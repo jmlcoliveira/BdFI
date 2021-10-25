@@ -3,7 +3,11 @@ package dataStructures;
 import dataStructures.exceptions.EmptyListException;
 import dataStructures.exceptions.InvalidPositionException;
 
+import java.io.Serializable;
+
 public class DoubleList<E> implements List<E> {
+
+    static final long serialVersionUID = 0L;
 
     // Node at the head of the list.
     protected DoubleListNode<E> head;
@@ -260,7 +264,10 @@ public class DoubleList<E> implements List<E> {
         list.clear();
     }
 
-    static class DoubleListNode<E> {
+    static class DoubleListNode<E> implements Serializable {
+
+        static final long serialVersionUID = 0L;
+
         // Element stored in the node.
         private E element;
 
