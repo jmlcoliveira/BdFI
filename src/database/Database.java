@@ -111,4 +111,7 @@ public interface Database extends Serializable {
     Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException;
 
     Iterator<Show> iteratorShowsByTag(String tag) throws NoShowsException, NoTaggedShowsException, NoShowsWithTagException;
+
+    Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
+            NoFinishedShowsException, NoRatedShowsException;
 }

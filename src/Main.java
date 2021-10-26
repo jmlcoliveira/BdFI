@@ -290,14 +290,47 @@ public class Main {
 
     }
 
+    /**
+     * Command 12
+     * Lists the show(s) with highest ratings
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
     private static void commandListBestShows(Scanner in, Database db) {
         try {
             Iterator<Show> it = db.listBestShows();
+            while (it.hasNext()) {
+                Show next = it.next();
+                System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(), next.getYear(),
+                        next.getRating());
+            }
         } catch (NoShowsException | NoFinishedShowsException | NoRatedShowsException e) {
-
+            System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Command 13
+     * Lists the shows with a given rating
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
+    private static void commandListShows(Scanner in, Database db) {
+        try {
+            int rating = in.nextInt();
+            Iterator<Show> it = db.listShows(rating);
+            while(it.hasNext()) {
+                Show next = it.next();
+                System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(), next.getYear(),
+                        next.getRating());
+            }
+        } catch(InvalidShowRatingException | NoShowsException |
+                NoFinishedShowsException | NoRatedShowsException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     /**
      * Command 14
      * Lists all shows with given tag

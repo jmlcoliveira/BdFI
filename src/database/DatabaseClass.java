@@ -3,6 +3,10 @@ package database;
 import dataStructures.DoubleList;
 import dataStructures.Iterator;
 import database.exceptions.*;
+import dataStructures.List;
+import database.exceptions.NoFinishedShowsException;
+import database.exceptions.NoRatedShowsException;
+import database.exceptions.NoShowsException;
 import participation.Participation;
 import participation.ParticipationClass;
 import person.Gender;
@@ -112,6 +116,18 @@ public class DatabaseClass implements Database, Serializable {
         List<Show> showList = new DoubleList<>();
         return showList.iterator();
 
+    }
+
+    @Override
+    public Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
+            NoFinishedShowsException, NoRatedShowsException {
+        if(rating < 0 || rating > 10) throw new InvalidShowRatingException();
+        if(show == null) throw new NoShowsException();
+        if(show.isInProduction()) throw new NoFinishedShowsException();
+        if(!show.isRated()) throw new NoRatedShowsException();
+        if(show.getRating() != rating) throw new NoRatedShowsException();
+        List<Show> showList = new DoubleList<>();
+        return showList.iterator();
     }
 
     @Override

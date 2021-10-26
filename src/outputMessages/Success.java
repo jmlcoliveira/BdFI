@@ -3,7 +3,7 @@ package outputMessages;
 public abstract class Success {
     //Person
     public static final String PERSON_ADDED = "Person added.";
-    public static final String PERSON_INFO = "%s %s %d %s %s %s";
+    public static final String PERSON_INFO = "%s %s %d %s %s %s\n";
     public static final String PERSON_SHOW = "%s %s %d %d\n";
 
     //Show
@@ -13,6 +13,7 @@ public abstract class Success {
     public static final String INFO_SHOW_HEADERS = "%s %s %d %d.\n";
     public static final String INFO_SHOW_TAG = "%s\n";
     public static final String SHOW_PARTICIPATION = "%s %s %d %s %s %s %s\n";
+    public static final String SHOW_LIST = "%s %s %d %d\n";
 
     //Participation
     public static final String PARTICIPATION_ADDED = "Participation added.";
