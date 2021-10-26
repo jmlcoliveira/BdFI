@@ -6,4 +6,6 @@ public abstract class Success {
 
     //Show
     public static final String SHOW_ADDED = "Show added.";
+    public static final String SHOW_PREMIERED = "Successful production.";
+    public static final String SHOW_REMOVED = "Show removed.";
 }

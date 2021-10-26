@@ -53,6 +53,22 @@ public class DatabaseClass implements Database, Serializable {
             throw new ShowNotInProductionException(showID);
         if(!showID.equals(show.getShowID()))
             throw new InvalidShowIDException(showID);
-        show.
+        show.premiere();
+    }
+
+    @Override
+    public void removeShow(String showID) throws ShowNotInProductionException, InvalidShowIDException {
+        if(showID.equals(show.getShowID()) && !show.isInProduction())
+            throw new ShowNotInProductionException(showID);
+        if(!showID.equals(show.getShowID()))
+            throw new InvalidShowIDException(showID);
+        show = null;
+    }
+
+    @Override
+    public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, InvalidShowIDException {
+        if(!showID.equals(show.getShowID()))
+            throw new InvalidShowIDException(showID);
+        show.rate(review);
     }
 }
