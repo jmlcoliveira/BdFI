@@ -5,6 +5,7 @@ import person.exceptions.InvalidYearException;
 import person.exceptions.PersonIdAlreadyExistsException;
 import show.exceptions.InvalidShowIDException;
 import show.exceptions.InvalidShowYearException;
+import show.exceptions.ShowNotInProductionException;
 
 import java.io.Serializable;
 
@@ -32,5 +33,7 @@ public interface Database extends Serializable {
     void addShow(String idShow, int year, String title)
             throws InvalidShowYearException, InvalidShowIDException;
 
-    void addParticipation()
+    void addParticipation();
+
+    void premiereShow(String showID) throws ShowNotInProductionException, InvalidShowIDException;
 }

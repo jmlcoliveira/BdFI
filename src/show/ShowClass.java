@@ -24,6 +24,7 @@ public class ShowClass implements Show {
         rating = -1;
         participations = new DoubleList<String>();
         tags = new DoubleList<>();
+        premiered = false;
     }
 
     @Override
@@ -60,5 +61,10 @@ public class ShowClass implements Show {
 
     public int getRating() {
         return rating;
+    }
+
+    @Override
+    public void premiere() {
+        premiered = true;
     }
 }

@@ -1,5 +1,12 @@
 package database;
 
+import person.*;
+import person.exceptions.*;
+import show.*;
+import show.exceptions.*;
+import show.exceptions.InvalidShowIDException;
+import show.exceptions.ShowNotInProductionException;
+
 import java.io.Serializable;
 
 public class DatabaseClass implements Database, Serializable {
@@ -38,5 +45,14 @@ public class DatabaseClass implements Database, Serializable {
     @Override
     public void addParticipation() {
 
+    }
+
+    @Override
+    public void premiereShow(String showID) throws ShowNotInProductionException, InvalidShowIDException {
+        if(showID.equals(show.getShowID()) && !show.isInProduction())
+            throw new ShowNotInProductionException(showID);
+        if(!showID.equals(show.getShowID()))
+            throw new InvalidShowIDException(showID);
+        show.
     }
 }

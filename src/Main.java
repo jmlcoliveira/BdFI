@@ -1,5 +1,6 @@
 import database.Database;
 import database.DatabaseClass;
+import outputMessages.Success;
 import person.exceptions.InvalidGenderException;
 import person.exceptions.InvalidYearException;
 import person.exceptions.PersonIdAlreadyExistsException;
@@ -88,6 +89,7 @@ public class Main {
             String gender = in.next();
             String name = in.nextLine();
             db.addPerson(id, year, email, telephone, gender, name);
+            System.out.println(Success.PERSON_ADDED);
         } catch (InvalidYearException | InvalidGenderException | PersonIdAlreadyExistsException e) {
             System.out.println(e.getMessage());
         }
@@ -106,6 +108,7 @@ public class Main {
             int year = in.nextInt();
             String title = in.nextLine();
             db.addShow(idShow, year, title);
+            System.out.println(Success.SHOW_ADDED);
         } catch (InvalidShowYearException | InvalidShowIDException e) {
             System.out.println(e.getMessage());
         }
@@ -122,6 +125,13 @@ public class Main {
 
     }
 
+    /**
+     * Command 4
+     * Premieres a show
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
     private static void commandPremiere(Scanner in, Database db) {
 
     }
