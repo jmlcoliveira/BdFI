@@ -1,5 +1,6 @@
 package database;
 
+import dataStructures.Iterator;
 import person.Person;
 import person.exceptions.InvalidGenderException;
 import person.exceptions.InvalidYearException;
@@ -96,4 +97,7 @@ public interface Database extends Serializable {
      * @return Show object with the given ID
      */
     Person getPerson(String showID) throws PersonIdNotFoundException;
+
+    Iterator<String> participationsIterator(String showID) throws ShowIdNotFoundException,
+            ShowHasNoParticipationsException;
 }

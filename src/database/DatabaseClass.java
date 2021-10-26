@@ -1,5 +1,6 @@
 package database;
 
+import dataStructures.Iterator;
 import person.Gender;
 import person.Person;
 import person.PersonClass;
@@ -90,6 +91,12 @@ public class DatabaseClass implements Database, Serializable {
         if(p == null) throw new PersonIdNotFoundException(personID);
         return p;
     }
+
+    @Override
+    public Iterator<String> participationsIterator(String showID) throws ShowIdNotFoundException, ShowHasNoParticipationsException {
+
+    }
+
     public Show getShow(String showID) throws ShowIdNotFoundException {
         Show s = getShowP(showID);
         if (s == null) throw new ShowIdNotFoundException(showID);
