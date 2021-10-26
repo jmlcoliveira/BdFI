@@ -3,6 +3,7 @@ package show;
 import dataStructures.Iterator;
 import show.exceptions.InvalidShowRatingException;
 import show.exceptions.ShowInProductionException;
+import show.exceptions.ShowNotInProductionException;
 
 import java.io.Serializable;
 
@@ -48,7 +49,10 @@ public interface Show extends Serializable {
 
     int getRating();
 
-    void premiere();
+    /**
+     * @throws ShowNotInProductionException
+     */
+    void premiere() throws ShowNotInProductionException;
 
     /**
      * Adds a tag to a show
@@ -57,5 +61,10 @@ public interface Show extends Serializable {
      */
     void addTag(String tag);
 
-    Iterator<String>
+    /**
+     * Returns an iterator containing all show tags
+     *
+     * @return iterator containing all show tags
+     */
+    Iterator<String> iteratorTags();
 }

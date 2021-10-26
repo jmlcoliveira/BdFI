@@ -1,9 +1,11 @@
 package show;
 
 import dataStructures.DoubleList;
+import dataStructures.Iterator;
 import dataStructures.List;
 import show.exceptions.InvalidShowRatingException;
 import show.exceptions.ShowInProductionException;
+import show.exceptions.ShowNotInProductionException;
 
 public class ShowClass implements Show {
 
@@ -66,13 +68,20 @@ public class ShowClass implements Show {
     }
 
     @Override
-    public void premiere() {
+    public void premiere() throws ShowNotInProductionException {
+        if (!isInProduction())
+            throw new ShowNotInProductionException(showID);
         premiered = true;
     }
 
     @Override
     public void addTag(String tag) {
         tags.addLast(tag);
+    }
+
+    @Override
+    public Iterator<String> iteratorTags() {
+        return tags.iterator();
     }
 
     @Override

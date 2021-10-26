@@ -207,7 +207,7 @@ public class Main {
         try {
             String showID = in.next();
             Show s = db.getShow(showID);
-
+            System.out.printf(Success.INFO_SHOW_HEADERS, s.getShowID(), s.getTitle(), s.getYear(), );
         } catch (ShowIdNotFoundException e) {
             System.out.println(e.getMessage());
         }

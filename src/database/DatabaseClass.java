@@ -35,17 +35,17 @@ public class DatabaseClass implements Database, Serializable {
         } catch (IllegalArgumentException e) {
             throw new InvalidGenderException();
         }
-        if (person.getPersonID().equals(personID))
-            throw new PersonIdAlreadyExistsException(personID);
+        /*Person p = getPerson(personID);
+        if (p != null) throw new PersonIdAlreadyExistsException(personID);*/
         person = new PersonClass(personID, year, email, telephone, gender1, name);
     }
 
     @Override
     public void addShow(String showID, int year, String title) throws InvalidShowYearException, ShowIDExistsException {
         if (year <= 0) throw new InvalidShowYearException();
-        if (show.getShowID().equals(showID)) throw new ShowIDExistsException(showID);
-        this.show = new ShowClass(showID, year, title);
-
+        /*Show s = getShowP(showID);
+        if (s != null) throw new ShowIDExistsException(showID);*/
+        show = new ShowClass(showID, year, title);
     }
 
     @Override
@@ -55,11 +55,9 @@ public class DatabaseClass implements Database, Serializable {
 
     @Override
     public void premiereShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
-        if (showID.equals(show.getShowID()) && !show.isInProduction())
-            throw new ShowNotInProductionException(showID);
-        if (!showID.equals(show.getShowID()))
-            throw new ShowIdNotFoundException(showID);
-        show.premiere();
+        Show s = getShow(showID);
+        if (s == null) throw new ShowIdNotFoundException(showID);
+        s.premiere();
     }
 
     @Override
@@ -83,9 +81,14 @@ public class DatabaseClass implements Database, Serializable {
     @Override
     public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, ShowIdNotFoundException {
         Show s = getShow(showID);
-        if (s == null)
-            throw new ShowIdNotFoundException(showID);
+        if (s == null) throw new ShowIdNotFoundException(showID);
         s.rate(review);
+    }
+
+    public Show getShow(String showID) throws ShowIdNotFoundException {
+        Show s = getShowP(showID);
+        if (s == null) throw new ShowIdNotFoundException(showID);
+        return s;
     }
 
     /**
@@ -98,12 +101,6 @@ public class DatabaseClass implements Database, Serializable {
         //Person p = new PersonClass(personID, 0, null, null, null, null);
         //To be completed in phase 2
         return person;
-    }
-
-    public Show getShow(String showID) throws ShowIdNotFoundException {
-        Show s = getShowP(showID);
-        if (s == null) throw new ShowIdNotFoundException(showID);
-        return s;
     }
 
     /**
