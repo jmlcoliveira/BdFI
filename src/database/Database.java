@@ -1,11 +1,9 @@
 package database;
 
 import dataStructures.Iterator;
+import participation.Participation;
 import person.Person;
-import person.exceptions.InvalidGenderException;
-import person.exceptions.InvalidYearException;
-import person.exceptions.PersonIdAlreadyExistsException;
-import person.exceptions.PersonIdNotFoundException;
+import person.exceptions.*;
 import show.Show;
 import show.exceptions.*;
 
@@ -100,4 +98,12 @@ public interface Database extends Serializable {
 
     Iterator<String> participationsIterator(String showID) throws ShowIdNotFoundException,
             ShowHasNoParticipationsException;
+
+    /**
+     * Returns an iterator containing the shows where the person with id personID participates
+     *
+     * @param personID person's ID
+     * @return an iterator containing the shows where the person with id personID participates
+     */
+    Iterator<Participation> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException;
 }

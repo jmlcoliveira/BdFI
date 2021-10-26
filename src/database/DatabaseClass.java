@@ -1,13 +1,12 @@
 package database;
 
 import dataStructures.Iterator;
+import participation.Participation;
+import participation.ParticipationClass;
 import person.Gender;
 import person.Person;
 import person.PersonClass;
-import person.exceptions.InvalidGenderException;
-import person.exceptions.InvalidYearException;
-import person.exceptions.PersonIdAlreadyExistsException;
-import person.exceptions.PersonIdNotFoundException;
+import person.exceptions.*;
 import show.Show;
 import show.ShowClass;
 import show.exceptions.*;
@@ -53,7 +52,9 @@ public class DatabaseClass implements Database, Serializable {
     public void addParticipation(String personID, String showID, String description) throws PersonIdNotFoundException, ShowIdNotFoundException {
         Person p = getPerson(personID);
         Show s = getShow(showID);
-        s.addParticipation(description);
+        Participation part = new ParticipationClass(p, s, description);
+        p.addParticipation(part);
+        s.addParticipation(part);
     }
 
     @Override
@@ -90,13 +91,20 @@ public class DatabaseClass implements Database, Serializable {
 
     public Person getPerson(String personID) throws PersonIdNotFoundException {
         Person p = getPersonP(personID);
-        if(p == null) throw new PersonIdNotFoundException(personID);
+        if (p == null) throw new PersonIdNotFoundException(personID);
         return p;
     }
 
     @Override
     public Iterator<String> participationsIterator(String showID) throws ShowIdNotFoundException, ShowHasNoParticipationsException {
 
+    }
+
+    @Override
+    public Iterator<Participation> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
+        Person p = getPerson(personID);
+        if (!p.hasParticipation()) throw new PersonHasNoShowsException(personID);
+        return p.iteratorParticipation();
     }
 
     public Show getShow(String showID) throws ShowIdNotFoundException {

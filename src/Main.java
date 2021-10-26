@@ -2,11 +2,9 @@ import dataStructures.Iterator;
 import database.Database;
 import database.DatabaseClass;
 import outputMessages.Success;
+import participation.Participation;
 import person.Person;
-import person.exceptions.InvalidGenderException;
-import person.exceptions.InvalidYearException;
-import person.exceptions.PersonIdAlreadyExistsException;
-import person.exceptions.PersonIdNotFoundException;
+import person.exceptions.*;
 import show.Show;
 import show.exceptions.*;
 
@@ -243,7 +241,7 @@ public class Main {
         try {
             String personID = in.nextLine();
             Person p = db.getPerson(personID);
-            System.out.printf(Success.PERSON_INFO, p.getPersonID(), p.getName(),p.getYear() ,p.getEmail() ,
+            System.out.printf(Success.PERSON_INFO, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(),
                     p.getTelephone(), p.getGender());
         } catch (PersonIdNotFoundException e) {
             System.out.println(e.getMessage());
@@ -251,8 +249,27 @@ public class Main {
     }
 
     /**
-     * Command 11
+     * Command 10
+     * Lists the shows where the person with given participates
      *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
+    private static void commandListShowsPerson(Scanner in, Database db) {
+        try {
+            String personID = in.nextLine().trim();
+            Iterator<Participation> it = db.iteratorShowsByPerson(personID);
+            while (it.hasNext()) {
+                Show s = it.next().getShow();
+                System.out.printf(Success.PERSON_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
+            }
+        } catch (PersonIdNotFoundException | PersonHasNoShowsException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Command 11
      *
      * @param in input where the data will be read from
      * @param db Database where this action will be performed

@@ -1,5 +1,8 @@
 package person;
 
+import dataStructures.Iterator;
+import participation.Participation;
+
 import java.io.Serializable;
 
 public interface Person extends Serializable {
@@ -45,4 +48,10 @@ public interface Person extends Serializable {
      * @return the person's name
      */
     String getName();
+
+    void addParticipation(Participation part);
+
+    Iterator<Participation> iteratorParticipation();
+
+    boolean hasParticipation();
 }

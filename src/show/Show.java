@@ -1,6 +1,7 @@
 package show;
 
 import dataStructures.Iterator;
+import participation.Participation;
 import show.exceptions.InvalidShowRatingException;
 import show.exceptions.ShowInProductionException;
 import show.exceptions.ShowNotInProductionException;
@@ -37,7 +38,7 @@ public interface Show extends Serializable {
      */
     Boolean isInProduction();
 
-    void addParticipation(String description);
+    void addParticipation(Participation part);
 
     /**
      * Gives the show a rating
@@ -68,5 +69,7 @@ public interface Show extends Serializable {
      */
     Iterator<String> iteratorTags();
 
-    Iterator<String> iteratorParticipations();
+    Iterator<Participation> iteratorParticipations();
+
+    boolean hasParticipation();
 }
