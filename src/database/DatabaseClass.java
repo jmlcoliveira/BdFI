@@ -1,5 +1,16 @@
 package database;
 
+import person.Gender;
+import person.Person;
+import person.PersonClass;
+import person.exceptions.InvalidGenderException;
+import person.exceptions.InvalidYearException;
+import person.exceptions.PersonIdAlreadyExistsException;
+import show.Show;
+import show.ShowClass;
+import show.exceptions.InvalidShowYearException;
+import show.exceptions.ShowIDExistsException;
+
 import java.io.Serializable;
 
 public class DatabaseClass implements Database, Serializable {

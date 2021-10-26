@@ -38,8 +38,10 @@ public class Main {
         while (!command.equals(Commands.QUIT)) {
             switch (command) {
                 case ADDPERSON:
+                    commandAddPerson(in, db);
                     break;
                 case ADDSHOW:
+                    commandAddShow(in, db);
                     break;
                 case ADDPARTICIPATION:
                     break;
