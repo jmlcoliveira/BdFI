@@ -68,6 +68,15 @@ public interface Database extends Serializable {
      */
     void tagShow(String showID, String tag) throws ShowIdNotFoundException;
 
+    /**
+     * Gives a show a review
+     *
+     * @param showID show's id
+     * @param review rating between 0 and 10 stars
+     * @throws InvalidShowRatingException if the review is not between 0 and 10 stars
+     * @throws ShowInProductionException  if the show is still in production
+     * @throws ShowIdNotFoundException    if there is no show with the same id
+     */
     void reviewShow(String showID, int review)
             throws InvalidShowRatingException, ShowInProductionException, ShowIdNotFoundException;
 
@@ -78,4 +87,12 @@ public interface Database extends Serializable {
      * @return Show object with the given ID
      */
     Show getShow(String showID) throws ShowIdNotFoundException;
+
+    /**
+     * Returns a Show object with the given ID
+     *
+     * @param showID show's ID
+     * @return Show object with the given ID
+     */
+    Show getPerson(String showID) throws ShowIdNotFoundException;
 }

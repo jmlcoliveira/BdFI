@@ -3,6 +3,7 @@ package outputMessages;
 public abstract class Success {
     //Person
     public static final String PERSON_ADDED = "Person added.";
+    public static final String PERSON_INFO = "%s %s %d %s %s %s";
 
     //Show
     public static final String SHOW_ADDED = "Show added.";

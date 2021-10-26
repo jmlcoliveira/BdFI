@@ -6,10 +6,7 @@ import person.exceptions.InvalidYearException;
 import person.exceptions.PersonIdAlreadyExistsException;
 import person.exceptions.PersonIdNotFoundException;
 import show.Show;
-import show.exceptions.InvalidShowYearException;
-import show.exceptions.ShowIDExistsException;
-import show.exceptions.ShowIdNotFoundException;
-import show.exceptions.ShowNotInProductionException;
+import show.exceptions.*;
 
 import java.io.*;
 import java.util.Scanner;
@@ -224,13 +221,28 @@ public class Main {
         try {
             String showID = in.next();
             int stars = in.nextInt();
+            db.reviewShow(showID, stars);
+        } catch (InvalidShowRatingException | ShowInProductionException | ShowIdNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Command 9
+     * Checks information about a person
+     *
+     * @param in
+     * @param db
+     */
+    private static void commandinfoPerson(Scanner in, Database db) {
+        try {
 
         }
     }
 
     /**
      * Command 15
-     * Outputs in the console a goodbye message
+     * Outputs in  |the console a goodbye message
      *
      * @param db database which is been saved
      */
