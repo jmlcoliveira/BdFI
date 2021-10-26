@@ -2,6 +2,7 @@ package database;
 
 import dataStructures.DoubleList;
 import dataStructures.Iterator;
+import database.exceptions.*;
 import participation.Participation;
 import participation.ParticipationClass;
 import person.Gender;
@@ -97,21 +98,25 @@ public class DatabaseClass implements Database, Serializable {
     }
 
     @Override
-    public Iterator<String> participationsIterator(String showID) throws ShowIdNotFoundException, ShowHasNoParticipationsException {
+    public Iterator<Participation> iteratorParticipationByShow(String showID) throws ShowIdNotFoundException, ShowHasNoParticipationsException {
         Show s = getShow(showID);
-        if(s == null) throw new ShowIdNotFoundException(showID);
+        if (s == null) throw new ShowIdNotFoundException(showID);
         return s.iteratorParticipations();
-
     }
 
     @Override
     public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
-        if(show == null) throw new NoShowsException();
-        if(show.isInProduction()) throw new NoFinishedShowsException();
-        if(!show.isRated()) throw new NoRatedShowsException();
+        if (show == null) throw new NoShowsException();
+        if (show.isInProduction()) throw new NoFinishedShowsException();
+        if (!show.isRated()) throw new NoRatedShowsException();
         List<Show> showList = new DoubleList<>();
         return showList.iterator();
 
+    }
+
+    @Override
+    public Iterator<Show> iteratorShowsByTag(String tag) throws NoShowsException, NoTaggedShowsException, NoShowsWithTagException {
+        return null;
     }
 
     @Override

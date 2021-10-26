@@ -1,16 +1,14 @@
 import dataStructures.Iterator;
 import database.Database;
 import database.DatabaseClass;
-import database.exceptions.NoFinishedShowsException;
-import database.exceptions.NoRatedShowsException;
-import database.exceptions.NoShowsException;
+import database.exceptions.*;
 import outputMessages.Success;
 import participation.Participation;
 import person.Person;
 import person.exceptions.*;
 import show.Show;
 import show.exceptions.*;
-import dataStructures.Iterator;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -277,10 +275,17 @@ public class Main {
      * @param in input where the data will be read from
      * @param db Database where this action will be performed
      */
-    private static void commandListParticipations(Scanner in, Database db) {
+    private static void commandListShowParticipation(Scanner in, Database db) {
         try {
             String showID = in.nextLine();
-
+            Iterator<Participation> it = db.iteratorParticipationByShow(showID);
+            while (it.hasNext()) {
+                Participation part = it.next();
+                Person p = part.getPerson();
+                System.out.printf(Success.SHOW_PARTICIPATION, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(), p.getTelephone(), p.getGender().getGender(), part.getDescription());
+            }
+        } catch (ShowIdNotFoundException | ShowHasNoParticipationsException e) {
+            System.out.println(e.getMessage());
         }
 
     }
@@ -288,8 +293,28 @@ public class Main {
     private static void commandListBestShows(Scanner in, Database db) {
         try {
             Iterator<Show> it = db.listBestShows();
-        } catch ( NoShowsException | NoFinishedShowsException | NoRatedShowsException e) {
+        } catch (NoShowsException | NoFinishedShowsException | NoRatedShowsException e) {
 
+        }
+    }
+
+    /**
+     * Command 14
+     * Lists all shows with given tag
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
+    private static void commandListTaggedShows(Scanner in, Database db) {
+        try {
+            String tag = in.nextLine().trim();
+            Iterator<Show> it = db.iteratorShowsByTag(tag);
+            while (it.hasNext()) {
+                Show s = it.next();
+                System.out.printf(Success.TAG_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
+            }
+        } catch (NoShowsException | NoTaggedShowsException | NoShowsWithTagException e) {
+            System.out.println(e.getMessage());
         }
     }
 

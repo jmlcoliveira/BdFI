@@ -12,10 +12,12 @@ public abstract class Success {
     public static final String SHOW_REMOVED = "Show removed.";
     public static final String INFO_SHOW_HEADERS = "%s %s %d %d.\n";
     public static final String INFO_SHOW_TAG = "%s\n";
+    public static final String SHOW_PARTICIPATION = "%s %s %d %s %s %s %s\n";
 
     //Participation
     public static final String PARTICIPATION_ADDED = "Participation added.";
 
     //Tag
     public static final String TAG_ADDED = "Tag added.";
+    public static final String TAG_SHOW = "%s %s %d %d\n";
 }
