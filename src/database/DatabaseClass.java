@@ -1,11 +1,15 @@
 package database;
 
-import person.*;
-import person.exceptions.*;
-import show.*;
+import person.Gender;
+import person.Person;
+import person.PersonClass;
+import person.exceptions.InvalidGenderException;
+import person.exceptions.InvalidYearException;
+import person.exceptions.PersonIdAlreadyExistsException;
+import person.exceptions.PersonIdNotFoundException;
+import show.Show;
+import show.ShowClass;
 import show.exceptions.*;
-import show.exceptions.InvalidShowIDException;
-import show.exceptions.ShowNotInProductionException;
 
 import java.io.Serializable;
 
@@ -17,12 +21,13 @@ public class DatabaseClass implements Database, Serializable {
     private Show show;
 
     public DatabaseClass() {
-
+        person = null;
+        show = null;
     }
 
 
     @Override
-    public void addPerson(String id, int year, String email, String telephone, String gender, String name) throws InvalidYearException, InvalidGenderException, PersonIdAlreadyExistsException {
+    public void addPerson(String personID, int year, String email, String telephone, String gender, String name) throws InvalidYearException, InvalidGenderException, PersonIdAlreadyExistsException {
         if (year <= 0) throw new InvalidYearException();
         Gender gender1;
         try {
@@ -30,45 +35,86 @@ public class DatabaseClass implements Database, Serializable {
         } catch (IllegalArgumentException e) {
             throw new InvalidGenderException();
         }
-        if (person.getId().equals(id)) throw new PersonIdAlreadyExistsException(id);
-        person = new PersonClass(id, year, email, telephone, gender1, name);
+        if (person.getPersonID().equals(personID))
+            throw new PersonIdAlreadyExistsException(personID);
+        person = new PersonClass(personID, year, email, telephone, gender1, name);
     }
 
     @Override
-    public void addShow(String ShowID, int year, String title) throws InvalidShowYearException, ShowIDExistsException {
+    public void addShow(String showID, int year, String title) throws InvalidShowYearException, ShowIDExistsException {
         if (year <= 0) throw new InvalidShowYearException();
-        if (show.getShowID().equals(ShowID)) throw new ShowIDExistsException(ShowID);
-        this.show = new ShowClass(ShowID, year, title);
+        if (show.getShowID().equals(showID)) throw new ShowIDExistsException(showID);
+        this.show = new ShowClass(showID, year, title);
 
     }
 
     @Override
-    public void addParticipation() {
+    public void addParticipation(String personID, String showID, String description) throws PersonIdNotFoundException, ShowIdNotFoundException {
 
     }
 
     @Override
-    public void premiereShow(String showID) throws ShowNotInProductionException, InvalidShowIDException {
-        if(showID.equals(show.getShowID()) && !show.isInProduction())
+    public void premiereShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
+        if (showID.equals(show.getShowID()) && !show.isInProduction())
             throw new ShowNotInProductionException(showID);
-        if(!showID.equals(show.getShowID()))
-            throw new InvalidShowIDException(showID);
+        if (!showID.equals(show.getShowID()))
+            throw new ShowIdNotFoundException(showID);
         show.premiere();
     }
 
     @Override
-    public void removeShow(String showID) throws ShowNotInProductionException, InvalidShowIDException {
-        if(showID.equals(show.getShowID()) && !show.isInProduction())
+    public void removeShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
+        Show s = getShow(showID);
+        if (s == null)
+            throw new ShowIdNotFoundException(showID);
+        if (!s.isInProduction())
             throw new ShowNotInProductionException(showID);
-        if(!showID.equals(show.getShowID()))
-            throw new InvalidShowIDException(showID);
         show = null;
     }
 
     @Override
-    public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, InvalidShowIDException {
-        if(!showID.equals(show.getShowID()))
-            throw new InvalidShowIDException(showID);
-        show.rate(review);
+    public void tagShow(String showID, String tag) throws ShowIdNotFoundException {
+        Show s = getShow(showID);
+        if (s == null)
+            throw new ShowIdNotFoundException(showID);
+        s.addTag(tag);
+    }
+
+    @Override
+    public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, ShowIdNotFoundException {
+        Show s = getShow(showID);
+        if (s == null)
+            throw new ShowIdNotFoundException(showID);
+        s.rate(review);
+    }
+
+    /**
+     * Returns a Person object with the given personID or <code>null</code> if no person exists with that id
+     *
+     * @param personID person's ID
+     * @return a Person object with the given personID or <code>null</code> if no person exists with that id
+     */
+    private Person getPerson(String personID) {
+        //Person p = new PersonClass(personID, 0, null, null, null, null);
+        //To be completed in phase 2
+        return person;
+    }
+
+    public Show getShow(String showID) throws ShowIdNotFoundException {
+        Show s = getShowP(showID);
+        if (s == null) throw new ShowIdNotFoundException(showID);
+        return s;
+    }
+
+    /**
+     * Returns a Show object with the given showID or <code>null</code> if no show exists with that id
+     *
+     * @param showID show's ID
+     * @return a Show object with the given showID or <code>null</code> if no show exists with that id
+     */
+    private Show getShowP(String showID) {
+        //Show s = new ShowClass(showID, 0, null);
+        //To be completed in phase 2
+        return show;
     }
 }

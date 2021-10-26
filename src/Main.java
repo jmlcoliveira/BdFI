@@ -4,9 +4,11 @@ import outputMessages.Success;
 import person.exceptions.InvalidGenderException;
 import person.exceptions.InvalidYearException;
 import person.exceptions.PersonIdAlreadyExistsException;
-import show.exceptions.InvalidShowIDException;
+import person.exceptions.PersonIdNotFoundException;
+import show.Show;
 import show.exceptions.InvalidShowYearException;
 import show.exceptions.ShowIDExistsException;
+import show.exceptions.ShowIdNotFoundException;
 import show.exceptions.ShowNotInProductionException;
 
 import java.io.*;
@@ -47,16 +49,21 @@ public class Main {
                     commandAddShow(in, db);
                     break;
                 case ADDPARTICIPATION:
+                    commandAddParticipation(in, db);
                     break;
                 case PREMIERE:
+                    commandPremiere(in, db);
                     break;
                 case REMOVESHOW:
+                    commandRemove(in, db);
                     break;
                 case TAGSHOW:
+                    commandTagShow(in, db);
                     break;
                 case INFOSHOW:
                     break;
                 case RATESHOW:
+                    commandRate(in, db);
                     break;
                 case INFOPERSON:
                     break;
@@ -91,7 +98,7 @@ public class Main {
             String email = in.next();
             String telephone = in.next();
             String gender = in.next();
-            String name = in.nextLine();
+            String name = in.nextLine().trim();
             db.addPerson(id, year, email, telephone, gender, name);
             System.out.println(Success.PERSON_ADDED);
         } catch (InvalidYearException | InvalidGenderException | PersonIdAlreadyExistsException e) {
@@ -110,7 +117,7 @@ public class Main {
         try {
             String idShow = in.next();
             int year = in.nextInt();
-            String title = in.nextLine();
+            String title = in.nextLine().trim();
             db.addShow(idShow, year, title);
             System.out.println(Success.SHOW_ADDED);
         } catch (InvalidShowYearException | ShowIDExistsException e) {
@@ -126,7 +133,15 @@ public class Main {
      * @param db Database where this action will be performed
      */
     private static void commandAddParticipation(Scanner in, Database db) {
-
+        try {
+            String personID = in.next();
+            String showID = in.next();
+            String description = in.nextLine().trim();
+            db.addParticipation(personID, showID, description);
+            System.out.println(Success.PARTICIPATION_ADDED);
+        } catch (PersonIdNotFoundException | ShowIdNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -137,11 +152,11 @@ public class Main {
      * @param db Database where this action will be performed
      */
     private static void commandPremiere(Scanner in, Database db) {
-        try{
+        try {
             String showID = in.nextLine();
             db.premiereShow(showID);
             System.out.println(Success.SHOW_PREMIERED);
-        } catch(ShowNotInProductionException | InvalidShowIDException e) {
+        } catch (ShowNotInProductionException | ShowIdNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -154,15 +169,57 @@ public class Main {
      * @param db Database where this action will be performed
      */
     private static void commandRemove(Scanner in, Database db) {
-        try{
+        try {
             String showID = in.nextLine();
             db.removeShow(showID);
             System.out.println(Success.SHOW_REMOVED);
-        } catch(ShowNotInProductionException | InvalidShowIDException e) {
+        } catch (ShowNotInProductionException | ShowIdNotFoundException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Command 6
+     * Tag a show
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
+    private static void commandTagShow(Scanner in, Database db) {
+        try {
+            String showID = in.next();
+            String tag = in.nextLine().trim();
+            db.tagShow(showID, tag);
+            System.out.println(Success.TAG_ADDED);
+        } catch (ShowIdNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Command 7
+     * Shows information about a show
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
+    private static void commandInfoShow(Scanner in, Database db) {
+        try {
+            String showID = in.next();
+            Show s = db.getShow(showID);
+
+        } catch (ShowIdNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Command 8
+     * Reviews a show
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
     private static void commandRate(Scanner in, Database db) {
         try {
             String showID = in.next();

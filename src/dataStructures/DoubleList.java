@@ -96,11 +96,11 @@ public class DoubleList<E> implements List<E> {
 
     @Override
     public void add(int position, E element) throws InvalidPositionException {
-        if (position < 0 || position >= currentSize)
+        if (position < 0 || position > currentSize)
             throw new InvalidPositionException();
         if (position == 0)
             addFirst(element);
-        else if (position == currentSize - 1)
+        else if (position == currentSize)
             addLast(element);
         else
             addMiddle(position, element);

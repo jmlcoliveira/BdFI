@@ -1,5 +1,6 @@
 package show;
 
+import dataStructures.Iterator;
 import show.exceptions.InvalidShowRatingException;
 import show.exceptions.ShowInProductionException;
 
@@ -49,4 +50,12 @@ public interface Show extends Serializable {
 
     void premiere();
 
+    /**
+     * Adds a tag to a show
+     *
+     * @param tag tag to be added
+     */
+    void addTag(String tag);
+
+    Iterator<String>
 }

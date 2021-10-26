@@ -9,23 +9,21 @@ public class ShowClass implements Show {
 
     static final long serialVersionUID = 0L;
 
-    private final String idShow;
+    private final String showID;
     private final int year;
     private final String title;
     private final List<String> participations;
     private final List<String> tags;
     private int rating;
-    private int reviewCount;
-    private bdfiAlg alg;
+    private final int reviewCount;
     private boolean premiered;
 
-    public ShowClass(String idShow, int year, String title) {
-        this.idShow = idShow;
+    public ShowClass(String showID, int year, String title) {
+        this.showID = showID;
         this.year = year;
         this.title = title;
         rating = -1;
         reviewCount = 0;
-        alg = new bdfiAlg();
         participations = new DoubleList<String>();
         tags = new DoubleList<>();
         premiered = false;
@@ -33,7 +31,7 @@ public class ShowClass implements Show {
 
     @Override
     public String getShowID() {
-        return idShow;
+        return showID;
     }
 
     @Override
@@ -59,8 +57,8 @@ public class ShowClass implements Show {
         if (review < 0 || review > 10)
             throw new InvalidShowRatingException();
         if (!premiered)
-            throw new ShowInProductionException(idShow);
-        this.rating = alg.updateReview(rating, reviewCount, review);;
+            throw new ShowInProductionException(showID);
+        this.rating = bdfiAlg.updateReview(rating, reviewCount, review);
     }
 
     public int getRating() {
@@ -70,5 +68,17 @@ public class ShowClass implements Show {
     @Override
     public void premiere() {
         premiered = true;
+    }
+
+    @Override
+    public void addTag(String tag) {
+        tags.addLast(tag);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (o == null | !(o instanceof Show)) return false;
+        return ((Show) o).getShowID().equals(showID);
     }
 }

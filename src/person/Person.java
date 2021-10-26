@@ -9,7 +9,7 @@ public interface Person extends Serializable {
      *
      * @return the person's id
      */
-    String getId();
+    String getPersonID();
 
     /**
      * Returns the person's year
