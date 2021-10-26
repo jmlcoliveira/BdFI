@@ -4,6 +4,7 @@ import dataStructures.DoubleList;
 import dataStructures.Iterator;
 import dataStructures.List;
 import show.exceptions.InvalidShowRatingException;
+import show.exceptions.ShowHasNoParticipationsException;
 import show.exceptions.ShowInProductionException;
 import show.exceptions.ShowNotInProductionException;
 
@@ -68,6 +69,11 @@ public class ShowClass implements Show {
     }
 
     @Override
+    public boolean isRated() {
+        return rating != -1;
+    }
+
+    @Override
     public void premiere() throws ShowNotInProductionException {
         if (!isInProduction())
             throw new ShowNotInProductionException(showID);
@@ -85,7 +91,8 @@ public class ShowClass implements Show {
     }
 
     @Override
-    public Iterator<String> iteratorParticipations() {
+    public Iterator<String> iteratorParticipations() throws ShowHasNoParticipationsException {
+        if(participations.isEmpty()) throw new ShowHasNoParticipationsException(showID);
         return participations.iterator();
     }
 
