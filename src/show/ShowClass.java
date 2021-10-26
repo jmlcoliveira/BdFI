@@ -85,6 +85,11 @@ public class ShowClass implements Show {
     }
 
     @Override
+    public Iterator<String> iteratorParticipations() {
+        return participations.iterator();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == this) return true;
         if (o == null | !(o instanceof Show)) return false;

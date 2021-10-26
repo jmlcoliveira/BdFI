@@ -50,6 +50,8 @@ public class DatabaseClass implements Database, Serializable {
 
     @Override
     public void addParticipation(String personID, String showID, String description) throws PersonIdNotFoundException, ShowIdNotFoundException {
+        Person p = getPerson(personID);
+        Show s = getShow(showID);
 
     }
 
