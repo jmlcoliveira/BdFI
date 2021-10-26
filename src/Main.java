@@ -1,7 +1,7 @@
+import dataStructures.Iterator;
 import database.Database;
 import database.DatabaseClass;
 import outputMessages.Success;
-import person.exceptions.*;
 import person.Person;
 import person.exceptions.InvalidGenderException;
 import person.exceptions.InvalidYearException;

@@ -67,4 +67,6 @@ public interface Show extends Serializable {
      * @return iterator containing all show tags
      */
     Iterator<String> iteratorTags();
+
+    Iterator<String> iteratorParticipations();
 }
