@@ -3,8 +3,7 @@ package database;
 import person.exceptions.InvalidGenderException;
 import person.exceptions.InvalidYearException;
 import person.exceptions.PersonIdAlreadyExistsException;
-import show.exceptions.InvalidShowIDException;
-import show.exceptions.InvalidShowYearException;
+import show.exceptions.*;
 
 import java.io.Serializable;
 
@@ -30,7 +29,28 @@ public interface Database extends Serializable {
      * @param title  title of the show
      */
     void addShow(String idShow, int year, String title)
-            throws InvalidShowYearException, InvalidShowIDException;
+            throws InvalidShowYearException, ShowIDExistsException;
 
-    void addParticipation()
+    void addParticipation();
+
+    /**
+     * Premieres a show
+     *
+     * @param showID show's id
+     * @throws ShowNotInProductionException if show already premiered
+     * @throws InvalidShowIDException if there is no show with the same id
+     */
+    void premiereShow(String showID) throws ShowNotInProductionException, InvalidShowIDException;
+
+    /**
+     * Removes a show
+     *
+     * @param showID show's id
+     * @throws ShowNotInProductionException if show already premiered
+     * @throws InvalidShowIDException if there is no show with the same id
+     */
+    void removeShow(String showID) throws ShowNotInProductionException, InvalidShowIDException;
+
+    void reviewShow(String showID, int review)
+            throws InvalidShowRatingException, ShowInProductionException, InvalidShowIDException;
 }

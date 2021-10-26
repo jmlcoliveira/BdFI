@@ -1,10 +1,13 @@
 import database.Database;
 import database.DatabaseClass;
+import outputMessages.Success;
 import person.exceptions.InvalidGenderException;
 import person.exceptions.InvalidYearException;
 import person.exceptions.PersonIdAlreadyExistsException;
 import show.exceptions.InvalidShowIDException;
 import show.exceptions.InvalidShowYearException;
+import show.exceptions.ShowIDExistsException;
+import show.exceptions.ShowNotInProductionException;
 
 import java.io.*;
 import java.util.Scanner;
@@ -90,6 +93,7 @@ public class Main {
             String gender = in.next();
             String name = in.nextLine();
             db.addPerson(id, year, email, telephone, gender, name);
+            System.out.println(Success.PERSON_ADDED);
         } catch (InvalidYearException | InvalidGenderException | PersonIdAlreadyExistsException e) {
             System.out.println(e.getMessage());
         }
@@ -108,7 +112,8 @@ public class Main {
             int year = in.nextInt();
             String title = in.nextLine();
             db.addShow(idShow, year, title);
-        } catch (InvalidShowYearException | InvalidShowIDException e) {
+            System.out.println(Success.SHOW_ADDED);
+        } catch (InvalidShowYearException | ShowIDExistsException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -124,8 +129,46 @@ public class Main {
 
     }
 
+    /**
+     * Command 4
+     * Premieres a show
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
     private static void commandPremiere(Scanner in, Database db) {
+        try{
+            String showID = in.nextLine();
+            db.premiereShow(showID);
+            System.out.println(Success.SHOW_PREMIERED);
+        } catch(ShowNotInProductionException | InvalidShowIDException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
+    /**
+     * Command 5
+     * Premieres a show
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
+    private static void commandRemove(Scanner in, Database db) {
+        try{
+            String showID = in.nextLine();
+            db.removeShow(showID);
+            System.out.println(Success.SHOW_REMOVED);
+        } catch(ShowNotInProductionException | InvalidShowIDException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void commandRate(Scanner in, Database db) {
+        try {
+            String showID = in.next();
+            int stars = in.nextInt();
+
+        }
     }
 
     /**

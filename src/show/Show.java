@@ -47,4 +47,6 @@ public interface Show extends Serializable {
 
     int getRating();
 
+    void premiere();
+
 }

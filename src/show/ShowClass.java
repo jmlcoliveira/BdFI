@@ -15,6 +15,8 @@ public class ShowClass implements Show {
     private final List<String> participations;
     private final List<String> tags;
     private int rating;
+    private int reviewCount;
+    private bdfiAlg alg;
     private boolean premiered;
 
     public ShowClass(String idShow, int year, String title) {
@@ -22,8 +24,11 @@ public class ShowClass implements Show {
         this.year = year;
         this.title = title;
         rating = -1;
+        reviewCount = 0;
+        alg = new bdfiAlg();
         participations = new DoubleList<String>();
         tags = new DoubleList<>();
+        premiered = false;
     }
 
     @Override
@@ -50,15 +55,20 @@ public class ShowClass implements Show {
         participations.addLast(description);
     }
 
-    public void rate(int rating) throws InvalidShowRatingException, ShowInProductionException {
-        if (rating < 0 || rating > 10)
+    public void rate(int review) throws InvalidShowRatingException, ShowInProductionException {
+        if (review < 0 || review > 10)
             throw new InvalidShowRatingException();
         if (!premiered)
             throw new ShowInProductionException(idShow);
-        this.rating = rating;
+        this.rating = alg.updateReview(rating, reviewCount, review);;
     }
 
     public int getRating() {
         return rating;
+    }
+
+    @Override
+    public void premiere() {
+        premiered = true;
     }
 }

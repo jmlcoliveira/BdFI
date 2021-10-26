@@ -1,15 +1,11 @@
 package database;
 
-import person.Gender;
-import person.Person;
-import person.PersonClass;
-import person.exceptions.InvalidGenderException;
-import person.exceptions.InvalidYearException;
-import person.exceptions.PersonIdAlreadyExistsException;
-import show.Show;
-import show.ShowClass;
-import show.exceptions.InvalidShowYearException;
-import show.exceptions.ShowIDExistsException;
+import person.*;
+import person.exceptions.*;
+import show.*;
+import show.exceptions.*;
+import show.exceptions.InvalidShowIDException;
+import show.exceptions.ShowNotInProductionException;
 
 import java.io.Serializable;
 
@@ -49,5 +45,30 @@ public class DatabaseClass implements Database, Serializable {
     @Override
     public void addParticipation() {
 
+    }
+
+    @Override
+    public void premiereShow(String showID) throws ShowNotInProductionException, InvalidShowIDException {
+        if(showID.equals(show.getShowID()) && !show.isInProduction())
+            throw new ShowNotInProductionException(showID);
+        if(!showID.equals(show.getShowID()))
+            throw new InvalidShowIDException(showID);
+        show.premiere();
+    }
+
+    @Override
+    public void removeShow(String showID) throws ShowNotInProductionException, InvalidShowIDException {
+        if(showID.equals(show.getShowID()) && !show.isInProduction())
+            throw new ShowNotInProductionException(showID);
+        if(!showID.equals(show.getShowID()))
+            throw new InvalidShowIDException(showID);
+        show = null;
+    }
+
+    @Override
+    public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, InvalidShowIDException {
+        if(!showID.equals(show.getShowID()))
+            throw new InvalidShowIDException(showID);
+        show.rate(review);
     }
 }
