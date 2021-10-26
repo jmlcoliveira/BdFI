@@ -106,4 +106,6 @@ public interface Database extends Serializable {
      * @return an iterator containing the shows where the person with id personID participates
      */
     Iterator<Participation> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException;
+
+    Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException;
 }

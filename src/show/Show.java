@@ -3,6 +3,7 @@ package show;
 import dataStructures.Iterator;
 import participation.Participation;
 import show.exceptions.InvalidShowRatingException;
+import show.exceptions.ShowHasNoParticipationsException;
 import show.exceptions.ShowInProductionException;
 import show.exceptions.ShowNotInProductionException;
 
@@ -49,6 +50,8 @@ public interface Show extends Serializable {
     void rate(int rating) throws InvalidShowRatingException, ShowInProductionException;
 
     int getRating();
+
+    boolean isRated();
 
     /**
      * @throws ShowNotInProductionException

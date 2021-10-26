@@ -1,13 +1,16 @@
 import dataStructures.Iterator;
 import database.Database;
 import database.DatabaseClass;
+import database.exceptions.NoFinishedShowsException;
+import database.exceptions.NoRatedShowsException;
+import database.exceptions.NoShowsException;
 import outputMessages.Success;
 import participation.Participation;
 import person.Person;
 import person.exceptions.*;
 import show.Show;
 import show.exceptions.*;
-
+import dataStructures.Iterator;
 import java.io.*;
 import java.util.Scanner;
 
@@ -275,7 +278,19 @@ public class Main {
      * @param db Database where this action will be performed
      */
     private static void commandListParticipations(Scanner in, Database db) {
+        try {
+            String showID = in.nextLine();
 
+        }
+
+    }
+
+    private static void commandListBestShows(Scanner in, Database db) {
+        try {
+            Iterator<Show> it = db.listBestShows();
+        } catch ( NoShowsException | NoFinishedShowsException | NoRatedShowsException e) {
+
+        }
     }
 
     /**

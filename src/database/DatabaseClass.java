@@ -1,5 +1,6 @@
 package database;
 
+import dataStructures.DoubleList;
 import dataStructures.Iterator;
 import participation.Participation;
 import participation.ParticipationClass;
@@ -97,6 +98,19 @@ public class DatabaseClass implements Database, Serializable {
 
     @Override
     public Iterator<String> participationsIterator(String showID) throws ShowIdNotFoundException, ShowHasNoParticipationsException {
+        Show s = getShow(showID);
+        if(s == null) throw new ShowIdNotFoundException(showID);
+        return s.iteratorParticipations();
+
+    }
+
+    @Override
+    public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
+        if(show == null) throw new NoShowsException();
+        if(show.isInProduction()) throw new NoFinishedShowsException();
+        if(!show.isRated()) throw new NoRatedShowsException();
+        List<Show> showList = new DoubleList<>();
+        return showList.iterator();
 
     }
 
