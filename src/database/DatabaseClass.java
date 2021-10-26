@@ -85,6 +85,11 @@ public class DatabaseClass implements Database, Serializable {
         s.rate(review);
     }
 
+    public Person getPerson(String personID) throws PersonIdNotFoundException {
+        Person p = getPersonP(personID);
+        if(p == null) throw new PersonIdNotFoundException(personID);
+        return p;
+    }
     public Show getShow(String showID) throws ShowIdNotFoundException {
         Show s = getShowP(showID);
         if (s == null) throw new ShowIdNotFoundException(showID);
@@ -97,7 +102,7 @@ public class DatabaseClass implements Database, Serializable {
      * @param personID person's ID
      * @return a Person object with the given personID or <code>null</code> if no person exists with that id
      */
-    private Person getPerson(String personID) {
+    private Person getPersonP(String personID) {
         //Person p = new PersonClass(personID, 0, null, null, null, null);
         //To be completed in phase 2
         return person;

@@ -1,5 +1,6 @@
 package database;
 
+import person.Person;
 import person.exceptions.InvalidGenderException;
 import person.exceptions.InvalidYearException;
 import person.exceptions.PersonIdAlreadyExistsException;
@@ -94,5 +95,5 @@ public interface Database extends Serializable {
      * @param showID show's ID
      * @return Show object with the given ID
      */
-    Show getPerson(String showID) throws ShowIdNotFoundException;
+    Person getPerson(String showID) throws PersonIdNotFoundException;
 }
