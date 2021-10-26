@@ -72,7 +72,11 @@ public interface Show extends Serializable {
      */
     Iterator<String> iteratorTags();
 
-    Iterator<Participation> iteratorParticipations() throws ShowHasNoParticipationsException;
+    Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException;
 
     boolean hasParticipation();
+
+    boolean hasTag(String tag);
+
+    boolean hasAnyTag();
 }

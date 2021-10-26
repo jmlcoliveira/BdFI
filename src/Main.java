@@ -292,7 +292,7 @@ public class Main {
 
     /**
      * Command 12
-     * Lists the show(s) with highest ratings
+     * Lists the show(s) with the highest ratings
      *
      * @param in input where the data will be read from
      * @param db Database where this action will be performed
@@ -321,16 +321,17 @@ public class Main {
         try {
             int rating = in.nextInt();
             Iterator<Show> it = db.listShows(rating);
-            while(it.hasNext()) {
+            while (it.hasNext()) {
                 Show next = it.next();
                 System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(), next.getYear(),
                         next.getRating());
             }
-        } catch(InvalidShowRatingException | NoShowsException |
+        } catch (InvalidShowRatingException | NoShowsException |
                 NoFinishedShowsException | NoRatedShowsException e) {
             System.out.println(e.getMessage());
         }
     }
+
     /**
      * Command 14
      * Lists all shows with given tag

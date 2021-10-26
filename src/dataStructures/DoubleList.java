@@ -196,7 +196,7 @@ public class DoubleList<E> implements List<E> {
 
 
     @Override
-    public int find(E element) {
+    public int indexOf(E element) {
         int i = 0;
         for (DoubleListNode<E> node = head; node != null; node = node.next) {
             if (node.getElement().equals(element))

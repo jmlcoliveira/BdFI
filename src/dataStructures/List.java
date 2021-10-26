@@ -73,7 +73,7 @@ public interface List<E> extends Serializable {
      * @param element - element to be searched in list
      * @return position of the first occurrence of the element in the list (or -1)
      */
-    int find(E element);
+    int indexOf(E element);
 
     /**
      * Inserts the specified element at the first position in the list.

@@ -92,14 +92,24 @@ public class ShowClass implements Show {
     }
 
     @Override
-    public Iterator<Participation> iteratorParticipations() throws ShowHasNoParticipationsException {
-        if(participations.isEmpty()) throw new ShowHasNoParticipationsException(showID);
+    public Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException {
+        if (participations.isEmpty()) throw new ShowHasNoParticipationsException(showID);
         return participations.iterator();
     }
 
     @Override
     public boolean hasParticipation() {
         return participations.size() != 0;
+    }
+
+    @Override
+    public boolean hasTag(String tag) {
+        return tags.indexOf(tag) >= 0;
+    }
+
+    @Override
+    public boolean hasAnyTag() {
+        return tags.size() > 0;
     }
 
     @Override
