@@ -59,21 +59,28 @@ public class Main {
                     commandTagShow(in, db);
                     break;
                 case INFOSHOW:
+                    commandInfoShow(in, db);
                     break;
                 case RATESHOW:
                     commandRate(in, db);
                     break;
                 case INFOPERSON:
+                    commandInfoPerson(in, db);
                     break;
                 case LISTSHOWSPERSON:
+                    commandListShowsPerson(in, db);
                     break;
                 case LISTPARTICIPATIONS:
+                    commandListShowParticipation(in, db);
                     break;
                 case LISTBESTSHOWS:
+                    commandListBestShows(in, db);
                     break;
                 case LISTSHOWS:
+                    commandListShowsByRating(in, db);
                     break;
                 case LISTTAGGEDSHOWS:
+                    commandListShowsByTag(in, db);
                     break;
             }
             command = getCommand(in);
@@ -151,7 +158,7 @@ public class Main {
      */
     private static void commandPremiere(Scanner in, Database db) {
         try {
-            String showID = in.nextLine();
+            String showID = in.nextLine().trim();
             db.premiereShow(showID);
             System.out.println(Success.SHOW_PREMIERED);
         } catch (ShowNotInProductionException | ShowIdNotFoundException e) {
@@ -168,7 +175,7 @@ public class Main {
      */
     private static void commandRemove(Scanner in, Database db) {
         try {
-            String showID = in.nextLine();
+            String showID = in.nextLine().trim();
             db.removeShow(showID);
             System.out.println(Success.SHOW_REMOVED);
         } catch (ShowNotInProductionException | ShowIdNotFoundException e) {
@@ -203,7 +210,7 @@ public class Main {
      */
     private static void commandInfoShow(Scanner in, Database db) {
         try {
-            String showID = in.next();
+            String showID = in.nextLine().trim();
             Show s = db.getShow(showID);
             System.out.printf(Success.INFO_SHOW_HEADERS, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
             Iterator<String> it = s.iteratorTags();
@@ -225,6 +232,7 @@ public class Main {
         try {
             String showID = in.next();
             int stars = in.nextInt();
+            in.nextLine();
             db.reviewShow(showID, stars);
         } catch (InvalidShowRatingException | ShowInProductionException | ShowIdNotFoundException e) {
             System.out.println(e.getMessage());
@@ -240,7 +248,7 @@ public class Main {
      */
     private static void commandInfoPerson(Scanner in, Database db) {
         try {
-            String personID = in.nextLine();
+            String personID = in.nextLine().trim();
             Person p = db.getPerson(personID);
             System.out.printf(Success.PERSON_INFO, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(),
                     p.getTelephone(), p.getGender());
@@ -277,7 +285,7 @@ public class Main {
      */
     private static void commandListShowParticipation(Scanner in, Database db) {
         try {
-            String showID = in.nextLine();
+            String showID = in.nextLine().trim();
             Iterator<Participation> it = db.iteratorParticipationByShow(showID);
             while (it.hasNext()) {
                 Participation part = it.next();
@@ -299,6 +307,7 @@ public class Main {
      */
     private static void commandListBestShows(Scanner in, Database db) {
         try {
+            in.nextLine();
             Iterator<Show> it = db.listBestShows();
             while (it.hasNext()) {
                 Show next = it.next();
@@ -317,9 +326,10 @@ public class Main {
      * @param in input where the data will be read from
      * @param db Database where this action will be performed
      */
-    private static void commandListShows(Scanner in, Database db) {
+    private static void commandListShowsByRating(Scanner in, Database db) {
         try {
             int rating = in.nextInt();
+            in.nextLine();
             Iterator<Show> it = db.listShows(rating);
             while (it.hasNext()) {
                 Show next = it.next();
@@ -339,7 +349,7 @@ public class Main {
      * @param in input where the data will be read from
      * @param db Database where this action will be performed
      */
-    private static void commandListTaggedShows(Scanner in, Database db) {
+    private static void commandListShowsByTag(Scanner in, Database db) {
         try {
             String tag = in.nextLine().trim();
             Iterator<Show> it = db.iteratorShowsByTag(tag);
