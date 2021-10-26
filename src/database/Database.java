@@ -1,6 +1,9 @@
 package database;
 
 import dataStructures.Iterator;
+import database.exceptions.NoFinishedShowsException;
+import database.exceptions.NoRatedShowsException;
+import database.exceptions.NoShowsException;
 import participation.Participation;
 import person.Person;
 import person.exceptions.*;
@@ -96,7 +99,7 @@ public interface Database extends Serializable {
      */
     Person getPerson(String showID) throws PersonIdNotFoundException;
 
-    Iterator<String> participationsIterator(String showID) throws ShowIdNotFoundException,
+    Iterator<Participation> participationsIterator(String showID) throws ShowIdNotFoundException,
             ShowHasNoParticipationsException;
 
     /**
@@ -108,4 +111,7 @@ public interface Database extends Serializable {
     Iterator<Participation> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException;
 
     Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException;
+
+    Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
+            NoFinishedShowsException, NoRatedShowsException;
 }
