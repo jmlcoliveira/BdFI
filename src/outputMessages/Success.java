@@ -9,7 +9,7 @@ public abstract class Success {
     public static final String SHOW_ADDED = "Show added.";
     public static final String SHOW_PREMIERED = "Successful production.";
     public static final String SHOW_REMOVED = "Show removed.";
-    public static final String INFO_SHOW_HEADERS = "%s %s %s %s.\n";
+    public static final String INFO_SHOW_HEADERS = "%s %s %d %d.\n";
     public static final String INFO_SHOW_TAG = "%s\n";
 
     //Participation

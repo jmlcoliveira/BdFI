@@ -1,10 +1,8 @@
+import dataStructures.Iterator;
 import database.Database;
 import database.DatabaseClass;
 import outputMessages.Success;
-import person.exceptions.InvalidGenderException;
-import person.exceptions.InvalidYearException;
-import person.exceptions.PersonIdAlreadyExistsException;
-import person.exceptions.PersonIdNotFoundException;
+import person.exceptions.*;
 import show.Show;
 import show.exceptions.*;
 
@@ -204,7 +202,10 @@ public class Main {
         try {
             String showID = in.next();
             Show s = db.getShow(showID);
-            System.out.printf(Success.INFO_SHOW_HEADERS, s.getShowID(), s.getTitle(), s.getYear(), );
+            System.out.printf(Success.INFO_SHOW_HEADERS, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
+            Iterator<String> it = s.iteratorTags();
+            while (it.hasNext())
+                System.out.printf(Success.INFO_SHOW_TAG, it.next());
         } catch (ShowIdNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -237,7 +238,19 @@ public class Main {
     private static void commandinfoPerson(Scanner in, Database db) {
         try {
 
+        } catch (PersonIdNotFoundException | PersonHasNoShowsException e) {
+
         }
+    }
+
+    /**
+     * Lists all shows where person with given id participated
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
+    private static void commandListShowsPerson(Scanner in, Database db) {
+
     }
 
     /**
