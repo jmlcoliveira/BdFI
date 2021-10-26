@@ -52,7 +52,7 @@ public class DatabaseClass implements Database, Serializable {
     public void addParticipation(String personID, String showID, String description) throws PersonIdNotFoundException, ShowIdNotFoundException {
         Person p = getPerson(personID);
         Show s = getShow(showID);
-
+        s.addParticipation(description);
     }
 
     @Override
