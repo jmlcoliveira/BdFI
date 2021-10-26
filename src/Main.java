@@ -1,8 +1,12 @@
-import dataStructures.Iterator;
 import database.Database;
 import database.DatabaseClass;
 import outputMessages.Success;
 import person.exceptions.*;
+import person.Person;
+import person.exceptions.InvalidGenderException;
+import person.exceptions.InvalidYearException;
+import person.exceptions.PersonIdAlreadyExistsException;
+import person.exceptions.PersonIdNotFoundException;
 import show.Show;
 import show.exceptions.*;
 
@@ -232,24 +236,28 @@ public class Main {
      * Command 9
      * Checks information about a person
      *
-     * @param in
-     * @param db
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
      */
-    private static void commandinfoPerson(Scanner in, Database db) {
+    private static void commandInfoPerson(Scanner in, Database db) {
         try {
-
-        } catch (PersonIdNotFoundException | PersonHasNoShowsException e) {
-
+            String personID = in.nextLine();
+            Person p = db.getPerson(personID);
+            System.out.printf(Success.PERSON_INFO, p.getPersonID(), p.getName(),p.getYear() ,p.getEmail() ,
+                    p.getTelephone(), p.getGender());
+        } catch (PersonIdNotFoundException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     /**
-     * Lists all shows where person with given id participated
+     * Command 11
+     *
      *
      * @param in input where the data will be read from
      * @param db Database where this action will be performed
      */
-    private static void commandListShowsPerson(Scanner in, Database db) {
+    private static void commandListParticipations(Scanner in, Database db) {
 
     }
 
