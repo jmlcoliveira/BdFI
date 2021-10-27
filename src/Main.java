@@ -252,7 +252,7 @@ public class Main {
             String personID = in.nextLine().trim();
             Person p = db.getPerson(personID);
             System.out.printf(Success.PERSON_INFO, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(),
-                    p.getTelephone(), p.getGender());
+                    p.getTelephone(), p.getGender().getGender());
         } catch (PersonIdNotFoundException e) {
             System.out.println(e.getMessage());
         }

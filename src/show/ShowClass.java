@@ -18,7 +18,7 @@ public class ShowClass implements Show {
     private final String showID;
     private final int year;
     private final String title;
-    private final List<Participation> participations;
+    private final List<Participation> participation;
     private final List<String> tags;
     private int currentRating;
     private boolean isRated;
@@ -32,9 +32,9 @@ public class ShowClass implements Show {
         currentRating = 0;
         isRated = false;
         reviewCount = 0;
-        participations = new DoubleList<>();
+        participation = new DoubleList<>();
         tags = new DoubleList<>();
-        premiered = false;
+        premiered = LocalDate.now().getYear() != year;
     }
 
     @Override
@@ -54,12 +54,11 @@ public class ShowClass implements Show {
 
     @Override
     public Boolean isInProduction() {
-        LocalDate.now();
         return !premiered;
     }
 
     public void addParticipation(Participation part) {
-        participations.addLast(part);
+        participation.addLast(part);
     }
 
     public void rate(int stars) throws InvalidShowRatingException, ShowInProductionException {
@@ -100,13 +99,13 @@ public class ShowClass implements Show {
 
     @Override
     public Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException {
-        if (participations.isEmpty()) throw new ShowHasNoParticipationsException(showID);
-        return participations.iterator();
+        if (participation.isEmpty()) throw new ShowHasNoParticipationsException(showID);
+        return participation.iterator();
     }
 
     @Override
     public boolean hasParticipation() {
-        return participations.size() != 0;
+        return participation.size() != 0;
     }
 
     @Override
