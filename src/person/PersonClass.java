@@ -71,4 +71,11 @@ public class PersonClass implements Person {
     public boolean hasParticipation() {
         return participation.size() != 0;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) return true;
+        if (!(o instanceof Person)) return false;
+        return ((Person) o).getPersonID().equals(personID);
+    }
 }
