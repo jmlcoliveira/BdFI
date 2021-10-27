@@ -9,6 +9,8 @@ import show.exceptions.ShowHasNoParticipationsException;
 import show.exceptions.ShowInProductionException;
 import show.exceptions.ShowNotInProductionException;
 
+import java.time.LocalDate;
+
 public class ShowClass implements Show {
 
     static final long serialVersionUID = 0L;
@@ -18,15 +20,17 @@ public class ShowClass implements Show {
     private final String title;
     private final List<Participation> participations;
     private final List<String> tags;
-    private int rating;
-    private final int reviewCount;
+    private int currentRating;
+    private boolean isRated;
+    private int reviewCount;
     private boolean premiered;
 
     public ShowClass(String showID, int year, String title) {
         this.showID = showID;
         this.year = year;
         this.title = title;
-        rating = -1;
+        currentRating = 0;
+        isRated = false;
         reviewCount = 0;
         participations = new DoubleList<>();
         tags = new DoubleList<>();
@@ -50,6 +54,7 @@ public class ShowClass implements Show {
 
     @Override
     public Boolean isInProduction() {
+        LocalDate.now();
         return !premiered;
     }
 
@@ -57,21 +62,23 @@ public class ShowClass implements Show {
         participations.addLast(part);
     }
 
-    public void rate(int review) throws InvalidShowRatingException, ShowInProductionException {
-        if (review < 0 || review > 10)
+    public void rate(int stars) throws InvalidShowRatingException, ShowInProductionException {
+        if (stars < 0 || stars > 10)
             throw new InvalidShowRatingException();
         if (!premiered)
             throw new ShowInProductionException(showID);
-        this.rating = bdfiAlg.updateReview(rating, reviewCount, review);
+        currentRating = bdfiAlg.updateReview(stars, reviewCount, currentRating);
+        reviewCount++;
+        isRated = true;
     }
 
     public int getRating() {
-        return rating;
+        return currentRating;
     }
 
     @Override
     public boolean isRated() {
-        return rating != -1;
+        return isRated;
     }
 
     @Override

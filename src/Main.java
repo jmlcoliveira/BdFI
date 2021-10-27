@@ -234,6 +234,7 @@ public class Main {
             int stars = in.nextInt();
             in.nextLine();
             db.reviewShow(showID, stars);
+            System.out.println(Success.SHOW_RATED);
         } catch (InvalidShowRatingException | ShowInProductionException | ShowIdNotFoundException e) {
             System.out.println(e.getMessage());
         }
