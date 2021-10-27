@@ -14,6 +14,7 @@ public abstract class Success {
     public static final String INFO_SHOW_TAG = "%s\n";
     public static final String SHOW_PARTICIPATION = "%s %s %d %s %s %s %s\n";
     public static final String SHOW_LIST = "%s %s %d %d\n";
+    public static final String SHOW_RATED = "Rating applied.";
 
     //Participation
     public static final String PARTICIPATION_ADDED = "Participation added.";
