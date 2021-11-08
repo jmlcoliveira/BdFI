@@ -1,0 +1,18 @@
+No shows.
+
+idShow does not exist.
+
+No shows.
+
+Show added.
+
+No finished productions.
+
+No finished productions.
+
+idShow has no participations.
+
+Show removed.
+
+Serializing and quitting...
+

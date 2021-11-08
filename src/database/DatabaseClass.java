@@ -38,8 +38,7 @@ public class DatabaseClass implements Database, Serializable {
         } catch (IllegalArgumentException e) {
             throw new InvalidGenderException();
         }
-        /*Person p = getPerson(personID);
-        if (p != null) throw new PersonIdAlreadyExistsException(personID);*/
+        if (person != null && personID.equals(person.getPersonID())) throw new PersonIdAlreadyExistsException(personID);
         person = new PersonClass(personID, year, email, telephone, gender1, name);
     }
 

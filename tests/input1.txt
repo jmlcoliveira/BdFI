@@ -1,0 +1,18 @@
+listshows 3
+
+listparticipations s100
+
+listbestshows
+
+addshow s204 2021 DUne
+
+listbestshows
+
+listshows 7
+
+listparticipations s204
+
+removeshow s204
+
+quit
+

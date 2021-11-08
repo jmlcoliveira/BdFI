@@ -1,0 +1,23 @@
+addPARTicipation p555 s111 Director
+
+addparticipation p234 s100 Actor, Main Protagonist
+
+addparticipation s111 p234 Actor, MAIN PROTAGONIST
+
+addparticipation p234 S111 Actor, MAIN PROTAGONIST
+
+addparticipation p234 s111 Executive PRODUCER
+
+addparticipation p234 s222 Writer
+
+ADDPARTICIPATION p234 s111 Main Writer
+
+infoshow s111
+
+infoperson p234
+
+quit
+
+
+
+

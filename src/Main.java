@@ -85,6 +85,7 @@ public class Main {
                     break;
             }
             command = getCommand(in);
+            System.out.println();
         }
         commandQuit(db);
     }
@@ -405,6 +406,7 @@ public class Main {
      */
     private static void commandQuit(Database db) {
         System.out.println("Serializing and quitting...");
+        System.out.println();
         save(db);
     }
 

@@ -1,0 +1,64 @@
+Invalid year.
+
+Show added.
+
+idShow exists.
+
+idShow does not exist.
+
+s547 THE WITCHER SEASON 2 2021 0
+
+idShow does not exist.
+
+idShow does not exist.
+
+s547 THE WITCHER SEASON 2 2021 0
+
+idShow does not exist.
+
+Show removed.
+
+idShow does not exist.
+
+idShow does not exist.
+
+Show added.
+
+idShow does not exist.
+
+Invalid Rating.
+
+idShow is in production.
+
+idShow does not exist.
+
+s111 THE WITCHER SEASON 2 2021 0
+
+Successful production.
+
+idShow has already completed production.
+
+s111 THE WITCHER SEASON 2 2021 0
+
+idShow does not exist.
+
+idShow has already completed production.
+
+idShow does not exist.
+
+Rating applied.
+
+Rating applied.
+
+Invalid Rating.
+
+Rating applied.
+
+Rating applied.
+
+idShow does not exist.
+
+s111 THE WITCHER SEASON 2 2021 7
+
+Serializing and quitting...
+

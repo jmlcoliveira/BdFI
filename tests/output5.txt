@@ -1,0 +1,31 @@
+idShow does not exist.
+
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE Actor, MAIN PROTAGONIST
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE Executive PRODUCER
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE Main Writer
+
+s111 THE WITCHER SEASON 2 2021 7
+
+No productions with rating.
+
+s111 THE WITCHER SEASON 2 2021 7
+
+Invalid Rating.
+
+idShow does not exist.
+
+Tag added.
+
+Tag added.
+
+Tag added.
+
+idShow does not exist.
+
+s111 THE WITCHER SEASON 2 2021 7
+adventure
+violence
+HORROR
+
+Serializing and quitting...
+

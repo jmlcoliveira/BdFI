@@ -1,0 +1,20 @@
+idPerson does not exist.
+
+idShow does not exist.
+
+idPerson does not exist.
+
+Participation added.
+
+Participation added.
+
+idShow does not exist.
+
+Participation added.
+
+s111 THE WITCHER SEASON 2 2021 7
+
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE
+
+Serializing and quitting...
+

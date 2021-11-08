@@ -1,0 +1,18 @@
+idPerson does not exist.
+
+Invalid year.
+
+Invalid year.
+
+Invalid gender information.
+
+Person added.
+
+idPerson exists.
+
+idPerson does not exist.
+
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE
+
+Serializing and quitting...
+

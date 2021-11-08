@@ -1,0 +1,18 @@
+infoperson p234
+
+addPERSON P234 -34656 alicia@warner.com 0034212990545 femALle Alicia VIKANDER
+
+addPERSON P234 -34656 alicia@warner.com 0034212990545 femALE Alicia VIKANDER
+
+addPERSON P234 1989 alicia@warner.com 0034212990545 femALle Alicia VIKANDER
+
+ADDPERSON P234 1989 alicia@warner.com 0034212990545 femALE Alicia VIKANDER
+
+ADDPERSON p234 1989 alicia@warner.com 0034212990545 femALE Alicia VIKANDER
+
+infoperson p111
+
+infoperson p234
+
+quit
+

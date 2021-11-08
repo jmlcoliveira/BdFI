@@ -1,0 +1,28 @@
+listPARTICIPATIONS s100
+
+listparticipations S111
+
+listbestshows
+
+listshows 6
+
+listshows 7
+
+listshows -1
+
+tagshow s444 DRAMA
+
+tagSHOW s111 adventure
+
+tagshow S111 violence
+
+tagshow s111 HORROR
+
+infoshow s444
+
+infoshow s111
+
+QUiT
+
+
+
