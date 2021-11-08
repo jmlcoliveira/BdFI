@@ -2,6 +2,7 @@ import dataStructures.Iterator;
 import database.Database;
 import database.DatabaseClass;
 import database.exceptions.*;
+import outputMessages.Error;
 import outputMessages.Success;
 import participation.Participation;
 import person.Person;
@@ -106,9 +107,14 @@ public class Main {
             String name = in.nextLine().trim();
             db.addPerson(id, year, email, telephone, gender, name);
             System.out.println(Success.PERSON_ADDED);
-        } catch (InvalidYearException | InvalidGenderException | PersonIdAlreadyExistsException e) {
-            System.out.println(e.getMessage());
+        } catch (InvalidYearException e) {
+            System.out.println(Error.INVALID_PERSON_YEAR);
+        } catch (InvalidGenderException e) {
+            System.out.println(Error.INVALID_GENDER);
+        } catch (PersonIdAlreadyExistsException e) {
+            System.out.println(Error.PERSON_EXISTS);
         }
+
     }
 
     /**
@@ -125,8 +131,10 @@ public class Main {
             String title = in.nextLine().trim();
             db.addShow(idShow, year, title);
             System.out.println(Success.SHOW_ADDED);
-        } catch (InvalidShowYearException | ShowIDExistsException e) {
-            System.out.println(e.getMessage());
+        } catch (InvalidShowYearException e) {
+            System.out.println(Error.INVALID_SHOW_YEAR);
+        } catch (ShowIDExistsException e) {
+            System.out.println(Error.SHOW_EXISTS);
         }
     }
 
@@ -144,8 +152,10 @@ public class Main {
             String description = in.nextLine().trim();
             db.addParticipation(personID, showID, description);
             System.out.println(Success.PARTICIPATION_ADDED);
-        } catch (PersonIdNotFoundException | ShowIdNotFoundException e) {
-            System.out.println(e.getMessage());
+        } catch (PersonIdNotFoundException e) {
+            System.out.println(Error.PERSON_DOESNT_EXIST);
+        } catch (ShowIdNotFoundException e) {
+            System.out.println(Error.SHOW_DOESNT_EXIST);
         }
     }
 
@@ -161,8 +171,10 @@ public class Main {
             String showID = in.nextLine().trim();
             db.premiereShow(showID);
             System.out.println(Success.SHOW_PREMIERED);
-        } catch (ShowNotInProductionException | ShowIdNotFoundException e) {
-            System.out.println(e.getMessage());
+        } catch (ShowNotInProductionException e) {
+            System.out.println(Error.SHOW_FINISHED_PRODUCTION);
+        } catch (ShowIdNotFoundException e) {
+            System.out.println(Error.SHOW_DOESNT_EXIST);
         }
     }
 
@@ -178,8 +190,10 @@ public class Main {
             String showID = in.nextLine().trim();
             db.removeShow(showID);
             System.out.println(Success.SHOW_REMOVED);
-        } catch (ShowNotInProductionException | ShowIdNotFoundException e) {
-            System.out.println(e.getMessage());
+        } catch (ShowNotInProductionException e) {
+            System.out.println(Error.SHOW_FINISHED_PRODUCTION);
+        } catch (ShowIdNotFoundException e) {
+            System.out.println(Error.SHOW_DOESNT_EXIST);
         }
     }
 
@@ -197,7 +211,7 @@ public class Main {
             db.tagShow(showID, tag);
             System.out.println(Success.TAG_ADDED);
         } catch (ShowIdNotFoundException e) {
-            System.out.println(e.getMessage());
+            System.out.println(Error.SHOW_DOESNT_EXIST);
         }
     }
 
@@ -217,7 +231,7 @@ public class Main {
             while (it.hasNext())
                 System.out.printf(Success.INFO_SHOW_TAG, it.next());
         } catch (ShowIdNotFoundException e) {
-            System.out.println(e.getMessage());
+            System.out.println(Error.SHOW_DOESNT_EXIST);
         }
     }
 
@@ -235,8 +249,12 @@ public class Main {
             in.nextLine();
             db.reviewShow(showID, stars);
             System.out.println(Success.SHOW_RATED);
-        } catch (InvalidShowRatingException | ShowInProductionException | ShowIdNotFoundException e) {
-            System.out.println(e.getMessage());
+        } catch (InvalidShowRatingException e) {
+            System.out.println(Error.INVALID_RATING);
+        } catch (ShowInProductionException e) {
+            System.out.println(Error.SHOW_IN_PRODUCTION);
+        } catch (ShowIdNotFoundException e) {
+            System.out.println(Error.SHOW_DOESNT_EXIST);
         }
     }
 
@@ -254,7 +272,7 @@ public class Main {
             System.out.printf(Success.PERSON_INFO, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(),
                     p.getTelephone(), p.getGender().getGender());
         } catch (PersonIdNotFoundException e) {
-            System.out.println(e.getMessage());
+            System.out.println(Error.PERSON_DOESNT_EXIST);
         }
     }
 
@@ -273,8 +291,10 @@ public class Main {
                 Show s = it.next().getShow();
                 System.out.printf(Success.PERSON_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
             }
-        } catch (PersonIdNotFoundException | PersonHasNoShowsException e) {
-            System.out.println(e.getMessage());
+        } catch (PersonIdNotFoundException e) {
+            System.out.println(Error.PERSON_DOESNT_EXIST);
+        } catch (PersonHasNoShowsException e) {
+            System.out.println(Error.PERSON_HAS_NO_SHOWS);
         }
     }
 
@@ -293,10 +313,11 @@ public class Main {
                 Person p = part.getPerson();
                 System.out.printf(Success.SHOW_PARTICIPATION, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(), p.getTelephone(), p.getGender().getGender(), part.getDescription());
             }
-        } catch (ShowIdNotFoundException | ShowHasNoParticipationsException e) {
-            System.out.println(e.getMessage());
+        } catch (ShowIdNotFoundException e) {
+            System.out.println(Error.SHOW_DOESNT_EXIST);
+        } catch (ShowHasNoParticipationsException e) {
+            System.out.println(Error.SHOW_NO_PARTICIPATIONS);
         }
-
     }
 
     /**
@@ -315,8 +336,12 @@ public class Main {
                 System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(), next.getYear(),
                         next.getRating());
             }
-        } catch (NoShowsException | NoFinishedShowsException | NoRatedShowsException e) {
-            System.out.println(e.getMessage());
+        } catch (NoShowsException e) {
+            System.out.println(Error.NO_SHOWS);
+        } catch (NoFinishedShowsException e) {
+            System.out.println(Error.NO_FINISHED_PRODUCTIONS);
+        } catch (NoRatedShowsException e) {
+            System.out.println(Error.NO_RATED_PRODUCTIONS);
         }
     }
 
@@ -337,9 +362,14 @@ public class Main {
                 System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(), next.getYear(),
                         next.getRating());
             }
-        } catch (InvalidShowRatingException | NoShowsException |
-                NoFinishedShowsException | NoRatedShowsException e) {
-            System.out.println(e.getMessage());
+        } catch (InvalidShowRatingException e) {
+            System.out.println(Error.INVALID_RATING);
+        } catch (NoShowsException e) {
+            System.out.println(Error.NO_SHOWS);
+        } catch (NoFinishedShowsException e) {
+            System.out.println(Error.NO_FINISHED_PRODUCTIONS);
+        } catch (NoRatedShowsException e) {
+            System.out.println(Error.NO_RATED_PRODUCTIONS);
         }
     }
 
@@ -358,8 +388,12 @@ public class Main {
                 Show s = it.next();
                 System.out.printf(Success.TAG_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
             }
-        } catch (NoShowsException | NoTaggedShowsException | NoShowsWithTagException e) {
-            System.out.println(e.getMessage());
+        } catch (NoShowsException e) {
+            System.out.println(Error.NO_SHOWS);
+        } catch (NoTaggedShowsException e) {
+            System.out.println(Error.NO_TAGGED_PRODUCTIONS);
+        } catch (NoShowsWithTagException e) {
+            System.out.println(Error.NO_SHOWS_WITH_TAG);
         }
     }
 
