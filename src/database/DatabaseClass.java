@@ -1,8 +1,6 @@
 package database;
 
-import dataStructures.DoubleList;
 import dataStructures.Iterator;
-import dataStructures.List;
 import database.exceptions.NoFinishedShowsException;
 import database.exceptions.NoProductionsWithRatingException;
 import database.exceptions.NoRatedShowsException;
@@ -110,43 +108,29 @@ public class DatabaseClass implements Database {
     }
 
     @Override
-    public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
+    public Show listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
         if (show == null) throw new NoShowsException();
         if (show.isInProduction()) throw new NoFinishedShowsException();
         if (show.hasNoRatings()) throw new NoRatedShowsException();
-        List<Show> l = new DoubleList<>();
-        l.addLast(show);
-        return l.iterator();
+        return show;
     }
 
     @Override
-    public Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
+    public Show listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException {
         if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
         if (show == null) throw new NoShowsException();
         if (show.isInProduction()) throw new NoFinishedShowsException();
         if (show.hasNoRatings()) throw new NoRatedShowsException();
         if (show.getRating() != rating) throw new NoProductionsWithRatingException();
-        List<Show> l = new DoubleList<>();
-        l.addLast(show);
-        return l.iterator();
+        return show;
     }
 
-    /*@Override
-    public Iterator<Participation> iteratorShowsByTag(String tag) throws NoShowsException, NoTaggedShowsException, NoShowsWithTagException {
-        if (show == null) throw new NoShowsException();
-        if (!show.hasAnyTag()) throw new NoTaggedShowsException();
-        if (!show.hasTag(tag)) throw new NoShowsWithTagException(tag);
-        List<Participation> l = new DoubleList<>();
-        l.addLast(show);
-        return l.iterator();
-    }*/
-
     @Override
-    public Iterator<Show> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
+    public Show iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
         Person p = getPerson(personID);
         if (!p.hasParticipation()) throw new PersonHasNoShowsException();
-        return p.iteratorShows();
+        return show;
     }
 
     @Override
@@ -169,8 +153,6 @@ public class DatabaseClass implements Database {
      * @return a Person object with the given personID or <code>null</code> if no person exists with that id
      */
     private Person getPersonP(String personID) {
-        //Person p = new PersonClass(personID, 0, null, null, null, null);
-        //To be completed in phase 2
         if (person == null || !personID.equalsIgnoreCase(person.getPersonID()))
             return null;
         return person;
@@ -183,8 +165,6 @@ public class DatabaseClass implements Database {
      * @return a Participation object with the given showID or <code>null</code> if no show exists with that id
      */
     private Show getShowP(String showID) {
-        //Participation s = new ShowClass(showID, 0, null);
-        //To be completed in phase 2
         if (show == null || !showID.equalsIgnoreCase(show.getShowID()))
             return null;
         return show;

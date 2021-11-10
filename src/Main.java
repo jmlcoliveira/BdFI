@@ -87,9 +87,6 @@ public class Main {
                 case LISTSHOWS:
                     commandListShowsByRating(in, db);
                     break;
-                case LISTTAGGEDSHOWS:
-                    commandListShowsByTag(in, db);
-                    break;
             }
             command = getCommand(in);
             System.out.println();
@@ -294,11 +291,9 @@ public class Main {
     private static void commandListShowsPerson(Scanner in, Database db) {
         try {
             String personID = in.nextLine().trim();
-            Iterator<Show> it = db.iteratorShowsByPerson(personID);
-            while (it.hasNext()) {
-                Show s = it.next();
-                System.out.printf(Success.PERSON_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
-            }
+            Show s = db.iteratorShowsByPerson(personID);
+            System.out.printf(Success.PERSON_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
+
         } catch (PersonIdNotFoundException e) {
             System.out.println(Error.PERSON_DOESNT_EXIST);
         } catch (PersonHasNoShowsException e) {
@@ -338,12 +333,10 @@ public class Main {
     private static void commandListBestShows(Scanner in, Database db) {
         try {
             in.nextLine();
-            Iterator<show.Show> it = db.listBestShows();
-            while (it.hasNext()) {
-                show.Show next = it.next();
-                System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(), next.getYear(),
-                        next.getRating());
-            }
+            Show s = db.listBestShows();
+            System.out.printf(Success.SHOW_LIST, s.getShowID(), s.getTitle(), s.getYear(),
+                    s.getRating());
+
         } catch (NoShowsException e) {
             System.out.println(Error.NO_SHOWS);
         } catch (NoFinishedShowsException e) {
@@ -364,12 +357,9 @@ public class Main {
         try {
             int rating = in.nextInt();
             in.nextLine();
-            Iterator<show.Show> it = db.listShows(rating);
-            while (it.hasNext()) {
-                show.Show next = it.next();
-                System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(), next.getYear(),
-                        next.getRating());
-            }
+            Show s = db.listShows(rating);
+            System.out.printf(Success.SHOW_LIST, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
+
         } catch (InvalidShowRatingException e) {
             System.out.println(Error.INVALID_RATING);
         } catch (NoShowsException e) {
@@ -381,31 +371,6 @@ public class Main {
         } catch (NoProductionsWithRatingException e) {
             System.out.println(Error.NO_PRODUCTION_WITH_RATING);
         }
-    }
-
-    /**
-     * Command 14
-     * Lists all shows with given tag
-     *
-     * @param in input where the data will be read from
-     * @param db Database where this action will be performed
-     */
-    private static void commandListShowsByTag(Scanner in, Database db) {
-        //to be implemented in a future version
-        /*try {
-            String tag = in.nextLine().trim();
-            Iterator<Participation> it = db.iteratorShowsByTag(tag);
-            while (it.hasNext()) {
-                Participation s = it.next();
-                System.out.printf(Success.TAG_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
-            }
-        } catch (NoShowsException e) {
-            System.out.println(Error.NO_SHOWS);
-        } catch (NoTaggedShowsException e) {
-            System.out.println(Error.NO_TAGGED_PRODUCTIONS);
-        } catch (NoShowsWithTagException e) {
-            System.out.println(Error.NO_SHOWS_WITH_TAG);
-        }*/
     }
 
     /**
