@@ -24,5 +24,6 @@ public abstract class Error {
     public static final String NO_SHOWS = "No shows.";
     public static final String NO_SHOWS_WITH_TAG  = "No shows with tag.";
     public static final String NO_TAGGED_PRODUCTIONS = "No tagged productions.";
+    public static final String NO_PRODUCTION_WITH_RATING = "No productions with rating.";
 
 }

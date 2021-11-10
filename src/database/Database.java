@@ -1,7 +1,10 @@
 package database;
 
 import dataStructures.Iterator;
-import database.exceptions.*;
+import database.exceptions.NoFinishedShowsException;
+import database.exceptions.NoProductionsWithRatingException;
+import database.exceptions.NoRatedShowsException;
+import database.exceptions.NoShowsException;
 import participation.Participation;
 import person.Person;
 import person.exceptions.*;
@@ -110,8 +113,8 @@ public interface Database extends Serializable {
 
     Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException;
 
-    Iterator<Show> iteratorShowsByTag(String tag) throws NoShowsException, NoTaggedShowsException, NoShowsWithTagException;
+    //Iterator<Show> iteratorShowsByTag(String tag) throws NoShowsException, NoTaggedShowsException, NoShowsWithTagException;
 
     Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
-            NoFinishedShowsException, NoRatedShowsException;
+            NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException;
 }

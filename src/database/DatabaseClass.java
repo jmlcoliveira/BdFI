@@ -3,7 +3,10 @@ package database;
 import dataStructures.DoubleList;
 import dataStructures.Iterator;
 import dataStructures.List;
-import database.exceptions.*;
+import database.exceptions.NoFinishedShowsException;
+import database.exceptions.NoProductionsWithRatingException;
+import database.exceptions.NoRatedShowsException;
+import database.exceptions.NoShowsException;
 import participation.Participation;
 import participation.ParticipationClass;
 import person.Gender;
@@ -32,21 +35,19 @@ public class DatabaseClass implements Database, Serializable {
     @Override
     public void addPerson(String personID, int year, String email, String telephone, String gender, String name) throws InvalidYearException, InvalidGenderException, PersonIdAlreadyExistsException {
         if (year <= 0) throw new InvalidYearException();
-        Gender gender1;
         try {
-            gender1 = Gender.valueOf(gender.replace('-', '_').toUpperCase());
+            Gender.valueOf(gender.replace('-', '_').toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new InvalidGenderException();
         }
-        if (person != null && personID.equals(person.getPersonID())) throw new PersonIdAlreadyExistsException(personID);
-        person = new PersonClass(personID, year, email, telephone, gender1, name);
+        if (getPersonP(personID) != null) throw new PersonIdAlreadyExistsException(personID);
+        person = new PersonClass(personID, year, email, telephone, gender, name);
     }
 
     @Override
     public void addShow(String showID, int year, String title) throws InvalidShowYearException, ShowIDExistsException {
         if (year <= 0) throw new InvalidShowYearException();
-        /*Show s = getShowP(showID);
-        if (s != null) throw new ShowIDExistsException(showID);*/
+        if (getShowP(showID) != null) throw new ShowIDExistsException(showID);
         show = new ShowClass(showID, year, title);
     }
 
@@ -62,15 +63,12 @@ public class DatabaseClass implements Database, Serializable {
     @Override
     public void premiereShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
         Show s = getShow(showID);
-        if (s == null) throw new ShowIdNotFoundException(showID);
         s.premiere();
     }
 
     @Override
     public void removeShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
         Show s = getShow(showID);
-        if (s == null)
-            throw new ShowIdNotFoundException(showID);
         if (!s.isInProduction())
             throw new ShowNotInProductionException(showID);
         show = null;
@@ -79,22 +77,13 @@ public class DatabaseClass implements Database, Serializable {
     @Override
     public void tagShow(String showID, String tag) throws ShowIdNotFoundException {
         Show s = getShow(showID);
-        if (s == null)
-            throw new ShowIdNotFoundException(showID);
         s.addTag(tag);
     }
 
     @Override
     public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, ShowIdNotFoundException {
         Show s = getShow(showID);
-        if (s == null) throw new ShowIdNotFoundException(showID);
         s.rate(review);
-    }
-
-    public Person getPerson(String personID) throws PersonIdNotFoundException {
-        Person p = getPersonP(personID);
-        if (p == null) throw new PersonIdNotFoundException(personID);
-        return p;
     }
 
     @Override
@@ -116,18 +105,18 @@ public class DatabaseClass implements Database, Serializable {
 
     @Override
     public Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
-            NoFinishedShowsException, NoRatedShowsException {
+            NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException {
         if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
         if (show == null) throw new NoShowsException();
         if (show.isInProduction()) throw new NoFinishedShowsException();
         if (!show.isRated()) throw new NoRatedShowsException();
-        if (show.getRating() != rating) throw new NoRatedShowsException();
+        if (show.getRating() != rating) throw new NoProductionsWithRatingException();
         List<Show> l = new DoubleList<>();
         l.addLast(show);
         return l.iterator();
     }
 
-    @Override
+    /*@Override
     public Iterator<Show> iteratorShowsByTag(String tag) throws NoShowsException, NoTaggedShowsException, NoShowsWithTagException {
         if (show == null) throw new NoShowsException();
         if (!show.hasAnyTag()) throw new NoTaggedShowsException();
@@ -135,7 +124,7 @@ public class DatabaseClass implements Database, Serializable {
         List<Show> l = new DoubleList<>();
         l.addLast(show);
         return l.iterator();
-    }
+    }*/
 
     @Override
     public Iterator<Participation> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
@@ -144,10 +133,17 @@ public class DatabaseClass implements Database, Serializable {
         return p.iteratorParticipation();
     }
 
+    @Override
     public Show getShow(String showID) throws ShowIdNotFoundException {
         Show s = getShowP(showID);
         if (s == null) throw new ShowIdNotFoundException(showID);
         return s;
+    }
+
+    public Person getPerson(String personID) throws PersonIdNotFoundException {
+        Person p = getPersonP(personID);
+        if (p == null) throw new PersonIdNotFoundException(personID);
+        return p;
     }
 
     /**
@@ -159,6 +155,8 @@ public class DatabaseClass implements Database, Serializable {
     private Person getPersonP(String personID) {
         //Person p = new PersonClass(personID, 0, null, null, null, null);
         //To be completed in phase 2
+        if (person == null || !personID.equalsIgnoreCase(person.getPersonID()))
+            return null;
         return person;
     }
 
@@ -171,6 +169,8 @@ public class DatabaseClass implements Database, Serializable {
     private Show getShowP(String showID) {
         //Show s = new ShowClass(showID, 0, null);
         //To be completed in phase 2
+        if (show == null || !showID.equalsIgnoreCase(show.getShowID()))
+            return null;
         return show;
     }
 }

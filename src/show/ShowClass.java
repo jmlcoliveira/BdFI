@@ -11,6 +11,12 @@ import show.exceptions.ShowNotInProductionException;
 
 import java.time.LocalDate;
 
+/**
+ * Show's class containing all information regarding a show
+ *
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public class ShowClass implements Show {
 
     static final long serialVersionUID = 0L;
@@ -110,7 +116,7 @@ public class ShowClass implements Show {
 
     @Override
     public boolean hasTag(String tag) {
-        return tags.indexOf(tag) >= 0;
+        return tags.find(tag) >= 0;
     }
 
     @Override

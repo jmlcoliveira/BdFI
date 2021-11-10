@@ -10,7 +10,7 @@ public abstract class Success {
     public static final String SHOW_ADDED = "Show added.";
     public static final String SHOW_PREMIERED = "Successful production.";
     public static final String SHOW_REMOVED = "Show removed.";
-    public static final String INFO_SHOW_HEADERS = "%s %s %d %d.\n";
+    public static final String INFO_SHOW_HEADERS = "%s %s %d %d\n";
     public static final String INFO_SHOW_TAG = "%s\n";
     public static final String SHOW_PARTICIPATION = "%s %s %d %s %s %s %s\n";
     public static final String SHOW_LIST = "%s %s %d %d\n";
@@ -22,4 +22,7 @@ public abstract class Success {
     //Tag
     public static final String TAG_ADDED = "Tag added.";
     public static final String TAG_SHOW = "%s %s %d %d\n";
+
+    //Exit
+    public static final String CLOSE_PROGRAM = "Serializing and quitting...";
 }

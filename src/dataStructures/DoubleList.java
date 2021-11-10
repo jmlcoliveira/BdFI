@@ -5,6 +5,13 @@ import dataStructures.exceptions.InvalidPositionException;
 
 import java.io.Serializable;
 
+/**
+ * Adaptation of the DoubleList class given by the AED Team
+ *
+ * @param <E> Generic Element
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public class DoubleList<E> implements List<E> {
 
     static final long serialVersionUID = 0L;
@@ -20,6 +27,12 @@ public class DoubleList<E> implements List<E> {
         head = null;
         tail = null;
         currentSize = 0;
+    }
+
+    public DoubleList(DoubleList<E> list) {
+        head = list.head;
+        tail = list.tail;
+        currentSize = list.currentSize;
     }
 
     @Override
@@ -196,7 +209,7 @@ public class DoubleList<E> implements List<E> {
 
 
     @Override
-    public int indexOf(E element) {
+    public int find(E element) {
         int i = 0;
         for (DoubleListNode<E> node = head; node != null; node = node.next) {
             if (node.getElement().equals(element))

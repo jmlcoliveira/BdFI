@@ -9,6 +9,12 @@ import show.exceptions.ShowNotInProductionException;
 
 import java.io.Serializable;
 
+/**
+ * Show's interface
+ *
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public interface Show extends Serializable {
 
     /**
@@ -28,17 +34,20 @@ public interface Show extends Serializable {
     /**
      * Returns de title of the show
      *
-     * @return
+     * @return title of the show
      */
     String getTitle();
 
     /**
      * Checks if the show is still in production
      *
-     * @return
+     * @return <code>true</code> if show is in production or <code>false</code> if not
      */
     Boolean isInProduction();
 
+    /**
+     * @param part participation of the show
+     */
     void addParticipation(Participation part);
 
     /**

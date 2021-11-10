@@ -5,6 +5,12 @@ import participation.Participation;
 
 import java.io.Serializable;
 
+/**
+ * Person's interface
+ *
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public interface Person extends Serializable {
 
     /**
@@ -40,7 +46,7 @@ public interface Person extends Serializable {
      *
      * @return the person's gender
      */
-    Gender getGender();
+    String getGender();
 
     /**
      * Returns the person's name
@@ -49,9 +55,24 @@ public interface Person extends Serializable {
      */
     String getName();
 
+    /**
+     * Adds a participation
+     *
+     * @param part participation
+     */
     void addParticipation(Participation part);
 
+    /**
+     * Returns an iterator containing all participation of the person
+     *
+     * @return an iterator containing all participation of the person
+     */
     Iterator<Participation> iteratorParticipation();
 
+    /**
+     * Returns <code>true</code> if person has any participation, <code>false</code> otherwise
+     *
+     * @return <code>true</code> if person has any participation, <code>false</code> otherwise
+     */
     boolean hasParticipation();
 }

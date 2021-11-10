@@ -5,6 +5,12 @@ import dataStructures.Iterator;
 import dataStructures.List;
 import participation.Participation;
 
+/**
+ * Person's class containing all information regarding a person
+ *
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public class PersonClass implements Person {
 
     static final long serialVersionUID = 0L;
@@ -13,11 +19,11 @@ public class PersonClass implements Person {
     private final int year;
     private final String email;
     private final String telephone;
-    private final Gender gender;
+    private final String gender;
     private final String name;
     private final List<Participation> participation;
 
-    public PersonClass(String personId, int year, String email, String telephone, Gender gender, String name) {
+    public PersonClass(String personId, int year, String email, String telephone, String gender, String name) {
         this.personID = personId;
         this.year = year;
         this.email = email;
@@ -48,7 +54,7 @@ public class PersonClass implements Person {
     }
 
     @Override
-    public Gender getGender() {
+    public String getGender() {
         return gender;
     }
 

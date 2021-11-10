@@ -1,7 +1,10 @@
 import dataStructures.Iterator;
 import database.Database;
 import database.DatabaseClass;
-import database.exceptions.*;
+import database.exceptions.NoFinishedShowsException;
+import database.exceptions.NoProductionsWithRatingException;
+import database.exceptions.NoRatedShowsException;
+import database.exceptions.NoShowsException;
 import outputMessages.Error;
 import outputMessages.Success;
 import participation.Participation;
@@ -13,6 +16,10 @@ import show.exceptions.*;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public class Main {
 
     //Name of the file
@@ -271,7 +278,7 @@ public class Main {
             String personID = in.nextLine().trim();
             Person p = db.getPerson(personID);
             System.out.printf(Success.PERSON_INFO, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(),
-                    p.getTelephone(), p.getGender().getGender());
+                    p.getTelephone(), p.getGender());
         } catch (PersonIdNotFoundException e) {
             System.out.println(Error.PERSON_DOESNT_EXIST);
         }
@@ -312,7 +319,7 @@ public class Main {
             while (it.hasNext()) {
                 Participation part = it.next();
                 Person p = part.getPerson();
-                System.out.printf(Success.SHOW_PARTICIPATION, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(), p.getTelephone(), p.getGender().getGender(), part.getDescription());
+                System.out.printf(Success.SHOW_PARTICIPATION, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(), p.getTelephone(), p.getGender(), part.getDescription());
             }
         } catch (ShowIdNotFoundException e) {
             System.out.println(Error.SHOW_DOESNT_EXIST);
@@ -371,6 +378,8 @@ public class Main {
             System.out.println(Error.NO_FINISHED_PRODUCTIONS);
         } catch (NoRatedShowsException e) {
             System.out.println(Error.NO_RATED_PRODUCTIONS);
+        } catch (NoProductionsWithRatingException e) {
+            System.out.println(Error.NO_PRODUCTION_WITH_RATING);
         }
     }
 
@@ -382,7 +391,8 @@ public class Main {
      * @param db Database where this action will be performed
      */
     private static void commandListShowsByTag(Scanner in, Database db) {
-        try {
+        //to be implemented in a future version
+        /*try {
             String tag = in.nextLine().trim();
             Iterator<Show> it = db.iteratorShowsByTag(tag);
             while (it.hasNext()) {
@@ -395,17 +405,17 @@ public class Main {
             System.out.println(Error.NO_TAGGED_PRODUCTIONS);
         } catch (NoShowsWithTagException e) {
             System.out.println(Error.NO_SHOWS_WITH_TAG);
-        }
+        }*/
     }
 
     /**
      * Command 15
-     * Outputs in  |the console a goodbye message
+     * Outputs in the console a goodbye message
      *
      * @param db database which is been saved
      */
     private static void commandQuit(Database db) {
-        System.out.println("Serializing and quitting...");
+        System.out.println(Success.CLOSE_PROGRAM);
         System.out.println();
         save(db);
     }
