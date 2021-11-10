@@ -39,17 +39,20 @@ public class PersonClass implements Person {
      * Person's name
      */
     private final String name;
+    /**
+     * List containing all shows where this person participated
+     */
     private final List<Show> showsOfPerson;
 
     /**
      * PersonsClass constructor
      *
-     * @param personId   Person's ID
-     * @param year       Person's year of birth
-     * @param email      Person's email
-     * @param telephone  Person's phone number
-     * @param gender     Person's gender
-     * @param name       Person's name
+     * @param personId  Person's ID
+     * @param year      Person's year of birth
+     * @param email     Person's email
+     * @param telephone Person's phone number
+     * @param gender    Person's gender
+     * @param name      Person's name
      */
     public PersonClass(String personId, int year, String email, String telephone, String gender, String name) {
         this.personID = personId;
@@ -58,7 +61,7 @@ public class PersonClass implements Person {
         this.telephone = telephone;
         this.gender = gender;
         this.name = name;
-        participation = new DoubleList<>();
+        showsOfPerson = new DoubleList<>();
     }
 
     @Override
@@ -92,8 +95,9 @@ public class PersonClass implements Person {
     }
 
     @Override
-    public void addParticipation(Show part) {
-        showsOfPerson.addLast(part);
+    public void addShow(Show part) {
+        if (showsOfPerson.isEmpty())
+            showsOfPerson.addLast(part);
     }
 
     @Override
@@ -103,7 +107,7 @@ public class PersonClass implements Person {
 
     @Override
     public boolean hasParticipation() {
-        return participation.size() != 0;
+        return showsOfPerson.size() != 0;
     }
 
     @Override

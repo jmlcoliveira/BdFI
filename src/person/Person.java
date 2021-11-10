@@ -60,7 +60,7 @@ public interface Person extends Serializable {
      *
      * @param show participation
      */
-    void addParticipation(Show show);
+    void addShow(Show show);
 
     /**
      * Returns an iterator containing all show where the person participated

@@ -9,7 +9,7 @@ public abstract class Error {
     public static final String PERSON_EXISTS = "idPerson exists.";
     public static final String PERSON_DOESNT_EXIST = "idPerson does not exist.";
 
-    //Show
+    //Participation
     public static final String INVALID_RATING = "Invalid Rating.";
     public static final String INVALID_SHOW_YEAR = "Invalid year.";
     public static final String SHOW_NO_PARTICIPATIONS = "idShow has no participations.";

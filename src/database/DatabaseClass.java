@@ -65,7 +65,7 @@ public class DatabaseClass implements Database, Serializable {
         Person p = getPerson(personID);
         Show s = getShow(showID);
         Participation part = new ParticipationClass(p, s, description);
-        p.addParticipation(part);
+        p.addShow(s);
         s.addParticipation(part);
     }
 
@@ -126,17 +126,17 @@ public class DatabaseClass implements Database, Serializable {
     }
 
     /*@Override
-    public Iterator<Show> iteratorShowsByTag(String tag) throws NoShowsException, NoTaggedShowsException, NoShowsWithTagException {
+    public Iterator<Participation> iteratorShowsByTag(String tag) throws NoShowsException, NoTaggedShowsException, NoShowsWithTagException {
         if (show == null) throw new NoShowsException();
         if (!show.hasAnyTag()) throw new NoTaggedShowsException();
         if (!show.hasTag(tag)) throw new NoShowsWithTagException(tag);
-        List<Show> l = new DoubleList<>();
+        List<Participation> l = new DoubleList<>();
         l.addLast(show);
         return l.iterator();
     }*/
 
     @Override
-    public Iterator<Participation> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
+    public Iterator<Show> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
         Person p = getPerson(personID);
         if (!p.hasParticipation()) throw new PersonHasNoShowsException();
         return p.iteratorShows();
@@ -170,13 +170,13 @@ public class DatabaseClass implements Database, Serializable {
     }
 
     /**
-     * Returns a Show object with the given showID or <code>null</code> if no show exists with that id
+     * Returns a Participation object with the given showID or <code>null</code> if no show exists with that id
      *
      * @param showID show's ID
-     * @return a Show object with the given showID or <code>null</code> if no show exists with that id
+     * @return a Participation object with the given showID or <code>null</code> if no show exists with that id
      */
     private Show getShowP(String showID) {
-        //Show s = new ShowClass(showID, 0, null);
+        //Participation s = new ShowClass(showID, 0, null);
         //To be completed in phase 2
         if (show == null || !showID.equalsIgnoreCase(show.getShowID()))
             return null;

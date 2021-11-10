@@ -233,7 +233,7 @@ public class Main {
     private static void commandInfoShow(Scanner in, Database db) {
         try {
             String showID = in.nextLine().trim();
-            Show s = db.getShow(showID);
+            show.Show s = db.getShow(showID);
             System.out.printf(Success.INFO_SHOW_HEADERS, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
             Iterator<String> it = s.iteratorTags();
             while (it.hasNext())
@@ -294,9 +294,9 @@ public class Main {
     private static void commandListShowsPerson(Scanner in, Database db) {
         try {
             String personID = in.nextLine().trim();
-            Iterator<Participation> it = db.iteratorShowsByPerson(personID);
+            Iterator<Show> it = db.iteratorShowsByPerson(personID);
             while (it.hasNext()) {
-                Show s = it.next().getShow();
+                Show s = it.next();
                 System.out.printf(Success.PERSON_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
             }
         } catch (PersonIdNotFoundException e) {
@@ -338,9 +338,9 @@ public class Main {
     private static void commandListBestShows(Scanner in, Database db) {
         try {
             in.nextLine();
-            Iterator<Show> it = db.listBestShows();
+            Iterator<show.Show> it = db.listBestShows();
             while (it.hasNext()) {
-                Show next = it.next();
+                show.Show next = it.next();
                 System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(), next.getYear(),
                         next.getRating());
             }
@@ -364,9 +364,9 @@ public class Main {
         try {
             int rating = in.nextInt();
             in.nextLine();
-            Iterator<Show> it = db.listShows(rating);
+            Iterator<show.Show> it = db.listShows(rating);
             while (it.hasNext()) {
-                Show next = it.next();
+                show.Show next = it.next();
                 System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(), next.getYear(),
                         next.getRating());
             }
@@ -394,9 +394,9 @@ public class Main {
         //to be implemented in a future version
         /*try {
             String tag = in.nextLine().trim();
-            Iterator<Show> it = db.iteratorShowsByTag(tag);
+            Iterator<Participation> it = db.iteratorShowsByTag(tag);
             while (it.hasNext()) {
-                Show s = it.next();
+                Participation s = it.next();
                 System.out.printf(Success.TAG_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
             }
         } catch (NoShowsException e) {

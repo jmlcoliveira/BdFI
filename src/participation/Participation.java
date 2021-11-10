@@ -1,7 +1,6 @@
 package participation;
 
 import person.Person;
-import show.Show;
 
 import java.io.Serializable;
 
@@ -15,11 +14,11 @@ public interface Participation extends Serializable {
     Person getPerson();
 
     /**
-     * Returns the Show where the participation was made
+     * Returns the Participation where the participation was made
      *
-     * @return the Show
+     * @return the Participation
      */
-    Show getShow();
+    show.Show getShow();
 
     /**
      * Returns the description of the participation

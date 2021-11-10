@@ -12,7 +12,7 @@ import show.exceptions.ShowNotInProductionException;
 import java.time.LocalDate;
 
 /**
- * Show's class containing all information regarding a show
+ * Participation's class containing all information regarding a show
  *
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
  * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt

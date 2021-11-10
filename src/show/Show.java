@@ -10,7 +10,7 @@ import show.exceptions.ShowNotInProductionException;
 import java.io.Serializable;
 
 /**
- * Show's interface
+ * Participation's interface
  *
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
  * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
@@ -59,7 +59,7 @@ public interface Show extends Serializable {
     void rate(int rating) throws InvalidShowRatingException, ShowInProductionException;
 
     /**
-     * Returns the rating of the Show
+     * Returns the rating of the Participation
      *
      * @return the rating
      */
@@ -75,7 +75,7 @@ public interface Show extends Serializable {
     /**
      * Premieres a show
      *
-     * @throws ShowNotInProductionException if the Show already premiered
+     * @throws ShowNotInProductionException if the Participation already premiered
      */
     void premiere() throws ShowNotInProductionException;
 
@@ -94,32 +94,32 @@ public interface Show extends Serializable {
     Iterator<String> iteratorTags();
 
     /**
-     * Returns an iterator with the Participations of the Show
+     * Returns an iterator with the Participations of the Participation
      *
      * @return iterator of Participations
-     * @throws ShowHasNoParticipationsException  if the Show has no Participations
+     * @throws ShowHasNoParticipationsException if the Participation has no Participations
      */
     Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException;
 
     /**
-     * Checks if the Show has Participations
+     * Checks if the Participation has Participations
      *
-     * @return <code>true</code> if the Show has no Participations
+     * @return <code>true</code> if the Participation has no Participations
      */
-    boolean hasParticipation();
+    //boolean hasParticipation();
 
     /**
-     * Checks if the Show has a given tag
+     * Checks if the Participation has a given tag
      *
      * @param tag the tag
-     * @return <code>true</code> if the Show has that tag
+     * @return <code>true</code> if the Participation has that tag
      */
-    boolean hasTag(String tag);
+    //boolean hasTag(String tag);
 
     /**
-     * Checks if the Show has at least one tag
+     * Checks if the Participation has at least one tag
      *
-     * @return <code>true</code> if the the Show has any tag
+     * @return <code>true</code> if the the Participation has any tag
      */
-    boolean hasAnyTag();
+    //boolean hasAnyTag();
 }
