@@ -40,14 +40,14 @@ public class DatabaseClass implements Database, Serializable {
         } catch (IllegalArgumentException e) {
             throw new InvalidGenderException();
         }
-        if (getPersonP(personID) != null) throw new PersonIdAlreadyExistsException(personID);
+        if (getPersonP(personID) != null) throw new PersonIdAlreadyExistsException();
         person = new PersonClass(personID, year, email, telephone, gender, name);
     }
 
     @Override
     public void addShow(String showID, int year, String title) throws InvalidShowYearException, ShowIDExistsException {
         if (year <= 0) throw new InvalidShowYearException();
-        if (getShowP(showID) != null) throw new ShowIDExistsException(showID);
+        if (getShowP(showID) != null) throw new ShowIDExistsException();
         show = new ShowClass(showID, year, title);
     }
 
@@ -70,7 +70,7 @@ public class DatabaseClass implements Database, Serializable {
     public void removeShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
         Show s = getShow(showID);
         if (!s.isInProduction())
-            throw new ShowNotInProductionException(showID);
+            throw new ShowNotInProductionException();
         show = null;
     }
 
@@ -89,7 +89,7 @@ public class DatabaseClass implements Database, Serializable {
     @Override
     public Iterator<Participation> iteratorParticipationByShow(String showID) throws ShowIdNotFoundException, ShowHasNoParticipationsException {
         Show s = getShow(showID);
-        if (s == null) throw new ShowIdNotFoundException(showID);
+        if (s == null) throw new ShowIdNotFoundException();
         return s.iteratorParticipation();
     }
 
@@ -97,7 +97,7 @@ public class DatabaseClass implements Database, Serializable {
     public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
         if (show == null) throw new NoShowsException();
         if (show.isInProduction()) throw new NoFinishedShowsException();
-        if (!show.isRated()) throw new NoRatedShowsException();
+        if (show.hasNoRatings()) throw new NoRatedShowsException();
         List<Show> l = new DoubleList<>();
         l.addLast(show);
         return l.iterator();
@@ -109,7 +109,7 @@ public class DatabaseClass implements Database, Serializable {
         if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
         if (show == null) throw new NoShowsException();
         if (show.isInProduction()) throw new NoFinishedShowsException();
-        if (!show.isRated()) throw new NoRatedShowsException();
+        if (show.hasNoRatings()) throw new NoRatedShowsException();
         if (show.getRating() != rating) throw new NoProductionsWithRatingException();
         List<Show> l = new DoubleList<>();
         l.addLast(show);
@@ -129,20 +129,20 @@ public class DatabaseClass implements Database, Serializable {
     @Override
     public Iterator<Participation> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
         Person p = getPerson(personID);
-        if (!p.hasParticipation()) throw new PersonHasNoShowsException(personID);
-        return p.iteratorParticipation();
+        if (!p.hasParticipation()) throw new PersonHasNoShowsException();
+        return p.iteratorShows();
     }
 
     @Override
     public Show getShow(String showID) throws ShowIdNotFoundException {
         Show s = getShowP(showID);
-        if (s == null) throw new ShowIdNotFoundException(showID);
+        if (s == null) throw new ShowIdNotFoundException();
         return s;
     }
 
     public Person getPerson(String personID) throws PersonIdNotFoundException {
         Person p = getPersonP(personID);
-        if (p == null) throw new PersonIdNotFoundException(personID);
+        if (p == null) throw new PersonIdNotFoundException();
         return p;
     }
 

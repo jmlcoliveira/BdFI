@@ -14,6 +14,9 @@ import java.io.Serializable;
  */
 public class DoubleList<E> implements List<E> {
 
+    /**
+     * Serial Version UID of the Class
+     */
     static final long serialVersionUID = 0L;
 
     // Node at the head of the list.

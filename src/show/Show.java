@@ -65,7 +65,12 @@ public interface Show extends Serializable {
      */
     int getRating();
 
-    boolean isRated();
+    /**
+     * Returns <code>true</code> if it has any rating, <code>false</code> otherwise
+     *
+     * @return <code>true</code> if it has any rating, <code>false</code> otherwise
+     */
+    boolean hasNoRatings();
 
     /**
      * Premieres a show

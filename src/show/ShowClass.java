@@ -19,15 +19,32 @@ import java.time.LocalDate;
  */
 public class ShowClass implements Show {
 
+    /**
+     * Serial Version UID of the Class
+     */
     static final long serialVersionUID = 0L;
 
+    /**
+     * ID of the show
+     */
     private final String showID;
+
+    /**
+     * Release year of the show
+     */
     private final int year;
+
+    /**
+     * Title of the show
+     */
     private final String title;
+
+    /**
+     * List containing all participation of the show
+     */
     private final List<Participation> participation;
     private final List<String> tags;
     private int currentRating;
-    private boolean isRated;
     private int reviewCount;
     private boolean premiered;
 
@@ -36,7 +53,6 @@ public class ShowClass implements Show {
         this.year = year;
         this.title = title;
         currentRating = 0;
-        isRated = false;
         reviewCount = 0;
         participation = new DoubleList<>();
         tags = new DoubleList<>();
@@ -63,33 +79,40 @@ public class ShowClass implements Show {
         return !premiered;
     }
 
+    //requires stars, count, currentReview >= 0
+    private static int updateReview(int stars, int count, int currentReview) {
+        return Math.round((stars + count * currentReview) / ((float) (count + 1)));
+    }
+
+    @Override
     public void addParticipation(Participation part) {
         participation.addLast(part);
     }
 
+    @Override
     public void rate(int stars) throws InvalidShowRatingException, ShowInProductionException {
         if (stars < 0 || stars > 10)
             throw new InvalidShowRatingException();
         if (!premiered)
-            throw new ShowInProductionException(showID);
-        currentRating = bdfiAlg.updateReview(stars, reviewCount, currentRating);
+            throw new ShowInProductionException();
+        currentRating = updateReview(stars, reviewCount, currentRating);
         reviewCount++;
-        isRated = true;
     }
 
+    @Override
     public int getRating() {
         return currentRating;
     }
 
     @Override
-    public boolean isRated() {
-        return isRated;
+    public boolean hasNoRatings() {
+        return currentRating == 0;
     }
 
     @Override
     public void premiere() throws ShowNotInProductionException {
         if (!isInProduction())
-            throw new ShowNotInProductionException(showID);
+            throw new ShowNotInProductionException();
         premiered = true;
     }
 
@@ -105,11 +128,11 @@ public class ShowClass implements Show {
 
     @Override
     public Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException {
-        if (participation.isEmpty()) throw new ShowHasNoParticipationsException(showID);
+        if (participation.isEmpty()) throw new ShowHasNoParticipationsException();
         return participation.iterator();
     }
 
-    @Override
+   /* @Override
     public boolean hasParticipation() {
         return participation.size() != 0;
     }
@@ -122,7 +145,7 @@ public class ShowClass implements Show {
     @Override
     public boolean hasAnyTag() {
         return tags.size() > 0;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {

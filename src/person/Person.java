@@ -1,7 +1,7 @@
 package person;
 
 import dataStructures.Iterator;
-import participation.Participation;
+import show.Show;
 
 import java.io.Serializable;
 
@@ -58,16 +58,16 @@ public interface Person extends Serializable {
     /**
      * Adds a participation
      *
-     * @param part participation
+     * @param show participation
      */
-    void addParticipation(Participation part);
+    void addParticipation(Show show);
 
     /**
-     * Returns an iterator containing all participation of the person
+     * Returns an iterator containing all show where the person participated
      *
-     * @return an iterator containing all participation of the person
+     * @return an iterator containing all show where the person participated
      */
-    Iterator<Participation> iteratorParticipation();
+    Iterator<Show> iteratorShows();
 
     /**
      * Returns <code>true</code> if person has any participation, <code>false</code> otherwise

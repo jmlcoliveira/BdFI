@@ -3,7 +3,7 @@ package person;
 import dataStructures.DoubleList;
 import dataStructures.Iterator;
 import dataStructures.List;
-import participation.Participation;
+import show.Show;
 
 /**
  * Person's class containing all information regarding a person
@@ -39,7 +39,7 @@ public class PersonClass implements Person {
      * Person's name
      */
     private final String name;
-    private final List<Participation> participation;
+    private final List<Show> showsOfPerson;
 
     /**
      * PersonsClass constructor
@@ -92,13 +92,13 @@ public class PersonClass implements Person {
     }
 
     @Override
-    public void addParticipation(Participation part) {
-        participation.addLast(part);
+    public void addParticipation(Show part) {
+        showsOfPerson.addLast(part);
     }
 
     @Override
-    public Iterator<Participation> iteratorParticipation() {
-        return participation.iterator();
+    public Iterator<Show> iteratorShows() {
+        return showsOfPerson.iterator();
     }
 
     @Override
