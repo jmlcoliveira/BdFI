@@ -58,12 +58,19 @@ public interface Show extends Serializable {
      */
     void rate(int rating) throws InvalidShowRatingException, ShowInProductionException;
 
+    /**
+     * Returns the rating of the Show
+     *
+     * @return the rating
+     */
     int getRating();
 
     boolean isRated();
 
     /**
-     * @throws ShowNotInProductionException
+     * Premieres a show
+     *
+     * @throws ShowNotInProductionException if the Show already premiered
      */
     void premiere() throws ShowNotInProductionException;
 
@@ -81,11 +88,33 @@ public interface Show extends Serializable {
      */
     Iterator<String> iteratorTags();
 
+    /**
+     * Returns an iterator with the Participations of the Show
+     *
+     * @return iterator of Participations
+     * @throws ShowHasNoParticipationsException  if the Show has no Participations
+     */
     Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException;
 
+    /**
+     * Checks if the Show has Participations
+     *
+     * @return <code>true</code> if the Show has no Participations
+     */
     boolean hasParticipation();
 
+    /**
+     * Checks if the Show has a given tag
+     *
+     * @param tag the tag
+     * @return <code>true</code> if the Show has that tag
+     */
     boolean hasTag(String tag);
 
+    /**
+     * Checks if the Show has at least one tag
+     *
+     * @return <code>true</code> if the the Show has any tag
+     */
     boolean hasAnyTag();
 }

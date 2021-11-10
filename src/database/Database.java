@@ -100,6 +100,14 @@ public interface Database extends Serializable {
      */
     Person getPerson(String showID) throws PersonIdNotFoundException;
 
+    /**
+     * Returns an iterator with all the participations in a show
+     *
+     * @param showID show's ID
+     * @return Iterator of participation
+     * @throws ShowIdNotFoundException           if there is no show with the same id
+     * @throws ShowHasNoParticipationsException  if the show has no participations
+     */
     Iterator<Participation> iteratorParticipationByShow(String showID) throws ShowIdNotFoundException,
             ShowHasNoParticipationsException;
 
@@ -111,10 +119,29 @@ public interface Database extends Serializable {
      */
     Iterator<Participation> iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException;
 
+    /**
+     * Returns an iterator containing the shows ordered by rating
+     *
+     * @return Iterator of shows
+     * @throws NoShowsException           if the database has no show
+     * @throws NoFinishedShowsException   if there are no finished shows
+     * @throws NoRatedShowsException      if there are no rated shows
+     */
     Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException;
 
     //Iterator<Show> iteratorShowsByTag(String tag) throws NoShowsException, NoTaggedShowsException, NoShowsWithTagException;
 
+    /**
+     * Returns an iterator with the shows that have a certain rating
+     *
+     * @param rating
+     * @return Iterator of shows
+     * @throws InvalidShowRatingException        if the rating is not allowed
+     * @throws NoShowsException                  if the database has no show
+     * @throws NoFinishedShowsException          if there are no finished shows
+     * @throws NoRatedShowsException             if there are no rated shows
+     * @throws NoProductionsWithRatingException  if there are no finished shows with the rating
+     */
     Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException;
 }

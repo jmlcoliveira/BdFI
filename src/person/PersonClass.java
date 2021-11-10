@@ -15,14 +15,42 @@ public class PersonClass implements Person {
 
     static final long serialVersionUID = 0L;
 
+    /**
+     * Person's ID
+     */
     private final String personID;
+    /**
+     * Person's year of birth
+     */
     private final int year;
+    /**
+     * Person's email
+     */
     private final String email;
+    /**
+     * Person's phone number
+     */
     private final String telephone;
+    /**
+     * Person's gender
+     */
     private final String gender;
+    /**
+     * Person's name
+     */
     private final String name;
     private final List<Participation> participation;
 
+    /**
+     * PersonsClass constructor
+     *
+     * @param personId   Person's ID
+     * @param year       Person's year of birth
+     * @param email      Person's email
+     * @param telephone  Person's phone number
+     * @param gender     Person's gender
+     * @param name       Person's name
+     */
     public PersonClass(String personId, int year, String email, String telephone, String gender, String name) {
         this.personID = personId;
         this.year = year;
