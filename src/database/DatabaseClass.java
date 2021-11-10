@@ -17,10 +17,17 @@ import show.Show;
 import show.ShowClass;
 import show.exceptions.*;
 
-import java.io.Serializable;
+/**
+ * Database interface
+ *
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
+public class DatabaseClass implements Database {
 
-public class DatabaseClass implements Database, Serializable {
-
+    /**
+     * Serial Version UID of the Class
+     */
     static final long serialVersionUID = 0L;
 
     /**

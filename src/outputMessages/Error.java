@@ -1,5 +1,11 @@
 package outputMessages;
 
+/**
+ * Abstract class containing all output Error messages
+ *
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public abstract class Error {
     //Person
     public static final String PERSON_NOT_ADDED = "Person added.";

@@ -1,10 +1,9 @@
 package database.exceptions;
 
+/**
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public class NoShowsWithTagException extends Exception {
 
-    private static final String MESSAGE = "No shows with %s.";
-
-    public NoShowsWithTagException(String tag) {
-        super(String.format(MESSAGE, tag));
-    }
 }

@@ -13,6 +13,12 @@ import show.exceptions.*;
 
 import java.io.Serializable;
 
+/**
+ * Database base class that contains all persons and shows and communicates with the main
+ *
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public interface Database extends Serializable {
 
     /**
@@ -134,13 +140,13 @@ public interface Database extends Serializable {
     /**
      * Returns an iterator with the shows that have a certain rating
      *
-     * @param rating
+     * @param rating target rating
      * @return Iterator of shows
-     * @throws InvalidShowRatingException        if the rating is not allowed
-     * @throws NoShowsException                  if the database has no show
-     * @throws NoFinishedShowsException          if there are no finished shows
-     * @throws NoRatedShowsException             if there are no rated shows
-     * @throws NoProductionsWithRatingException  if there are no finished shows with the rating
+     * @throws InvalidShowRatingException       if the rating is not allowed
+     * @throws NoShowsException                 if the database has no show
+     * @throws NoFinishedShowsException         if there are no finished shows
+     * @throws NoRatedShowsException            if there are no rated shows
+     * @throws NoProductionsWithRatingException if there are no finished shows with the rating
      */
     Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException;

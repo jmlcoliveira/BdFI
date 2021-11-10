@@ -1,10 +1,8 @@
 package database.exceptions;
 
+/**
+ * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
+ * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
+ */
 public class NoRatedShowsException extends Exception{
-
-    private static final String MESSAGE = "No rated productions.";
-
-    public NoRatedShowsException() {
-        super(MESSAGE);
-    }
 }
