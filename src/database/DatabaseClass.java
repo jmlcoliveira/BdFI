@@ -23,9 +23,18 @@ public class DatabaseClass implements Database, Serializable {
 
     static final long serialVersionUID = 0L;
 
+    /**
+     * the Person in the Database
+     */
     private Person person;
+    /**
+     * the Show in the Show
+     */
     private Show show;
 
+    /**
+     * DatabaseClass constructor
+     */
     public DatabaseClass() {
         person = null;
         show = null;
