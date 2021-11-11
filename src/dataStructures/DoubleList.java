@@ -94,17 +94,19 @@ public class DoubleList<E> implements List<E> {
             tail = newNode;
         else
             head.setPrevious(newNode);
+        newNode.setNext(head);
         head = newNode;
         currentSize++;
     }
 
     @Override
     public void addLast(E element) {
-        DoubleListNode<E> newNode = new DoubleListNode<>(element, tail, null);
         if (this.isEmpty())
             addFirst(element);
         else {
+            DoubleListNode<E> newNode = new DoubleListNode<>(element, tail, null);
             tail.setNext(newNode);
+            newNode.setPrevious(tail);
             tail = newNode;
             currentSize++;
         }
@@ -231,10 +233,9 @@ public class DoubleList<E> implements List<E> {
      * @return DoubleListNode<E> where element was found, null if not found
      */
     protected DoubleListNode<E> findNode(E element) {
-        for (DoubleListNode<E> node = head; node != null; node = node.next) {
+        for (DoubleListNode<E> node = head; node != null; node = node.getNext()) {
             if (node.getElement().equals(element))
                 return node;
-            node = node.getNext();
         }
         return null;
     }
@@ -273,8 +274,13 @@ public class DoubleList<E> implements List<E> {
     public void append(DoubleList<E> list) {
         DoubleListNode<E> first = list.head;
         DoubleListNode<E> last = list.tail;
-        first.setPrevious(tail);
-        tail.setNext(first);
+        if (isEmpty()) {
+            head = first;
+            tail = last;
+        } else {
+            first.setPrevious(tail);
+            tail.setNext(first);
+        }
         tail = last;
         currentSize += list.size();
         list.clear();
