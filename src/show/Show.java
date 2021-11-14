@@ -94,32 +94,10 @@ public interface Show extends Serializable {
     Iterator<String> iteratorTags();
 
     /**
-     * Returns an iterator with the Participations of the Participation
+     * Returns an iterator with the participation of the show
      *
-     * @return iterator of Participations
-     * @throws ShowHasNoParticipationsException if the Participation has no Participations
+     * @return iterator of participation
+     * @throws ShowHasNoParticipationsException if the show has no participation
      */
     Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException;
-
-    /**
-     * Checks if the Participation has Participations
-     *
-     * @return <code>true</code> if the Participation has no Participations
-     */
-    //boolean hasParticipation();
-
-    /**
-     * Checks if the Participation has a given tag
-     *
-     * @param tag the tag
-     * @return <code>true</code> if the Participation has that tag
-     */
-    //boolean hasTag(String tag);
-
-    /**
-     * Checks if the Participation has at least one tag
-     *
-     * @return <code>true</code> if the the Participation has any tag
-     */
-    //boolean hasAnyTag();
 }

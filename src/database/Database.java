@@ -22,6 +22,8 @@ import java.io.Serializable;
 public interface Database extends Serializable {
 
     /**
+     * Adds a new person
+     *
      * @param personID  person's ID
      * @param year      person's birth year
      * @param email     person's email
@@ -36,6 +38,8 @@ public interface Database extends Serializable {
             throws InvalidYearException, InvalidGenderException, PersonIdAlreadyExistsException;
 
     /**
+     * Adds a new show
+     *
      * @param showID show's id
      * @param year   date the show was made
      * @param title  title of the show
@@ -44,6 +48,8 @@ public interface Database extends Serializable {
             throws InvalidShowYearException, ShowIDExistsException;
 
     /**
+     * Adds a new participation
+     *
      * @param personID    person's ID
      * @param showID      show's id
      * @param description description of certain person's participation in a show

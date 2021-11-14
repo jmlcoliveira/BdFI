@@ -12,7 +12,7 @@ public abstract class Success {
     public static final String PERSON_INFO = "%s %s %d %s %s %s\n";
     public static final String PERSON_SHOW = "%s %s %d %d\n";
 
-    //Participation
+    //Show
     public static final String SHOW_ADDED = "Show added.";
     public static final String SHOW_PREMIERED = "Successful production.";
     public static final String SHOW_REMOVED = "Show removed.";

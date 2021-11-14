@@ -4,6 +4,9 @@ import person.Person;
 import show.Show;
 
 /**
+ * Participation class containing details of a participation, which are, the person who participated,
+ * the show where the participation occurred and the description of the participation
+ *
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
  * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
  */

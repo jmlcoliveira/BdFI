@@ -5,6 +5,8 @@ import person.Person;
 import java.io.Serializable;
 
 /**
+ * Participation interface
+ *
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
  * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
  */

@@ -48,7 +48,7 @@ public class PersonClass implements Person {
     private final List<Show> showsOfPerson;
 
     /**
-     * PersonsClass constructor
+     * Class constructor
      *
      * @param personId  Person's ID
      * @param year      Person's year of birth
@@ -111,12 +111,5 @@ public class PersonClass implements Person {
     @Override
     public boolean hasParticipation() {
         return showsOfPerson.size() != 0;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof Person)) return false;
-        return ((Person) o).getPersonID().equals(personID);
     }
 }

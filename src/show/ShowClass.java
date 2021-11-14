@@ -43,11 +43,34 @@ public class ShowClass implements Show {
      * List containing all participation of the show
      */
     private final List<Participation> participation;
-    private final List<String> tags;
-    private int currentRating;
-    private int reviewCount;
-    private boolean premiered;
 
+    /**
+     * List containing all tags of this show
+     */
+    private final List<String> tags;
+
+    /**
+     * Variable containing the current rating of the show
+     */
+    private int currentRating;
+
+    /**
+     * Number of reviews
+     */
+    private int reviewCount;
+
+    /**
+     * Boolean variable containing production status
+     */
+    private boolean inProduction;
+
+    /**
+     * Constructor method
+     *
+     * @param showID id of the show
+     * @param year   production year of the show
+     * @param title  title of the show
+     */
     public ShowClass(String showID, int year, String title) {
         this.showID = showID;
         this.year = year;
@@ -56,7 +79,7 @@ public class ShowClass implements Show {
         reviewCount = 0;
         participation = new DoubleList<>();
         tags = new DoubleList<>();
-        premiered = LocalDate.now().getYear() != year;
+        inProduction = LocalDate.now().getYear() == year;
     }
 
     @Override
@@ -76,7 +99,7 @@ public class ShowClass implements Show {
 
     @Override
     public Boolean isInProduction() {
-        return !premiered;
+        return inProduction;
     }
 
     //requires stars, count, currentReview >= 0
@@ -93,7 +116,7 @@ public class ShowClass implements Show {
     public void rate(int stars) throws InvalidShowRatingException, ShowInProductionException {
         if (stars < 0 || stars > 10)
             throw new InvalidShowRatingException();
-        if (!premiered)
+        if (inProduction)
             throw new ShowInProductionException();
         currentRating = updateReview(stars, reviewCount, currentRating);
         reviewCount++;
@@ -113,7 +136,7 @@ public class ShowClass implements Show {
     public void premiere() throws ShowNotInProductionException {
         if (!isInProduction())
             throw new ShowNotInProductionException();
-        premiered = true;
+        inProduction = false;
     }
 
     @Override
@@ -130,27 +153,5 @@ public class ShowClass implements Show {
     public Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException {
         if (participation.isEmpty()) throw new ShowHasNoParticipationsException();
         return participation.iterator();
-    }
-
-   /* @Override
-    public boolean hasParticipation() {
-        return participation.size() != 0;
-    }
-
-    @Override
-    public boolean hasTag(String tag) {
-        return tags.find(tag) >= 0;
-    }
-
-    @Override
-    public boolean hasAnyTag() {
-        return tags.size() > 0;
-    }*/
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof Show)) return false;
-        return ((Show) o).getShowID().equals(showID);
     }
 }

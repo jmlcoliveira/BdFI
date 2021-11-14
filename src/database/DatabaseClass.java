@@ -16,7 +16,8 @@ import show.ShowClass;
 import show.exceptions.*;
 
 /**
- * Database interface
+ * Database class which communicates with the Main class and stores information of all shows and
+ * persons.
  *
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
  * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
@@ -140,6 +141,7 @@ public class DatabaseClass implements Database {
         return s;
     }
 
+    @Override
     public Person getPerson(String personID) throws PersonIdNotFoundException {
         Person p = getPersonP(personID);
         if (p == null) throw new PersonIdNotFoundException();
@@ -159,10 +161,10 @@ public class DatabaseClass implements Database {
     }
 
     /**
-     * Returns a Participation object with the given showID or <code>null</code> if no show exists with that id
+     * Returns a Show object with the given showID or <code>null</code> if no show exists with that id
      *
      * @param showID show's ID
-     * @return a Participation object with the given showID or <code>null</code> if no show exists with that id
+     * @return a show object with the given showID or <code>null</code> if no show exists with that id
      */
     private Show getShowP(String showID) {
         if (show == null || !showID.equalsIgnoreCase(show.getShowID()))

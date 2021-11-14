@@ -28,7 +28,7 @@ public class Main {
     /**
      * Main method where Scanner and Database are initialized
      *
-     * @param args contains the supplied command-line arguments as an array of String objects
+     * @param args contains the supplied command-line arguments as an array of String
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -86,6 +86,8 @@ public class Main {
                     break;
                 case LISTSHOWS:
                     commandListShowsByRating(in, db);
+                    break;
+                default:
                     break;
             }
             command = getCommand(in);
