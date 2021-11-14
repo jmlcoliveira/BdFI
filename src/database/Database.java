@@ -30,7 +30,7 @@ public interface Database extends Serializable {
      * @param telephone person's phone number
      * @param gender    person's gender
      * @param name      person's name
-     * @throws InvalidYearException           if <code>year <= 0</code>
+     * @throws InvalidYearException           if year <= 0
      * @throws InvalidGenderException         if gender is invalid
      * @throws PersonIdAlreadyExistsException if personID already exists
      */
@@ -128,6 +128,8 @@ public interface Database extends Serializable {
      *
      * @param personID person's ID
      * @return an iterator containing the shows where the person with id personID participates
+     * @throws PersonHasNoShowsException if person has no shows
+     * @throws PersonIdNotFoundException if no person with given id exists
      */
     Show iteratorShowsByPerson(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException;
 

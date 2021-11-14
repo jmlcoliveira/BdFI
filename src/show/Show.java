@@ -55,6 +55,7 @@ public interface Show extends Serializable {
      *
      * @param rating between 0 and 10 stars
      * @throws InvalidShowRatingException if the rating is not between 0 and 10
+     * @throws ShowInProductionException  if the show is in production
      */
     void rate(int rating) throws InvalidShowRatingException, ShowInProductionException;
 
