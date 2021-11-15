@@ -1,9 +1,9 @@
-package BdFI.exceptions;
+package BdFI.database.exceptions;
 
 /**
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
  * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
  */
-public class NoShowsException extends Exception{
+public class NoProductionsWithRatingException extends Exception {
 
 }

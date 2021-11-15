@@ -12,11 +12,11 @@ public class ParticipationClass implements Participation {
     /**
      * the Person who participated
      */
-    private final PersonPrivate person;
+    private final Person person;
     /**
      * the Show the Persons participated in
      */
-    private final ShowPrivate show;
+    private final Show show;
     /**
      * the description of what the Person did
      */
@@ -29,19 +29,19 @@ public class ParticipationClass implements Participation {
      * @param show        the Show
      * @param description the description
      */
-    public ParticipationClass(PersonPrivate person, ShowPrivate show, String description) {
+    public ParticipationClass(Person person, Show show, String description) {
         this.person = person;
         this.show = show;
         this.description = description;
     }
 
     @Override
-    public PersonPrivate getPerson() {
+    public Person getPerson() {
         return person;
     }
 
     @Override
-    public ShowPrivate getShow() {
+    public Show getShow() {
         return show;
     }
 

@@ -1,4 +1,4 @@
-package BdFI.exceptions;
+package BdFI.database.exceptions;
 
 /**
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt

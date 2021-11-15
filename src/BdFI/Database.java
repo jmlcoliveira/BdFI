@@ -1,9 +1,9 @@
 package BdFI;
 
-import BdFI.exceptions.NoFinishedShowsException;
-import BdFI.exceptions.NoProductionsWithRatingException;
-import BdFI.exceptions.NoRatedShowsException;
-import BdFI.exceptions.NoShowsException;
+import BdFI.database.exceptions.NoFinishedShowsException;
+import BdFI.database.exceptions.NoProductionsWithRatingException;
+import BdFI.database.exceptions.NoRatedShowsException;
+import BdFI.database.exceptions.NoShowsException;
 import BdFI.person.exceptions.*;
 import BdFI.show.exceptions.*;
 import dataStructures.Iterator;
