@@ -1,22 +1,20 @@
+import BdFI.*;
+import BdFI.exceptions.NoFinishedShowsException;
+import BdFI.exceptions.NoProductionsWithRatingException;
+import BdFI.exceptions.NoRatedShowsException;
+import BdFI.exceptions.NoShowsException;
+import BdFI.person.exceptions.*;
+import BdFI.show.exceptions.*;
 import dataStructures.Iterator;
-import database.Database;
-import database.DatabaseClass;
-import database.exceptions.NoFinishedShowsException;
-import database.exceptions.NoProductionsWithRatingException;
-import database.exceptions.NoRatedShowsException;
-import database.exceptions.NoShowsException;
 import outputMessages.Error;
 import outputMessages.Success;
-import participation.Participation;
-import person.Person;
-import person.exceptions.*;
-import show.Show;
-import show.exceptions.*;
 
 import java.io.*;
 import java.util.Scanner;
 
 /**
+ * Main class
+ *
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
  * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
  */
@@ -121,7 +119,6 @@ public class Main {
         } catch (PersonIdAlreadyExistsException e) {
             System.out.println(Error.PERSON_EXISTS);
         }
-
     }
 
     /**
@@ -232,7 +229,7 @@ public class Main {
     private static void commandInfoShow(Scanner in, Database db) {
         try {
             String showID = in.nextLine().trim();
-            show.Show s = db.getShow(showID);
+            Show s = db.getShow(showID);
             System.out.printf(Success.INFO_SHOW_HEADERS, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
             Iterator<String> it = s.iteratorTags();
             while (it.hasNext())
@@ -293,7 +290,7 @@ public class Main {
     private static void commandListShowsPerson(Scanner in, Database db) {
         try {
             String personID = in.nextLine().trim();
-            Show s = db.iteratorShowsByPerson(personID);
+            Show s = db.showByPersonID(personID);
             System.out.printf(Success.PERSON_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
 
         } catch (PersonIdNotFoundException e) {
