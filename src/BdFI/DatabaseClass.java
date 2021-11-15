@@ -26,6 +26,12 @@ public class DatabaseClass implements Database {
      * the Person in the Database
      */
     private PersonPrivate person;
+
+    /**
+     * Array containing possible genders
+     */
+    public String[] genders = {"FEMALE", "MALE", "OTHER", "NOT-PROVIDED"};
+
     /**
      * the Show in the Show
      */
@@ -55,11 +61,10 @@ public class DatabaseClass implements Database {
      * @throws InvalidGenderException if gender is not valid
      */
     private void validateGender(String gender) throws InvalidGenderException {
-        try {
-            Gender.valueOf(gender.replace('-', '_').toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new InvalidGenderException();
-        }
+        for (String s : genders)
+            if (s.compareToIgnoreCase(gender) == 0)
+                return;
+        throw new InvalidGenderException();
     }
 
     @Override
