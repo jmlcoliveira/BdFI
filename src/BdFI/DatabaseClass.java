@@ -43,13 +43,23 @@ public class DatabaseClass implements Database {
     @Override
     public void addPerson(String personID, int year, String email, String telephone, String gender, String name) throws InvalidYearException, InvalidGenderException, PersonIdAlreadyExistsException {
         if (year <= 0) throw new InvalidYearException();
+        validateGender(gender);
+        if (getPersonP(personID) != null) throw new PersonIdAlreadyExistsException();
+        person = new PersonClass(personID, year, email, telephone, gender, name);
+    }
+
+    /**
+     * Checks if gender is valid
+     *
+     * @param gender gender to be checked
+     * @throws InvalidGenderException if gender is not valid
+     */
+    private void validateGender(String gender) throws InvalidGenderException {
         try {
             Gender.valueOf(gender.replace('-', '_').toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new InvalidGenderException();
         }
-        if (getPersonP(personID) != null) throw new PersonIdAlreadyExistsException();
-        person = new PersonClass(personID, year, email, telephone, gender, name);
     }
 
     @Override
