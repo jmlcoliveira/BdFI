@@ -1,6 +1,5 @@
 package dataStructures;
 
-import dataStructures.DoubleList.DoubleListNode;
 import dataStructures.exceptions.NoSuchElementException;
 
 /**

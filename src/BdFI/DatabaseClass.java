@@ -23,14 +23,14 @@ public class DatabaseClass implements Database {
     static final long serialVersionUID = 0L;
 
     /**
+     * Array containing possible genders
+     */
+    private String[] genders = {"FEMALE", "MALE", "OTHER", "NOT-PROVIDED"};
+
+    /**
      * the Person in the Database
      */
     private PersonPrivate person;
-
-    /**
-     * Array containing possible genders
-     */
-    public String[] genders = {"FEMALE", "MALE", "OTHER", "NOT-PROVIDED"};
 
     /**
      * the Show in the Show
