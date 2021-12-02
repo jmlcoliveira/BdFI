@@ -153,4 +153,9 @@ public class ShowClass implements ShowPrivate {
         if (participation.isEmpty()) throw new ShowHasNoParticipationsException();
         return participation.iterator();
     }
+
+    @Override
+    public int compareTo(ShowPrivate o) {
+        return showID.hashCode();
+    }
 }

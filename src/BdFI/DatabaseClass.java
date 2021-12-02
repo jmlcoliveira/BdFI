@@ -4,7 +4,10 @@ import BdFI.database.exceptions.NoFinishedShowsException;
 import BdFI.database.exceptions.NoProductionsWithRatingException;
 import BdFI.database.exceptions.NoRatedShowsException;
 import BdFI.database.exceptions.NoShowsException;
-import BdFI.person.exceptions.*;
+import BdFI.person.exceptions.InvalidYearException;
+import BdFI.person.exceptions.PersonHasNoShowsException;
+import BdFI.person.exceptions.PersonIdAlreadyExistsException;
+import BdFI.person.exceptions.PersonIdNotFoundException;
 import BdFI.show.exceptions.*;
 import dataStructures.Iterator;
 
@@ -45,26 +48,12 @@ public class DatabaseClass implements Database {
         show = null;
     }
 
-
     @Override
     public void addPerson(String personID, int year, String email, String telephone, String gender, String name) throws InvalidYearException, InvalidGenderException, PersonIdAlreadyExistsException {
         if (year <= 0) throw new InvalidYearException();
         validateGender(gender);
         if (getPersonP(personID) != null) throw new PersonIdAlreadyExistsException();
         person = new PersonClass(personID, year, email, telephone, gender, name);
-    }
-
-    /**
-     * Checks if gender is valid
-     *
-     * @param gender gender to be checked
-     * @throws InvalidGenderException if gender is not valid
-     */
-    private void validateGender(String gender) throws InvalidGenderException {
-        for (String s : genders)
-            if (s.compareToIgnoreCase(gender) == 0)
-                return;
-        throw new InvalidGenderException();
     }
 
     @Override
@@ -117,7 +106,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
-    public Show listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
+    public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
         if (show == null) throw new NoShowsException();
         if (show.isInProduction()) throw new NoFinishedShowsException();
         if (show.hasNoRatings()) throw new NoRatedShowsException();

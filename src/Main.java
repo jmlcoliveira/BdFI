@@ -103,19 +103,22 @@ public class Main {
      * @param db Database where this action will be performed
      */
     private static void commandAddPerson(Scanner in, Database db) {
+        int year = -1;
         try {
             String id = in.next();
-            int year = in.nextInt();
+            year = in.nextInt();
             String email = in.next();
             String telephone = in.next();
             String gender = in.next();
             String name = in.nextLine().trim();
+            validateGender(gender);
             db.addPerson(id, year, email, telephone, gender, name);
             System.out.println(Success.PERSON_ADDED);
         } catch (InvalidYearException e) {
             System.out.println(Error.INVALID_PERSON_YEAR);
         } catch (InvalidGenderException e) {
-            System.out.println(Error.INVALID_GENDER);
+            if (year <= 0) System.out.println(Error.INVALID_PERSON_YEAR);
+            else System.out.println(Error.INVALID_GENDER);
         } catch (PersonIdAlreadyExistsException e) {
             System.out.println(Error.PERSON_EXISTS);
         }
@@ -334,9 +337,12 @@ public class Main {
     private static void commandListBestShows(Scanner in, Database db) {
         try {
             in.nextLine();
-            Show s = db.listBestShows();
-            System.out.printf(Success.SHOW_LIST, s.getShowID(), s.getTitle(), s.getYear(),
-                    s.getRating());
+            Iterator<Show> it = db.listBestShows();
+            while (it.hasNext()) {
+                Show s = it.next();
+                System.out.printf(Success.SHOW_LIST, s.getShowID(), s.getTitle(), s.getYear(),
+                        s.getRating());
+            }
 
         } catch (NoShowsException e) {
             System.out.println(Error.NO_SHOWS);
@@ -435,5 +441,18 @@ public class Main {
         } catch (IllegalArgumentException e) {
             return Commands.UNKNOWN;
         }
+    }
+
+    /**
+     * Checks if gender is valid
+     *
+     * @param gender gender to be checked
+     * @throws InvalidGenderException if gender is not valid
+     */
+    private static void validateGender(String gender) throws InvalidGenderException {
+        for (String s : genders)
+            if (s.compareToIgnoreCase(gender) == 0)
+                return;
+        throw new InvalidGenderException();
     }
 }

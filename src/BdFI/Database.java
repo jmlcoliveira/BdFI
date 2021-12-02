@@ -143,7 +143,7 @@ public interface Database extends Serializable {
      * @throws NoFinishedShowsException if there are no finished shows
      * @throws NoRatedShowsException    if there are no rated shows
      */
-    Show listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException;
+    Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException;
 
     /**
      * Returns an iterator with the shows that have a certain rating

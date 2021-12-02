@@ -1,6 +1,7 @@
 package dataStructures;
 
 import dataStructures.exceptions.EmptyDictionaryException;
+import dataStructures.exceptions.NoSuchElementException;
 
 /**
  * BinarySearchTree implementation
@@ -313,19 +314,59 @@ public class BinarySearchTree<K extends Comparable<K>, V>
             }
             currentSize--;
             return oldValue;
-        }                                 
-    }                                
+        }
+    }
 
 
     /**
-     * Returns an iterator of the entries in the dictionary 
+     * Returns an iterator of the entries in the dictionary
      * which preserves the key order relation.
-     * @return  key-order iterator of the entries in the dictionary
+     *
+     * @return key-order iterator of the entries in the dictionary
      */
-    public Iterator<Entry<K,V>> iterator( ) 
-    {
-        //TODO: Original comentado para nao dar erro de compilacao
-        return new BSTKeyOrderIterator<K,V>(root);
+    public Iterator<Entry<K, V>> iterator() {
+        return new BSTKeyOrderIterator();
+    }
+
+    class BSTKeyOrderIterator implements Iterator<Entry<K, V>> {
+
+        private Stack<BSTNode<K, V>> stack;
+
+        BSTKeyOrderIterator() {
+            rewind();
+        }
+
+        @Override
+        public boolean hasNext() {
+            return !stack.isEmpty();
+        }
+
+        @Override
+        public Entry<K, V> next() throws NoSuchElementException {
+            if (stack.isEmpty()) throw new NoSuchElementException();
+            BSTNode<K, V> toReturn = findNext();
+            return toReturn.getEntry();
+        }
+
+        protected void findLowest(BSTNode<K, V> node) {
+            while (node != null) {
+                stack.push(node);
+                node = node.getLeft();
+            }
+        }
+
+        protected BSTNode<K, V> findNext() {
+            BSTNode<K, V> toReturn = stack.pop();
+            if (toReturn.getRight() != null)
+                findLowest(toReturn.getRight());
+            return toReturn;
+        }
+
+        @Override
+        public void rewind() {
+            stack = new StackInList<>();
+            findLowest(root);
+        }
     }
 
 }

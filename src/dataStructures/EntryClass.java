@@ -2,7 +2,7 @@ package dataStructures;
 
 import java.io.Serializable;
 
-public class EntryClass<K extends Comparable<K>, V> implements Serializable, Entry<K,V> {
+public class EntryClass<K extends Comparable<K>, V> implements Serializable, Entry<K, V>, Comparable<EntryClass<K, V>> {
     static final long serialVersionUID = 0L;
 
     private K key;
@@ -29,5 +29,10 @@ public class EntryClass<K extends Comparable<K>, V> implements Serializable, Ent
 
     public void setValue(V value) {
         this.value = value;
+    }
+
+    @Override
+    public int compareTo(EntryClass<K, V> o) {
+        return key.compareTo(o.getKey());
     }
 }
