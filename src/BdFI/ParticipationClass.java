@@ -49,4 +49,8 @@ public class ParticipationClass implements Participation {
     public String getDescription() {
         return description;
     }
+
+    public int compareTo(Participation o) {
+
+    }
 }

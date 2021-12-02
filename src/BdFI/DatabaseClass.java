@@ -9,7 +9,7 @@ import BdFI.person.exceptions.PersonHasNoShowsException;
 import BdFI.person.exceptions.PersonIdAlreadyExistsException;
 import BdFI.person.exceptions.PersonIdNotFoundException;
 import BdFI.show.exceptions.*;
-import dataStructures.Iterator;
+import dataStructures.*;
 
 /**
  * Database class which communicates with the Main class and stores information of all shows and
@@ -26,41 +26,46 @@ public class DatabaseClass implements Database {
     static final long serialVersionUID = 0L;
 
     /**
-     * Array containing possible genders
-     */
-    private String[] genders = {"FEMALE", "MALE", "OTHER", "NOT-PROVIDED"};
-
-    /**
      * the Person in the Database
      */
-    private PersonPrivate person;
+    private final Dictionary<String, PersonPrivate> personByID;
+    private final Dictionary<String, OrderedDictionary<String, ShowPrivate>> showsByPerson;
+    private final Dictionary<String, List<Participation>> participationsByShow;
 
     /**
      * the Show in the Show
      */
-    private ShowPrivate show;
+    private final Dictionary<String, ShowPrivate> showsByID;
+    private OrderedDictionary<Integer, OrderedList<ShowPrivate>> listOfShowsByRating;
+
 
     /**
      * DatabaseClass constructor
      */
     public DatabaseClass() {
-        person = null;
-        show = null;
+        personByID = new SepChainHashTable<>();
+        showsByID = new SepChainHashTable<>();
+        showsByPerson = new SepChainHashTable<>();
+        participationsByShow = new SepChainHashTable<>();
+
     }
 
     @Override
-    public void addPerson(String personID, int year, String email, String telephone, String gender, String name) throws InvalidYearException, InvalidGenderException, PersonIdAlreadyExistsException {
+    public void addPerson(String personID, int year, String email, String telephone, String gender, String name) throws InvalidYearException, PersonIdAlreadyExistsException {
         if (year <= 0) throw new InvalidYearException();
-        validateGender(gender);
-        if (getPersonP(personID) != null) throw new PersonIdAlreadyExistsException();
-        person = new PersonClass(personID, year, email, telephone, gender, name);
+        if (personByID.find(personID) != null) throw new PersonIdAlreadyExistsException();
+
+        personByID.insert(personID, new PersonClass(personID, year, email, telephone, gender, name));
+        showsByPerson.insert(personID, new BinarySearchTree<>());
     }
 
     @Override
     public void addShow(String showID, int year, String title) throws InvalidShowYearException, ShowIDExistsException {
         if (year <= 0) throw new InvalidShowYearException();
-        if (getShowP(showID) != null) throw new ShowIDExistsException();
-        show = new ShowClass(showID, year, title);
+        if (showsByID.find(showID) != null) throw new ShowIDExistsException();
+
+        showsByID.insert(showID, new ShowClass(showID, year, title));
+        participationsByShow.insert(showID, new DoubleList<>());
     }
 
     @Override
@@ -70,6 +75,10 @@ public class DatabaseClass implements Database {
         Participation part = new ParticipationClass(p, s, description);
         p.addShow(s);
         s.addParticipation(part);
+
+        if (showsByPerson.find(personID) == null) {
+            showsByPerson.insert(personID, new BinarySearchTree<>());
+        } else if () //todo
     }
 
     @Override
@@ -83,7 +92,6 @@ public class DatabaseClass implements Database {
         Show s = getShow(showID);
         if (!s.isInProduction())
             throw new ShowNotInProductionException();
-        show = null;
     }
 
     @Override
@@ -133,39 +141,15 @@ public class DatabaseClass implements Database {
 
     @Override
     public Show getShow(String showID) throws ShowIdNotFoundException {
-        Show s = getShowP(showID);
+        Show s = showsByID.find(showID);
         if (s == null) throw new ShowIdNotFoundException();
         return s;
     }
 
     @Override
     public Person getPerson(String personID) throws PersonIdNotFoundException {
-        Person p = getPersonP(personID);
+        Person p = personByID.find(personID);
         if (p == null) throw new PersonIdNotFoundException();
         return p;
-    }
-
-    /**
-     * Returns a Person object with the given personID or <code>null</code> if no person exists with that id
-     *
-     * @param personID person's ID
-     * @return a Person object with the given personID or <code>null</code> if no person exists with that id
-     */
-    private PersonPrivate getPersonP(String personID) {
-        if (person == null || !personID.equalsIgnoreCase(person.getPersonID()))
-            return null;
-        return person;
-    }
-
-    /**
-     * Returns a Show object with the given showID or <code>null</code> if no show exists with that id
-     *
-     * @param showID show's ID
-     * @return a show object with the given showID or <code>null</code> if no show exists with that id
-     */
-    private ShowPrivate getShowP(String showID) {
-        if (show == null || !showID.equalsIgnoreCase(show.getShowID()))
-            return null;
-        return show;
     }
 }

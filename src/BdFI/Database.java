@@ -32,7 +32,7 @@ public interface Database extends Serializable {
      * @throws PersonIdAlreadyExistsException if personID already exists
      */
     void addPerson(String personID, int year, String email, String telephone, String gender, String name)
-            throws InvalidYearException, InvalidGenderException, PersonIdAlreadyExistsException;
+            throws InvalidYearException, PersonIdAlreadyExistsException;
 
     /**
      * Adds a new show

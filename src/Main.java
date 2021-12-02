@@ -24,7 +24,12 @@ public class Main {
     private static final String FILE_NAME = "db.dat";
 
     /**
-     * Main method where Scanner and Database are initialized
+     * Array containing possible genders
+     */
+    private static final String[] genders = {"FEMALE", "MALE", "OTHER", "NOT-PROVIDED"};
+
+    /**
+     * Main method where Scanner and Database are initied
      *
      * @param args contains the supplied command-line arguments as an array of String
      */
