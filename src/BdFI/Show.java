@@ -3,7 +3,7 @@ package BdFI;
 import BdFI.show.exceptions.ShowHasNoParticipationsException;
 import dataStructures.Iterator;
 
-public interface Show {
+public interface Show extends Comparable<Show> {
     /**
      * Returns the id of the show
      *
@@ -48,6 +48,13 @@ public interface Show {
     Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException;
 
     /**
+     * Returns an iterator containing all persons in the show
+     *
+     * @return an iterator containing all persons in the show
+     */
+    Iterator<Person> iteratorPersonsInShow();
+
+    /**
      * Returns <code>true</code> if it has any rating, <code>false</code> otherwise
      *
      * @return <code>true</code> if it has any rating, <code>false</code> otherwise
@@ -59,5 +66,5 @@ public interface Show {
      *
      * @return <code>true</code> if show is in production or <code>false</code> if not
      */
-    Boolean isInProduction();
+    boolean isInProduction();
 }

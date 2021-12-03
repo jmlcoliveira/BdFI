@@ -4,9 +4,7 @@ import BdFI.show.exceptions.InvalidShowRatingException;
 import BdFI.show.exceptions.ShowHasNoParticipationsException;
 import BdFI.show.exceptions.ShowInProductionException;
 import BdFI.show.exceptions.ShowNotInProductionException;
-import dataStructures.DoubleList;
-import dataStructures.Iterator;
-import dataStructures.List;
+import dataStructures.*;
 
 import java.time.LocalDate;
 
@@ -42,6 +40,8 @@ public class ShowClass implements ShowPrivate {
      * List containing all participation of the show
      */
     private final List<Participation> participation;
+
+    private final OrderedDictionary<String, Person> personsInShow;
 
     /**
      * List containing all tags of this show
@@ -79,6 +79,8 @@ public class ShowClass implements ShowPrivate {
         participation = new DoubleList<>();
         tags = new DoubleList<>();
         inProduction = LocalDate.now().getYear() == year;
+
+        personsInShow = new BinarySearchTree<>();
     }
 
     @Override
@@ -97,7 +99,7 @@ public class ShowClass implements ShowPrivate {
     }
 
     @Override
-    public Boolean isInProduction() {
+    public boolean isInProduction() {
         return inProduction;
     }
 
@@ -109,6 +111,8 @@ public class ShowClass implements ShowPrivate {
     @Override
     public void addParticipation(Participation part) {
         participation.addLast(part);
+        Person p = part.getPerson();
+        personsInShow.insert(p.getPersonID(), p);
     }
 
     @Override
@@ -155,7 +159,12 @@ public class ShowClass implements ShowPrivate {
     }
 
     @Override
-    public int compareTo(ShowPrivate o) {
-        return showID.hashCode();
+    public Iterator<Person> iteratorPersonsInShow() {
+        return personsInShow.iteratorValues();
+    }
+
+    @Override
+    public int compareTo(Show o) {
+        return showID.compareTo(o.getShowID());
     }
 }

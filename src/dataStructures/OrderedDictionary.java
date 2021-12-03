@@ -29,15 +29,17 @@ public interface OrderedDictionary<K extends Comparable<K>, V>
      * @return
      * @throws EmptyDictionaryException
      */
-    Entry<K,V> maxEntry( ) throws EmptyDictionaryException;
+    Entry<K, V> maxEntry() throws EmptyDictionaryException;
 
     /* (non-Javadoc)
-     * Returns an iterator of the entries in the dictionary 
+     * Returns an iterator of the entries in the dictionary
      * which preserves the key order relation.
-     * 
+     *
      * @see dataStructures.Dictionary#iterator()
      */
-    Iterator<Entry<K,V>> iterator( );
+    Iterator<Entry<K, V>> iterator();
+
+    Iterator<V> iteratorValues();
 
 } 
 

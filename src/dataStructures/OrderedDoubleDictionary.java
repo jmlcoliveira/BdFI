@@ -131,6 +131,12 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
     }
 
     @Override
+    public Iterator<V> iteratorValues() {
+        //TODO
+        return null;
+    }
+
+    @Override
     public Entry<K, V> minEntry() throws EmptyDictionaryException {
         return head.getElement();
     }

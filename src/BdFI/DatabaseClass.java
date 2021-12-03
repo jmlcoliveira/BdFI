@@ -29,14 +29,15 @@ public class DatabaseClass implements Database {
      * the Person in the Database
      */
     private final Dictionary<String, PersonPrivate> personByID;
-    private final Dictionary<String, OrderedDictionary<String, ShowPrivate>> showsByPerson;
-    private final Dictionary<String, List<Participation>> participationsByShow;
 
     /**
      * the Show in the Show
      */
     private final Dictionary<String, ShowPrivate> showsByID;
-    private OrderedDictionary<Integer, OrderedList<ShowPrivate>> listOfShowsByRating;
+    private final OrderedDictionary<Integer, OrderedList<Show>> listOfShowsByRating;
+    private final Dictionary<String, OrderedList<Show>> listOfShowsByTag;
+
+    private int showsInProductionCounter;
 
 
     /**
@@ -45,9 +46,9 @@ public class DatabaseClass implements Database {
     public DatabaseClass() {
         personByID = new SepChainHashTable<>();
         showsByID = new SepChainHashTable<>();
-        showsByPerson = new SepChainHashTable<>();
-        participationsByShow = new SepChainHashTable<>();
-
+        listOfShowsByRating = new BinarySearchTree<>();
+        listOfShowsByTag = new SepChainHashTable<>();
+        showsInProductionCounter = 0;
     }
 
     @Override
@@ -64,8 +65,8 @@ public class DatabaseClass implements Database {
         if (year <= 0) throw new InvalidShowYearException();
         if (showsByID.find(showID) != null) throw new ShowIDExistsException();
 
-        showsByID.insert(showID, new ShowClass(showID, year, title));
-        participationsByShow.insert(showID, new DoubleList<>());
+        ShowPrivate show = new ShowClass(showID, year, title);
+        showsByID.insert(showID, show);
     }
 
     @Override
@@ -85,6 +86,7 @@ public class DatabaseClass implements Database {
     public void premiereShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
         ShowPrivate s = (ShowPrivate) getShow(showID);
         s.premiere();
+        showsInProductionCounter--;
     }
 
     @Override
@@ -92,6 +94,14 @@ public class DatabaseClass implements Database {
         Show s = getShow(showID);
         if (!s.isInProduction())
             throw new ShowNotInProductionException();
+        showsInProductionCounter--;
+        Iterator<Person> it = s.iteratorPersonsInShow();
+        while (it.hasNext()) {
+            PersonPrivate p = (PersonPrivate) it.next();
+            p.removeShow((ShowPrivate) s);
+        }
+        showsByID.remove(s.getShowID());
+
     }
 
     @Override
@@ -103,7 +113,16 @@ public class DatabaseClass implements Database {
     @Override
     public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, ShowIdNotFoundException {
         ShowPrivate s = (ShowPrivate) getShow(showID);
+        int oldRating = s.getRating();
         s.rate(review);
+        int newRating = s.getRating();
+        if (oldRating != newRating) {
+            if (listOfShowsByRating.find(oldRating) != null)
+                listOfShowsByRating.find(oldRating).remove(s);
+            if (listOfShowsByRating.find(newRating) == null)
+                listOfShowsByRating.insert(newRating, new OrderedDoubleList<>());
+            listOfShowsByRating.find(newRating).insert(s);
+        }
     }
 
     @Override
