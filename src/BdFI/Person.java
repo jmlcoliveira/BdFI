@@ -1,5 +1,7 @@
 package BdFI;
 
+import dataStructures.Iterator;
+
 public interface Person {
     /**
      * Returns the person's id
@@ -49,4 +51,6 @@ public interface Person {
      * @return <code>true</code> if person has any participation, <code>false</code> otherwise
      */
     boolean hasParticipation();
+
+    Iterator<Show> showIterator();
 }

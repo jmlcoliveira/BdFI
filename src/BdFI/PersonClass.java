@@ -111,4 +111,9 @@ public class PersonClass implements PersonPrivate {
     public boolean hasParticipation() {
         return showsOfPerson != null;
     }
+
+    @Override
+    public Iterator<Show> showIterator() {
+        return showsOfPerson.iteratorValues();
+    }
 }

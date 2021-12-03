@@ -57,7 +57,6 @@ public class DatabaseClass implements Database {
         if (personByID.find(personID) != null) throw new PersonIdAlreadyExistsException();
 
         personByID.insert(personID, new PersonClass(personID, year, email, telephone, gender, name));
-        showsByPerson.insert(personID, new BinarySearchTree<>());
     }
 
     @Override
@@ -76,10 +75,6 @@ public class DatabaseClass implements Database {
         Participation part = new ParticipationClass(p, s, description);
         p.addShow(s);
         s.addParticipation(part);
-
-        if (showsByPerson.find(personID) == null) {
-            showsByPerson.insert(personID, new BinarySearchTree<>());
-        } else if () //todo
     }
 
     @Override
@@ -108,6 +103,14 @@ public class DatabaseClass implements Database {
     public void tagShow(String showID, String tag) throws ShowIdNotFoundException {
         ShowPrivate s = (ShowPrivate) getShow(showID);
         s.addTag(tag);
+
+        if (listOfShowsByTag.find(tag) == null) {
+            OrderedList<Show> shows = new OrderedDoubleList<>();
+            shows.insert(s);
+            listOfShowsByTag.insert(tag, shows);
+        } else {
+            listOfShowsByTag.find(tag).insert(s);
+        }
     }
 
     @Override
@@ -134,28 +137,27 @@ public class DatabaseClass implements Database {
 
     @Override
     public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
-        if (show == null) throw new NoShowsException();
-        if (show.isInProduction()) throw new NoFinishedShowsException();
-        if (show.hasNoRatings()) throw new NoRatedShowsException();
-        return show;
+        return listShows(listOfShowsByRating.maxEntry().getKey());
     }
 
     @Override
-    public Show listShows(int rating) throws InvalidShowRatingException, NoShowsException,
+    public Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException {
+        OrderedList<Show> shows = listOfShowsByRating.find(rating);
+
         if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
-        if (show == null) throw new NoShowsException();
-        if (show.isInProduction()) throw new NoFinishedShowsException();
-        if (show.hasNoRatings()) throw new NoRatedShowsException();
-        if (show.getRating() != rating) throw new NoProductionsWithRatingException();
-        return show;
+        if (showsByID.isEmpty()) throw new NoShowsException();
+        if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
+        if (listOfShowsByRating.isEmpty()) throw new NoRatedShowsException();
+        if (shows.isEmpty()) throw new NoProductionsWithRatingException();
+        return shows.iterator();
     }
 
     @Override
-    public Show showByPersonID(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
+    public Iterator<Show> showsByPersonID(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
         Person p = getPerson(personID);
         if (!p.hasParticipation()) throw new PersonHasNoShowsException();
-        return show;
+        return p.showIterator();
     }
 
     @Override

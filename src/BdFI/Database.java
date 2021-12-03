@@ -133,7 +133,7 @@ public interface Database extends Serializable {
      * @throws PersonHasNoShowsException if person has no shows
      * @throws PersonIdNotFoundException if no person with given id exists
      */
-    Show showByPersonID(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException;
+    Iterator<Show> showsByPersonID(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException;
 
     /**
      * Returns an iterator containing the shows ordered by rating
@@ -156,6 +156,6 @@ public interface Database extends Serializable {
      * @throws NoRatedShowsException            if there are no rated shows
      * @throws NoProductionsWithRatingException if there are no finished shows with the rating
      */
-    Show listShows(int rating) throws InvalidShowRatingException, NoShowsException,
+    Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException;
 }

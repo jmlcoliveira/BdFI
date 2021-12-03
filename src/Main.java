@@ -300,8 +300,12 @@ public class Main {
     private static void commandListShowsPerson(Scanner in, Database db) {
         try {
             String personID = in.nextLine().trim();
-            Show s = db.showByPersonID(personID);
-            System.out.printf(Success.PERSON_SHOW, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
+            Iterator<Show> itShows = db.showsByPersonID(personID);
+            while (itShows.hasNext()) {
+                Show next = itShows.next();
+                System.out.printf(Success.PERSON_SHOW, next.getShowID(), next.getTitle(),
+                        next.getYear(), next.getRating());
+            }
 
         } catch (PersonIdNotFoundException e) {
             System.out.println(Error.PERSON_DOESNT_EXIST);
@@ -369,8 +373,12 @@ public class Main {
         try {
             int rating = in.nextInt();
             in.nextLine();
-            Show s = db.listShows(rating);
-            System.out.printf(Success.SHOW_LIST, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
+            Iterator<Show> itShows = db.listShows(rating);
+            while (itShows.hasNext()) {
+                Show next = itShows.next();
+                System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(),
+                        next.getYear(), next.getRating());
+            }
 
         } catch (InvalidShowRatingException e) {
             System.out.println(Error.INVALID_RATING);

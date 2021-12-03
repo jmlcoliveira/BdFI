@@ -50,7 +50,4 @@ public class ParticipationClass implements Participation {
         return description;
     }
 
-    public int compareTo(Participation o) {
-
-    }
 }
