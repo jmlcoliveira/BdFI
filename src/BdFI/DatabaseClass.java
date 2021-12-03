@@ -11,6 +11,8 @@ import BdFI.person.exceptions.PersonIdNotFoundException;
 import BdFI.show.exceptions.*;
 import dataStructures.*;
 
+import java.time.Year;
+
 /**
  * Database class which communicates with the Main class and stores information of all shows and
  * persons.
@@ -66,6 +68,8 @@ public class DatabaseClass implements Database {
 
         ShowPrivate show = new ShowClass(showID, year, title);
         showsByID.insert(showID, show);
+
+        if(year == Year.now().getValue()) showsInProductionCounter++;
     }
 
     @Override
@@ -137,6 +141,9 @@ public class DatabaseClass implements Database {
 
     @Override
     public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
+        if(showsByID.isEmpty()) throw new NoShowsException();
+        if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
+        if (listOfShowsByRating.isEmpty()) throw new NoRatedShowsException();
         return listShows(listOfShowsByRating.maxEntry().getKey());
     }
 
