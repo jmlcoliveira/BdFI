@@ -111,7 +111,7 @@ public class Main {
     private static void commandAddPerson(Scanner in, Database db) {
         int year = -1;
         try {
-            String id = in.next().toUpperCase();
+            String id = in.next();
             year = in.nextInt();
             String email = in.next();
             String telephone = in.next();
@@ -141,7 +141,7 @@ public class Main {
      */
     private static void commandAddShow(Scanner in, Database db) {
         try {
-            String idShow = in.next().toUpperCase();
+            String idShow = in.next();
             int year = in.nextInt();
             String title = in.nextLine().trim();
             db.addShow(idShow, year, title);
@@ -162,7 +162,7 @@ public class Main {
      */
     private static void commandAddParticipation(Scanner in, Database db) {
         try {
-            String personID = in.next().toUpperCase();
+            String personID = in.next();
             String showID = in.next().toUpperCase();
             String description = in.nextLine().trim();
             db.addParticipation(personID, showID, description);
@@ -183,7 +183,7 @@ public class Main {
      */
     private static void commandPremiere(Scanner in, Database db) {
         try {
-            String showID = in.nextLine().trim().toUpperCase();
+            String showID = in.nextLine().trim();
             db.premiereShow(showID);
             System.out.println(Success.SHOW_PREMIERED);
         } catch (ShowNotInProductionException e) {
@@ -202,7 +202,7 @@ public class Main {
      */
     private static void commandRemove(Scanner in, Database db) {
         try {
-            String showID = in.nextLine().trim().toUpperCase();
+            String showID = in.nextLine().trim();
             db.removeShow(showID);
             System.out.println(Success.SHOW_REMOVED);
         } catch (ShowNotInProductionException e) {
@@ -221,7 +221,7 @@ public class Main {
      */
     private static void commandTagShow(Scanner in, Database db) {
         try {
-            String showID = in.next().toUpperCase();
+            String showID = in.next();
             String tag = in.nextLine().trim();
             db.tagShow(showID, tag);
             System.out.println(Success.TAG_ADDED);
@@ -239,7 +239,7 @@ public class Main {
      */
     private static void commandInfoShow(Scanner in, Database db) {
         try {
-            String showID = in.nextLine().trim().toUpperCase();
+            String showID = in.nextLine().trim();
             Show s = db.getShow(showID);
             System.out.printf(Success.INFO_SHOW_HEADERS, s.getShowID(), s.getTitle(), s.getYear(), s.getRating());
             Iterator<String> it = s.iteratorTags();
@@ -259,7 +259,7 @@ public class Main {
      */
     private static void commandRate(Scanner in, Database db) {
         try {
-            String showID = in.next().toUpperCase();
+            String showID = in.next();
             int stars = in.nextInt();
             in.nextLine();
             db.reviewShow(showID, stars);
@@ -282,7 +282,7 @@ public class Main {
      */
     private static void commandInfoPerson(Scanner in, Database db) {
         try {
-            String personID = in.nextLine().trim().toUpperCase();
+            String personID = in.nextLine().trim();
             Person p = db.getPerson(personID);
             System.out.printf(Success.PERSON_INFO, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(),
                     p.getTelephone(), p.getGender());
@@ -300,7 +300,7 @@ public class Main {
      */
     private static void commandListShowsPerson(Scanner in, Database db) {
         try {
-            String personID = in.nextLine().trim().toUpperCase();
+            String personID = in.nextLine().trim();
             Iterator<Show> itShows = db.showsByPersonID(personID);
             while (itShows.hasNext()) {
                 Show next = itShows.next();
@@ -323,7 +323,7 @@ public class Main {
      */
     private static void commandListShowParticipation(Scanner in, Database db) {
         try {
-            String showID = in.nextLine().trim().toUpperCase();
+            String showID = in.nextLine().trim();
             Iterator<Participation> it = db.iteratorParticipationByShow(showID);
             while (it.hasNext()) {
                 Participation part = it.next();

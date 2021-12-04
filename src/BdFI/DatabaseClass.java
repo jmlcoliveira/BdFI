@@ -12,6 +12,7 @@ import BdFI.show.exceptions.*;
 import dataStructures.*;
 
 import java.time.Year;
+import java.util.Locale;
 
 /**
  * Database class which communicates with the Main class and stores information of all shows and
@@ -56,18 +57,18 @@ public class DatabaseClass implements Database {
     @Override
     public void addPerson(String personID, int year, String email, String telephone, String gender, String name) throws InvalidYearException, PersonIdAlreadyExistsException {
         if (year <= 0) throw new InvalidYearException();
-        if (personByID.find(personID) != null) throw new PersonIdAlreadyExistsException();
+        if (personByID.find(personID.toUpperCase()) != null) throw new PersonIdAlreadyExistsException();
 
-        personByID.insert(personID, new PersonClass(personID, year, email, telephone, gender, name));
+        personByID.insert(personID.toUpperCase(), new PersonClass(personID, year, email, telephone, gender, name));
     }
 
     @Override
     public void addShow(String showID, int year, String title) throws InvalidShowYearException, ShowIDExistsException {
         if (year <= 0) throw new InvalidShowYearException();
-        if (showsByID.find(showID) != null) throw new ShowIDExistsException();
+        if (showsByID.find(showID.toUpperCase()) != null) throw new ShowIDExistsException();
 
         ShowPrivate show = new ShowClass(showID, year, title);
-        showsByID.insert(showID, show);
+        showsByID.insert(showID.toUpperCase(), show);
 
         if(year == Year.now().getValue()) showsInProductionCounter++;
     }
@@ -99,7 +100,7 @@ public class DatabaseClass implements Database {
             PersonPrivate p = (PersonPrivate) it.next();
             p.removeShow((ShowPrivate) s);
         }
-        showsByID.remove(s.getShowID());
+        showsByID.remove(s.getShowID().toUpperCase());
 
     }
 
@@ -169,14 +170,14 @@ public class DatabaseClass implements Database {
 
     @Override
     public Show getShow(String showID) throws ShowIdNotFoundException {
-        Show s = showsByID.find(showID);
+        Show s = showsByID.find(showID.toUpperCase());
         if (s == null) throw new ShowIdNotFoundException();
         return s;
     }
 
     @Override
     public Person getPerson(String personID) throws PersonIdNotFoundException {
-        Person p = personByID.find(personID);
+        Person p = personByID.find(personID.toUpperCase());
         if (p == null) throw new PersonIdNotFoundException();
         return p;
     }
