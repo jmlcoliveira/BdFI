@@ -12,7 +12,6 @@ import BdFI.show.exceptions.*;
 import dataStructures.*;
 
 import java.time.Year;
-import java.util.Locale;
 
 /**
  * Database class which communicates with the Main class and stores information of all shows and
