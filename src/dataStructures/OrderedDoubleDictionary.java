@@ -1,6 +1,7 @@
 package dataStructures;
 
 import dataStructures.exceptions.EmptyDictionaryException;
+import dataStructures.exceptions.NoSuchElementException;
 
 public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements OrderedDictionary<K, V> {
 
@@ -87,7 +88,6 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
         } else {
             previous.setNext(newNode);
             newNode.setPrevious(previous);
-
             next.setPrevious(newNode);
             newNode.setNext(next);
         }
@@ -122,18 +122,6 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
             previous.setNext(next);
         }
         currentSize--;
-
-    }
-
-    @Override
-    public Iterator<Entry<K, V>> iterator() {
-        return new DoubleListIterator<>(head, tail);
-    }
-
-    @Override
-    public Iterator<V> iteratorValues() {
-        //TODO
-        return null;
     }
 
     @Override
@@ -144,5 +132,115 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
     @Override
     public Entry<K, V> maxEntry() throws EmptyDictionaryException {
         return tail.getElement();
+    }
+
+    @Override
+    public Iterator<Entry<K, V>> iterator() {
+        return new IteratorEntry();
+    }
+
+    @Override
+    public Iterator<V> iteratorValues() {
+        return new IteratorValues();
+    }
+
+    @Override
+    public Iterator<K> iteratorKeys() {
+        return new IteratorKeys();
+    }
+
+    abstract class ODLIterator {
+        /**
+         * Serial Version UID of the Class
+         */
+        static final long serialVersionUID = 0L;
+
+        /**
+         * Node with the next element in the iteration.
+         */
+        protected DoubleListNode<Entry<K, V>> nextToReturn;
+
+        /**
+         * Node with the previous element in the iteration.
+         */
+        protected DoubleListNode<Entry<K, V>> prevToReturn;
+
+        public ODLIterator() {
+            this.rewind();
+        }
+
+        public void rewind() {
+            nextToReturn = head;
+            prevToReturn = null;
+        }
+
+        public void fullForward() {
+            prevToReturn = tail;
+            nextToReturn = null;
+        }
+
+        public boolean hasNext() {
+            return nextToReturn != null;
+        }
+
+        public boolean hasPrevious() {
+            return prevToReturn != null;
+        }
+
+        private Entry<K, V> next() throws NoSuchElementException {
+            if (!this.hasNext())
+                throw new NoSuchElementException();
+
+            Entry<K, V> element = nextToReturn.getElement();
+            prevToReturn = nextToReturn.getPrevious();
+            nextToReturn = nextToReturn.getNext();
+            return element;
+        }
+
+        private Entry<K, V> previous() throws NoSuchElementException {
+            if (!this.hasPrevious())
+                throw new NoSuchElementException();
+
+            Entry<K, V> element = prevToReturn.getElement();
+            nextToReturn = prevToReturn.getNext();
+            prevToReturn = prevToReturn.getPrevious();
+            return element;
+        }
+    }
+
+    class IteratorEntry extends ODLIterator implements TwoWayIterator<Entry<K, V>> {
+        @Override
+        public Entry<K, V> next() throws NoSuchElementException {
+            return super.next();
+        }
+
+        @Override
+        public Entry<K, V> previous() throws NoSuchElementException {
+            return super.previous();
+        }
+    }
+
+    class IteratorValues extends ODLIterator implements TwoWayIterator<V> {
+        @Override
+        public V next() throws NoSuchElementException {
+            return super.next().getValue();
+        }
+
+        @Override
+        public V previous() throws NoSuchElementException {
+            return super.previous().getValue();
+        }
+    }
+
+    class IteratorKeys extends ODLIterator implements TwoWayIterator<K> {
+        @Override
+        public K next() throws NoSuchElementException {
+            return super.next().getKey();
+        }
+
+        @Override
+        public K previous() throws NoSuchElementException {
+            return super.previous().getKey();
+        }
     }
 }

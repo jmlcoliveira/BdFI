@@ -41,5 +41,7 @@ public interface OrderedDictionary<K extends Comparable<K>, V>
 
     Iterator<V> iteratorValues();
 
+    Iterator<K> iteratorKeys();
+
 } 
 

@@ -249,49 +249,9 @@ public class BinarySearchTree<K extends Comparable<K>, V>
         return new IteratorValues();
     }
 
-    /**
-     * Inner class to store path steps
-     *
-     * @param <K> Generic type Key, must extend comparable
-     * @param <V> Generic type Value
-     * @author AED team
-     * @version 1.0
-     */
-    protected static class PathStep<K extends Comparable<K>, V> {
-
-        /**
-         * The parent of the node.
-         */
-        public BSTNode<K, V> parent;
-
-        /**
-         * The node is the left or the right child of parent.
-         */
-        public boolean isLeftChild;
-
-        /**
-         * PathStep constructor
-         *
-         * @param theParent - ancestor of the current node
-         * @param toTheLeft - will be true of the current node is the left child of theParent
-         */
-        public PathStep(BSTNode<K, V> theParent, boolean toTheLeft) {
-            parent = theParent;
-            isLeftChild = toTheLeft;
-        }
-
-
-        /**
-         * Method to set node parent before moving in the tree
-         *
-         * @param newParent - ancestor of the current node
-         * @param toTheLeft - will be true of the current node is the left child of theParent
-         */
-        public void set(BSTNode<K, V> newParent, boolean toTheLeft) {
-            parent = newParent;
-            isLeftChild = toTheLeft;
-        }
-
+    @Override
+    public Iterator<K> iteratorKeys() {
+        return new IteratorKeys();
     }
 
     abstract class BSTKeyOrderIterator {
@@ -344,6 +304,58 @@ public class BinarySearchTree<K extends Comparable<K>, V>
         @Override
         public V next() throws NoSuchElementException {
             return super.next().getValue();
+        }
+    }
+
+    /**
+     * Inner class to store path steps
+     *
+     * @param <K> Generic type Key, must extend comparable
+     * @param <V> Generic type Value
+     * @author AED team
+     * @version 1.0
+     */
+    protected static class PathStep<K extends Comparable<K>, V> {
+
+        /**
+         * The parent of the node.
+         */
+        public BSTNode<K, V> parent;
+
+        /**
+         * The node is the left or the right child of parent.
+         */
+        public boolean isLeftChild;
+
+        /**
+         * PathStep constructor
+         *
+         * @param theParent - ancestor of the current node
+         * @param toTheLeft - will be true of the current node is the left child of theParent
+         */
+        public PathStep(BSTNode<K, V> theParent, boolean toTheLeft) {
+            parent = theParent;
+            isLeftChild = toTheLeft;
+        }
+
+
+        /**
+         * Method to set node parent before moving in the tree
+         *
+         * @param newParent - ancestor of the current node
+         * @param toTheLeft - will be true of the current node is the left child of theParent
+         */
+        public void set(BSTNode<K, V> newParent, boolean toTheLeft) {
+            parent = newParent;
+            isLeftChild = toTheLeft;
+        }
+
+    }
+
+    class IteratorKeys extends BSTKeyOrderIterator implements Iterator<K> {
+        @Override
+        public K next() throws NoSuchElementException {
+            return super.next().getKey();
         }
     }
 

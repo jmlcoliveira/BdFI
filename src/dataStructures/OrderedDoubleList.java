@@ -31,11 +31,11 @@ public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E
     private DoubleListNode<E> findNode(E element) {
         DoubleListNode<E> node = head;
         while (node != null && node.getElement().compareTo(element) <= 0) {
-            E currentElement = node.getElement();
 
-            if (currentElement.equals(element))
+            if (node.getElement().equals(element))
                 return node;
             node = node.getNext();
+
         }
         return null;
     }
@@ -48,9 +48,8 @@ public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E
             E currentElement = node.getElement();
 
             if (currentElement.equals(element)) {
-                E oldValue = node.getElement();
                 node.setElement(element);
-                return oldValue;
+                return currentElement;
             }
             if (node.getElement().compareTo(element) > 0) {
                 next = node;
