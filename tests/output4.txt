@@ -1,20 +1,76 @@
-idPerson does not exist.
+Show added.
 
-idShow does not exist.
+Successful production.
 
-idPerson does not exist.
+No rated productions.
 
-Participation added.
+No rated productions.
 
-Participation added.
+No rated productions.
 
-idShow does not exist.
+m0 Duna Failed Movie - A tale of failure 2021 0
 
-Participation added.
+Show added.
 
-s111 THE WITCHER SEASON 2 2021 7
+Show added.
 
-P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE
+Rating applied.
+
+Rating applied.
+
+Rating applied.
+
+No productions with rating.
+
+m0 Duna Failed Movie - A tale of failure 2021 0
+m2 Dune (1984) 1984 0
+other Dune Failed Movie - A tale of failure 2020 0
+
+m0 Duna Failed Movie - A tale of failure 2021 0
+m2 Dune (1984) 1984 0
+other Dune Failed Movie - A tale of failure 2020 0
+
+idShow has already completed production.
+
+idShow has already completed production.
+
+idShow has already completed production.
+
+idShow has already completed production.
+
+idShow has already completed production.
+
+idShow has already completed production.
+
+Rating applied.
+
+Invalid Rating.
+
+Rating applied.
+
+m2 Dune (1984) 1984 6
+
+Rating applied.
+
+Rating applied.
+
+Rating applied.
+
+m2 Dune (1984) 1984 6
+
+Rating applied.
+
+Rating applied.
+
+m0 Duna Failed Movie - A tale of failure 2021 6
+m2 Dune (1984) 1984 6
+
+m0 Duna Failed Movie - A tale of failure 2021 6
+m2 Dune (1984) 1984 6
+
+No productions with rating.
+
+other Dune Failed Movie - A tale of failure 2020 0
 
 Serializing and quitting...
 

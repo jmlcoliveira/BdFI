@@ -1,23 +1,70 @@
-addPARTicipation p555 s111 Director
+addShow m0 2021 Duna Failed Movie - A tale of failure
 
-addparticipation p234 s100 Actor, Main Protagonist
+premiere M0
 
-addparticipation s111 p234 Actor, MAIN PROTAGONIST
+listShows 7
 
-addparticipation p234 S111 Actor, MAIN PROTAGONIST
+listShows 0
 
-addparticipation p234 s111 Executive PRODUCER
+listbestshows
 
-addparticipation p234 s222 Writer
+infoShow m0
 
-ADDPARTICIPATION p234 s111 Main Writer
+addShow m2 1984 Dune (1984)
 
-infoshow s111
+addShow other 2020 Dune Failed Movie - A tale of failure
 
-infoperson p234
+rateShow M0 0
+
+rateShow M2 0
+
+rateShow other 0
+
+listShows 3
+
+listShows 0
+
+listbestshows
+
+removeShow m0
+
+removeShow other
+
+removeShow m2
+
+premiere m0
+
+premiere Other
+
+premiere m2
+
+rateShow M2 10
+
+rateShow M2 -10
+
+rateShow M2 8
+
+listbestshows
+
+rateShow M2 1
+
+rateShow M2 7
+
+rateShow M2 9
+
+listbestshows
+
+rateShow M0 10
+
+rateShow M0 7
+
+listbestshows
+
+listShows 6
+
+listShows 5
+
+listShows 0
 
 quit
-
-
-
 

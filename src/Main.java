@@ -10,7 +10,6 @@ import outputMessages.Error;
 import outputMessages.Success;
 
 import java.io.*;
-import java.util.Locale;
 import java.util.Scanner;
 
 /**

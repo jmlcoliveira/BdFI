@@ -1,18 +1,38 @@
 infoperson p234
 
-addPERSON P234 -34656 alicia@warner.com 0034212990545 femALle Alicia VIKANDER
-
-addPERSON P234 -34656 alicia@warner.com 0034212990545 femALE Alicia VIKANDER
-
-addPERSON P234 1989 alicia@warner.com 0034212990545 femALle Alicia VIKANDER
-
-ADDPERSON P234 1989 alicia@warner.com 0034212990545 femALE Alicia VIKANDER
-
-ADDPERSON p234 1989 alicia@warner.com 0034212990545 femALE Alicia VIKANDER
-
 infoperson p111
 
 infoperson p234
+
+ADDShow m1 -2021 Dune (2021)
+
+AddShow m1 2021 Dune (2021)
+
+addshow M1 2021 Dune (2021)
+
+addPerson p4 1983 rebecca@acme.corp 24213 female Rebecca Ferguson
+
+addParticipation P4 K1 Actress
+
+addParticipation T5 K1 Actress
+
+addParticipation P4 M1 Actress supporting role
+
+addShow m7 2021 Cowboy Bebop (2021)
+
+addShow m5 2021 Reminiscence
+
+addParticipation p4 m5 main actress
+
+addPerson pk17 1967 denis@acme.corp 3454353 not_provided Denis Villeneuve
+
+addPerson p6 1967 denis@acme.corp 3454353 not-provided Denis Villeneuve
+
+infoperson P6
+
+addParticipation p6 m1 Director and more
+
+addParticipation p6 m1 Writer also
 
 quit
 

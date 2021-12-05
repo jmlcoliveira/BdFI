@@ -1,0 +1,118 @@
+listshows 3
+
+listparticipations s100
+
+listbestshows
+
+addshow s204 2021 DUne
+
+listbestshows
+
+listshows 7
+
+listparticipations s204
+
+removeshow s204
+
+infoperson p234
+
+addPERSON P234 -34656 alicia@warner.com 0034212990545 femALle Alicia VIKANDER
+
+addPERSON P234 -34656 alicia@warner.com 0034212990545 femALE Alicia VIKANDER
+
+addPERSON P234 1989 alicia@warner.com 0034212990545 femALle Alicia VIKANDER
+
+ADDPERSON P234 1989 alicia@warner.com 0034212990545 femALE Alicia VIKANDER
+
+ADDPERSON p234 1989 alicia@warner.com 0034212990545 femALE Alicia VIKANDER
+
+infoperson p111
+
+infoperson p234
+
+ADDSHOW S547 -4976785 THE MAN FROM U.N.C.L.E
+
+ADDshow s547 2021 THE WITCHER SEASON 2
+
+ADDshow s547 2021 THE WITCHER SEASON 2
+
+INFOSHOW S333
+
+infoshow s547
+
+REMOVESHOW S333
+
+INFOSHOW S333
+
+infoshow s547
+
+removeshow s333
+
+removeshow s547
+
+infoshow s547
+
+infoshow s333
+
+ADDshow s111 2021 THE WITCHER SEASON 2
+
+rateshow s547 8
+
+rateshow s111 -1
+
+rateshow s111 7
+
+infoshow s222
+
+infoshow s111
+
+addPARTicipation p555 s111 Director
+
+addparticipation p234 s100 Actor, Main Protagonist
+
+addparticipation s111 p234 Actor, MAIN PROTAGONIST
+
+addparticipation p234 S111 Actor, MAIN PROTAGONIST
+
+addparticipation p234 s111 Executive PRODUCER
+
+addparticipation p234 s222 Writer
+
+ADDPARTICIPATION p234 s111 Main Writer
+
+infoshow s111
+
+infoperson p234
+
+listPARTICIPATIONS s100
+
+listparticipations S111
+
+listbestshows
+
+listshows 6
+
+listshows 7
+
+listshows -1
+
+tagshow s444 DRAMA
+
+tagSHOW s111 adventure
+
+tagshow S111 violence
+
+tagshow s111 HORROR
+
+infoshow s444
+
+infoshow s111
+
+REMOVESHOW s111
+
+PREMIERE s111
+
+REMOVESHOW s204
+
+quit
+

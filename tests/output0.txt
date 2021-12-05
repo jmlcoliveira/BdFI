@@ -1,0 +1,123 @@
+No shows.
+
+idShow does not exist.
+
+No shows.
+
+Show added.
+
+No finished productions.
+
+No finished productions.
+
+idShow has no participations.
+
+Show removed.
+
+idPerson does not exist.
+
+Invalid year.
+
+Invalid year.
+
+Invalid gender information.
+
+Person added.
+
+idPerson exists.
+
+idPerson does not exist.
+
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE
+
+Invalid year.
+
+Show added.
+
+idShow exists.
+
+idShow does not exist.
+
+s547 THE WITCHER SEASON 2 2021 0
+
+idShow does not exist.
+
+idShow does not exist.
+
+s547 THE WITCHER SEASON 2 2021 0
+
+idShow does not exist.
+
+Show removed.
+
+idShow does not exist.
+
+idShow does not exist.
+
+Show added.
+
+idShow does not exist.
+
+Invalid Rating.
+
+idShow is in production.
+
+idShow does not exist.
+
+s111 THE WITCHER SEASON 2 2021 0
+
+idPerson does not exist.
+
+idShow does not exist.
+
+idPerson does not exist.
+
+Participation added.
+
+Participation added.
+
+idShow does not exist.
+
+Participation added.
+
+s111 THE WITCHER SEASON 2 2021 0
+
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE
+
+idShow does not exist.
+
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE Actor, MAIN PROTAGONIST
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE Executive PRODUCER
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE Main Writer
+
+No finished productions.
+
+No finished productions.
+
+No finished productions.
+
+Invalid Rating.
+
+idShow does not exist.
+
+Tag added.
+
+Tag added.
+
+Tag added.
+
+idShow does not exist.
+
+s111 THE WITCHER SEASON 2 2021 0
+adventure
+violence
+HORROR
+
+Show removed.
+
+idShow does not exist.
+
+idShow does not exist.
+
+Serializing and quitting...
+

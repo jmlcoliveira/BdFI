@@ -1,28 +1,128 @@
-listPARTICIPATIONS s100
+addShow m0 2021 Failed Movie - A tale of failure
 
-listparticipations S111
+addShow m1 2021 Dune (2021)
+
+addPerson pKF 1995 tim@acme.corp 213 not-provided Timothee Chalamet
+
+addParticipation pKF m1 Main actor
+
+addPerson p4 1983 rebecca@acme.corp 24213 female Rebecca Ferguson
+
+addParticipation p4 m1 main actress
+
+addPerson p5 1979 oscar@acme.corp 3453 other Oscar Isaac
+
+addParticipation p5 m1 Actor
+
+addPerson p6 1967 denis@acme.corp 3454353 not-provided Denis Villeneuve
+
+addParticipation p6 m1 Director and more
+
+addPerson p7 1957 hans@acme.corp 3453 male Hans Zimmer
+
+addPerson Ar67 1969 bautista@acme.corp 345d453 not-provided Dave Bautista
+
+addParticipation ar67 m1 Muscle
+
+addParticipation ar67 m1 Actor
+
+addParticipation p6 m1 Writer also
+
+addParticipation p7 m1 Music Director
+
+addParticipation p7 m1 Sound Producer
+
+addShow m2 1984 Dune (1984)
+
+addPerson p1 1940 patrick@acme.corp 213412 male Patrick Stewart
+
+addPerson p2 1959 kyle@acme.corp 2134512 male Kyle MacLachlan
+
+addParticipation p1 m2 Actor
+
+addParticipation p2 m2 actress
+
+addShow ba6 2021 Wonder Woman 1984
+
+addPerson p10 1966 robin@acme.corp 224413 female Robin Wright
+
+addParticipation p7 bA6 Music Director
+
+addParticipation p10 Ba6 actress senior
+
+addPerson p11 1985 gal@acme.corp 224454 female Gal Gadot
+
+addParticipation p11 ba6 Main actress
+
+addShow m4 2017 Blade Runner 2049
+
+addPerson p9 1988 ana@acme.corp 224413 female Ana de Armas
+
+addParticipation p9 m4 leading female role
+
+addParticipation p10 m4 supporting female role
+
+addPerson p12 1942 harrison@acme.corp 224413 male Harrison Ford
+
+addParticipation p12 m4 supporting male role
+
+addParticipation p7 m4 Sound Producer
+
+addParticipation p6 m4 Director
+
+addParticipation ar67 m4 Muscle 2
+
+addShow m5 2021 Reminiscence
+
+addParticipation p4 m5 main actress
+
+addShow m6 2019 Star Wars: Episode IX - The Rise of Skywalker - Directors cut - The ultimate edition
+
+addParticipation p12 m6 supporting male role
+
+addParticipation p5 m6 Actor
+
+addShow m7 2021 Cowboy Bebop (2021)
+
+addPerson p13 1964 yoko@acme.corp 224413 female Yoko Kanno
+
+addParticipation p13 m7 Music Director
+
+addShow m8 1998 Cowboy Bebop
+
+addParticipation p13 m8 Music Director
+
+addShow m9 1995 Ghost in the Shell
+
+addParticipation p13 m9 Music Director
+
+addShow m10 2014 Ex Machina
+
+addPERSON P234 1988 alicia@warner.com 0034212990545 femALe Alicia VIKANDER
+
+addParticipation p5 m10 Actor
+
+addParticipation p234 m10 Actress
+
+listShowsPerson P234
+
+listShowsPerson P5
+
+listSHOWSperson p7
+
+listparticipations m1
+
+listparticipations m4
+
+premiere m1
+
+rateShow m1 6
 
 listbestshows
 
-listshows 6
+rateShow m8 9
 
-listshows 7
-
-listshows -1
-
-tagshow s444 DRAMA
-
-tagSHOW s111 adventure
-
-tagshow S111 violence
-
-tagshow s111 HORROR
-
-infoshow s444
-
-infoshow s111
+listbestshows
 
 QUiT
-
-
 

@@ -1,64 +1,78 @@
-Invalid year.
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE
 
-Show added.
+p4 Rebecca Ferguson 1983 rebecca@acme.corp 24213 female
 
-idShow exists.
+p6 Denis Villeneuve 1967 denis@acme.corp 3454353 not-provided
 
-idShow does not exist.
+m1 Dune (2021) 2021 0
 
-s547 THE WITCHER SEASON 2 2021 0
+Tag added.
 
-idShow does not exist.
+Tag added.
 
-idShow does not exist.
+Tag added.
 
-s547 THE WITCHER SEASON 2 2021 0
+m1 Dune (2021) 2021 0
+Action
+adventure
+Drama
 
-idShow does not exist.
+Tag added.
 
-Show removed.
+Tag added.
 
-idShow does not exist.
+Tag added.
 
-idShow does not exist.
+m5 Reminiscence 2021 0
+Sci-fi
+Action
+Adventure
 
-Show added.
+m7 Cowboy Bebop (2021) 2021 0
 
-idShow does not exist.
+idPerson has no shows.
+
+m1 Dune (2021) 2021 0
+m5 Reminiscence 2021 0
+
+m1 Dune (2021) 2021 0
+
+p4 Rebecca Ferguson 1983 rebecca@acme.corp 24213 female Actress supporting role
+p6 Denis Villeneuve 1967 denis@acme.corp 3454353 not-provided Director and more
+p6 Denis Villeneuve 1967 denis@acme.corp 3454353 not-provided Writer also
+
+p4 Rebecca Ferguson 1983 rebecca@acme.corp 24213 female main actress
+
+idShow has no participations.
+
+No shows with tag.
+
+m1 Dune (2021) 2021 0
+m5 Reminiscence 2021 0
 
 Invalid Rating.
 
 idShow is in production.
 
-idShow does not exist.
+Show removed.
 
-s111 THE WITCHER SEASON 2 2021 0
+Show removed.
 
-Successful production.
+No tagged productions.
 
-idShow has already completed production.
+idPerson has no shows.
 
-s111 THE WITCHER SEASON 2 2021 0
+No finished productions.
 
-idShow does not exist.
+No finished productions.
 
-idShow has already completed production.
+Show removed.
 
-idShow does not exist.
+No shows.
 
-Rating applied.
+No shows.
 
-Rating applied.
-
-Invalid Rating.
-
-Rating applied.
-
-Rating applied.
-
-idShow does not exist.
-
-s111 THE WITCHER SEASON 2 2021 7
+No shows.
 
 Serializing and quitting...
 

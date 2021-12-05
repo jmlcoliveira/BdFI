@@ -1,16 +1,62 @@
-listshows 3
+listtaggedShows action 
 
-listparticipations s100
+listShows -1
+
+listShows 11
+
+listShows 0
+
+listShows 5
 
 listbestshows
 
+listparticipations 42
+
+listShowsPerson 42
+
+infoPerson 42
+
+rateShow 42 -5
+
+rateshow 42 15
+
+RateShow 42 7
+
+infoShow 42
+
+tagshow 42 action
+
+removeshow 42
+
+premiere 42
+
+addparticipation 42 42 The meaning of the Universe is 42
+
+addshow s204 -2048 Blade Runner 2048
+
+addPerson p4 -1983 rebecca@acme.corp 24213 female Rebecca Ferguson
+
+addPerson p4 1983 rebecca@acme.corp 24213 femaLle Rebecca Ferguson
+
 addshow s204 2021 DUne
+
+addShow s204 1984 Dune (1984)
+
+rateShow s204 9
 
 listbestshows
 
 listshows 7
 
 listparticipations s204
+
+listtaggedShows Adventure
+
+tagShow s204 Action
+
+tagShow s204 Drama
+
+listtaggedShows Adventure
 
 removeshow s204
 

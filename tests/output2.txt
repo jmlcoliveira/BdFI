@@ -1,18 +1,38 @@
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE
+
 idPerson does not exist.
 
-Invalid year.
+P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE
 
 Invalid year.
+
+Show added.
+
+idShow exists.
+
+Person added.
+
+idShow does not exist.
+
+idPerson does not exist.
+
+Participation added.
+
+Show added.
+
+Show added.
+
+Participation added.
 
 Invalid gender information.
 
 Person added.
 
-idPerson exists.
+p6 Denis Villeneuve 1967 denis@acme.corp 3454353 not-provided
 
-idPerson does not exist.
+Participation added.
 
-P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE
+Participation added.
 
 Serializing and quitting...
 

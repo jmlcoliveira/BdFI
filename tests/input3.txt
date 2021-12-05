@@ -1,69 +1,68 @@
-ADDSHOW S547 -4976785 THE MAN FROM U.N.C.L.E
+infoPerson P234
 
-ADDshow s547 2021 THE WITCHER SEASON 2
+infoPerson P4
 
-ADDshow s547 2021 THE WITCHER SEASON 2
+infoPerson P6
 
-INFOSHOW S333
+infoShow m1
 
-infoshow s547
+tagShow m1 Action
 
-REMOVESHOW S333
+tagShow m1 adventure
 
-INFOSHOW S333
+tagShow m1 Drama
 
-infoshow s547
+infoShow m1
 
-removeshow s333
+tagShow m5 Sci-fi
 
-removeshow s547
+tagShow m5 Action
 
-infoshow s547
+tagShow m5 Adventure
 
-infoshow s333
+infoShow m5
 
-ADDshow s111 2021 THE WITCHER SEASON 2
+infoShow m7
 
-rateshow s547 8
+listshowsPerson p234
 
-rateshow s111 -1
+listSHOWSperson     p4
 
-rateshow s111 7
+listSHOWSperson p6
 
-infoshow s222
+listparticipations m1
 
-infoshow s111
+listparticipations m5
 
-PREMIERE S111
+listparticipations m7
 
-REMOVESHOW s111
+listtaggedShows adventure_
 
-infoshow s111
+listtaggedShows adventure
 
-premiere s345
+rateShow m1 -1
 
-premiere s111
+rateshow m1 1
 
-rateshow s3454 5
+removeShow m1
 
-rateshow s111 2
+removeShow m5
 
-rateshow s111 10
+listtaggedShows adventure
 
-rateshow s111 -4
+listSHOWSperson p4
 
-rateshow s111 7
+listbestshows
 
-rateshow s111 8
+listShows 8
 
-infoshow s34565
+removeShow m7
 
-infoshow s111
+listbestshows
+
+listtaggedShows Adventure
+
+listShows 8
 
 quit
-
-
-
-
-
 

@@ -1,16 +1,62 @@
 No shows.
 
-idShow does not exist.
+Invalid Rating.
+
+Invalid Rating.
 
 No shows.
 
+No shows.
+
+No shows.
+
+idShow does not exist.
+
+idPerson does not exist.
+
+idPerson does not exist.
+
+Invalid Rating.
+
+Invalid Rating.
+
+idShow does not exist.
+
+idShow does not exist.
+
+idShow does not exist.
+
+idShow does not exist.
+
+idShow does not exist.
+
+idPerson does not exist.
+
+Invalid year.
+
+Invalid year.
+
+Invalid gender information.
+
 Show added.
+
+idShow exists.
+
+idShow is in production.
 
 No finished productions.
 
 No finished productions.
 
 idShow has no participations.
+
+No tagged productions.
+
+Tag added.
+
+Tag added.
+
+No shows with tag.
 
 Show removed.
 

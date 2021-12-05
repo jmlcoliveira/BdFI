@@ -27,11 +27,18 @@ public class Tests {
 	 * Basta configurar esta sequencia de testes!
 	 */
 
+	@org.junit.Test
+	public void test00() {
+		test("input0.txt", "output0.txt");
+	}
+
 	/**
 	 * Testa os comandos help e exit.
 	 */
 	@org.junit.Test
-    public void test01() { test("input1.txt","output1.txt"); }
+	public void test01() {
+		test("input1.txt", "output1.txt");
+	}
 
 	/**
 	 * Testa o comando user e users, sem erros.

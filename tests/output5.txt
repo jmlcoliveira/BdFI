@@ -1,31 +1,147 @@
-idShow does not exist.
+idShow exists.
 
-P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE Actor, MAIN PROTAGONIST
-P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE Executive PRODUCER
-P234 Alicia VIKANDER 1989 alicia@warner.com 0034212990545 femALE Main Writer
+Show added.
 
-s111 THE WITCHER SEASON 2 2021 7
+Person added.
 
-No productions with rating.
+Participation added.
 
-s111 THE WITCHER SEASON 2 2021 7
+idPerson exists.
 
-Invalid Rating.
+Participation added.
 
-idShow does not exist.
+Person added.
 
-Tag added.
+Participation added.
 
-Tag added.
+idPerson exists.
 
-Tag added.
+Participation added.
 
-idShow does not exist.
+Person added.
 
-s111 THE WITCHER SEASON 2 2021 7
-adventure
-violence
-HORROR
+Person added.
+
+Participation added.
+
+Participation added.
+
+Participation added.
+
+Participation added.
+
+Participation added.
+
+idShow exists.
+
+Person added.
+
+Person added.
+
+Participation added.
+
+Participation added.
+
+Show added.
+
+Person added.
+
+Participation added.
+
+Participation added.
+
+Person added.
+
+Participation added.
+
+Show added.
+
+Person added.
+
+Participation added.
+
+Participation added.
+
+Person added.
+
+Participation added.
+
+Participation added.
+
+Participation added.
+
+Participation added.
+
+Show added.
+
+Participation added.
+
+Show added.
+
+Participation added.
+
+Participation added.
+
+Show added.
+
+Person added.
+
+Participation added.
+
+Show added.
+
+Participation added.
+
+Show added.
+
+Participation added.
+
+Show added.
+
+idPerson exists.
+
+Participation added.
+
+Participation added.
+
+m10 Ex Machina 2014 0
+
+m1 Dune (2021) 2021 0
+m10 Ex Machina 2014 0
+m6 Star Wars: Episode IX - The Rise of Skywalker - Directors cut - The ultimate edition 2019 0
+
+ba6 Wonder Woman 1984 2021 0
+m1 Dune (2021) 2021 0
+m4 Blade Runner 2049 2017 0
+
+pKF Timothee Chalamet 1995 tim@acme.corp 213 not-provided Main actor
+p4 Rebecca Ferguson 1983 rebecca@acme.corp 24213 female main actress
+p5 Oscar Isaac 1979 oscar@acme.corp 3453 other Actor
+p6 Denis Villeneuve 1967 denis@acme.corp 3454353 not-provided Director and more
+Ar67 Dave Bautista 1969 bautista@acme.corp 345d453 not-provided Muscle
+Ar67 Dave Bautista 1969 bautista@acme.corp 345d453 not-provided Actor
+p6 Denis Villeneuve 1967 denis@acme.corp 3454353 not-provided Writer also
+p7 Hans Zimmer 1957 hans@acme.corp 3453 male Music Director
+p7 Hans Zimmer 1957 hans@acme.corp 3453 male Sound Producer
+
+p9 Ana de Armas 1988 ana@acme.corp 224413 female leading female role
+p10 Robin Wright 1966 robin@acme.corp 224413 female supporting female role
+p12 Harrison Ford 1942 harrison@acme.corp 224413 male supporting male role
+p7 Hans Zimmer 1957 hans@acme.corp 3453 male Sound Producer
+p6 Denis Villeneuve 1967 denis@acme.corp 3454353 not-provided Director
+Ar67 Dave Bautista 1969 bautista@acme.corp 345d453 not-provided Muscle 2
+
+Successful production.
+
+Rating applied.
+
+m0 Duna Failed Movie - A tale of failure 2021 6
+m2 Dune (1984) 1984 6
+m1 Dune (2021) 2021 6
+
+Rating applied.
+
+m8 Cowboy Bebop 1998 9
 
 Serializing and quitting...
 
