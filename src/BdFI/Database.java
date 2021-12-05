@@ -1,9 +1,6 @@
 package BdFI;
 
-import BdFI.database.exceptions.NoFinishedShowsException;
-import BdFI.database.exceptions.NoProductionsWithRatingException;
-import BdFI.database.exceptions.NoRatedShowsException;
-import BdFI.database.exceptions.NoShowsException;
+import BdFI.database.exceptions.*;
 import BdFI.person.exceptions.*;
 import BdFI.show.exceptions.*;
 import dataStructures.Iterator;
@@ -158,4 +155,17 @@ public interface Database extends Serializable {
      */
     Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException;
+
+
+    /**
+     * Returns an iterator with the shows that have a certain tag
+     *
+     * @param tag target tag
+     * @return Iterator of shows
+     * @throws NoShowsException                 if the database has no show
+     * @throws NoTaggedProductionsException     if there are no shows with any tag in the database
+     * @throws NoShowsWithTagException          if there are no shows with the given tag in the database
+     */
+    Iterator<Show> listTaggedShows(String tag) throws NoShowsException, NoTaggedProductionsException,
+            NoShowsWithTagException;
 }

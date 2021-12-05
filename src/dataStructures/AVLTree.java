@@ -76,8 +76,8 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
             case 'L':
                 this.rotateLeft1L(node, leftChild, path);
                 break;
-// case 'E':
-// Impossible.
+            // case 'E':
+            // Impossible.
             case 'R':
                 this.rotateLeft2(node, leftChild, path);
                 break;
@@ -122,8 +122,8 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
             case 'L':
                 this.rotateRight2(node, rightChild, path);
                 break;
-// case 'E':
-// Impossible.
+            // case 'E':
+            // Impossible.
             case 'R':
                 this.rotateRight1R(node, rightChild, path);
                 break;
@@ -184,7 +184,19 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
             return null;
         else {
             V oldValue = node.getValue();
-// Remover a entrada de node.
+            if ( node.getLeft() == null )   // The left subtree is empty.
+                this.linkSubtree(node.getRight(), path.top());
+            else if ( node.getRight() == null ) // The right subtree is empty.
+                this.linkSubtree(node.getLeft(), path.top());
+            else {
+                // Node has 2 children. Replace the node's entry with
+                // the 'minEntry' of the right subtree.
+                path.push( new PathStep<K,V>(node, false) );
+                BSTNode<K,V> minNode = this.minNode(node.getRight(), path);
+                node.setEntry( minNode.getEntry() );
+                // Remove the 'minEntry' of the right subtree.
+                this.linkSubtree(minNode.getRight(), path.top());
+            }
             currentSize--;
             this.reorganizeRem(path);
             return oldValue;

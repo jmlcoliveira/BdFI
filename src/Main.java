@@ -1,8 +1,5 @@
 import BdFI.*;
-import BdFI.database.exceptions.NoFinishedShowsException;
-import BdFI.database.exceptions.NoProductionsWithRatingException;
-import BdFI.database.exceptions.NoRatedShowsException;
-import BdFI.database.exceptions.NoShowsException;
+import BdFI.database.exceptions.*;
 import BdFI.person.exceptions.*;
 import BdFI.show.exceptions.*;
 import dataStructures.Iterator;
@@ -87,6 +84,9 @@ public class Main {
                 case LISTBESTSHOWS:
                     commandListBestShows(in, db);
                     break;
+                case LISTTAGGEDSHOWS:
+                    commandListTaggedShows(in, db);
+                    break;
                 case LISTSHOWS:
                     commandListShowsByRating(in, db);
                     break;
@@ -128,7 +128,6 @@ public class Main {
             System.out.println(Error.PERSON_EXISTS);
         }
     }
-
 
 
     /**
@@ -390,6 +389,32 @@ public class Main {
             System.out.println(Error.NO_RATED_PRODUCTIONS);
         } catch (NoProductionsWithRatingException e) {
             System.out.println(Error.NO_PRODUCTION_WITH_RATING);
+        }
+    }
+
+    /**
+     * Command 14
+     * Lists the shows with a given tag
+     *
+     * @param in input where the data will be read from
+     * @param db Database where this action will be performed
+     */
+    private static void commandListTaggedShows(Scanner in, Database db) {
+        try {
+            String tag = in.nextLine().trim();
+            Iterator<Show> itShows = db.listTaggedShows(tag);
+            while (itShows.hasNext()) {
+                Show next = itShows.next();
+                System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(),
+                        next.getYear(), next.getRating());
+            }
+
+        } catch (NoShowsException e) {
+            System.out.println(Error.NO_SHOWS);
+        } catch (NoTaggedProductionsException e) {
+            System.out.println(Error.NO_TAGGED_PRODUCTIONS);
+        } catch (NoShowsWithTagException e) {
+            System.out.println(Error.NO_SHOWS_WITH_TAG);
         }
     }
 

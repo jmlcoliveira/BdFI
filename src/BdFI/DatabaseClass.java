@@ -1,9 +1,6 @@
 package BdFI;
 
-import BdFI.database.exceptions.NoFinishedShowsException;
-import BdFI.database.exceptions.NoProductionsWithRatingException;
-import BdFI.database.exceptions.NoRatedShowsException;
-import BdFI.database.exceptions.NoShowsException;
+import BdFI.database.exceptions.*;
 import BdFI.person.exceptions.InvalidYearException;
 import BdFI.person.exceptions.PersonHasNoShowsException;
 import BdFI.person.exceptions.PersonIdAlreadyExistsException;
@@ -119,7 +116,12 @@ public class DatabaseClass implements Database {
 
     @Override
     public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, ShowIdNotFoundException {
-        ShowPrivate s = (ShowPrivate) getShow(showID);
+        if (review < 0 || review > 10) throw new InvalidShowRatingException();
+        ShowPrivate s = showsByID.find(showID.toUpperCase());
+        if(s != null && s.isInProduction()) throw new ShowInProductionException();
+        if(s == null) throw new ShowIdNotFoundException();
+
+
         int oldRating = s.getRating();
         s.rate(review);
         int newRating = s.getRating();
@@ -156,7 +158,17 @@ public class DatabaseClass implements Database {
         if (showsByID.isEmpty()) throw new NoShowsException();
         if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
         if (listOfShowsByRating.isEmpty()) throw new NoRatedShowsException();
-        if (shows.isEmpty()) throw new NoProductionsWithRatingException();
+        if (shows == null) throw new NoProductionsWithRatingException();
+        return shows.iterator();
+    }
+
+    public Iterator<Show> listTaggedShows(String tag) throws NoShowsException, NoTaggedProductionsException,
+            NoShowsWithTagException {
+        if (showsByID.isEmpty()) throw new NoShowsException();
+        if(listOfShowsByTag.isEmpty()) throw new NoTaggedProductionsException();
+        OrderedList<Show> shows = listOfShowsByTag.find(tag);
+        if(shows == null) throw new NoShowsWithTagException();
+
         return shows.iterator();
     }
 
