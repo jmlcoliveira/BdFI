@@ -374,5 +374,8 @@ public class BinarySearchTree<K extends Comparable<K>, V>
         }
     }
 
+    public Iterator<Entry<K,V>> breadthIterator() {
+        return new BSTBreadthFirstIterator<>(root);
+    }
 }
 

@@ -67,6 +67,72 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
         }
     }
 
+    public void reorganizeRem(Stack<PathStep<K,V>> path) {
+        boolean shrunk = true;
+        PathStep<K, V> lastStep = path.pop();
+        AVLNode<K, V> parent = (AVLNode<K, V>) lastStep.parent;
+        while(shrunk && parent != null) {
+            if (lastStep.isLeftChild) {             // parent's left subtree has shrunk.
+                switch (parent.getBalance()) {
+                    case 'L':
+                        parent.setBalance('E');
+                        break;
+                    case 'E':
+                        parent.setBalance('R');
+                        break;
+                    case 'R':
+                        this.rebalanceRemLeft(parent, path);
+                        shrunk = false;
+                        break;
+                }
+            }
+            else
+                switch (parent.getBalance()) {
+                    case 'L':
+                        this.rebalanceRemRight(parent, path);
+                        break;
+                    case 'E':
+                        parent.setBalance('R');
+                        break;
+                    case 'R':
+                        parent.setBalance('E');
+                        break;
+                }
+        }
+    }
+
+    protected void rebalanceRemRight(AVLNode<K,V> node,
+                                     Stack<PathStep<K,V>> path ) {
+        AVLNode<K,V> leftChild = (AVLNode<K,V>) node.getRight();
+        switch(leftChild.getBalance()) {
+            case 'L':
+                this.rotateLeft1L(node, leftChild, path);
+                break;
+            case 'E':
+                this.rotateLeft1L(node, leftChild, path);
+                break;
+            case 'R':
+                this.rotateLeft2(node, leftChild, path);
+                break;
+        }
+    }
+
+    protected  void rebalanceRemLeft(AVLNode<K,V> node,
+                                     Stack<PathStep<K,V>> path ) {
+        AVLNode<K,V> rightChild = (AVLNode<K,V>) node.getRight();
+        switch(rightChild.getBalance()) {
+            case 'L':
+                this.rotateRight2(node, rightChild, path);
+                break;
+            case 'E':
+                this.rotateRight1R(node, rightChild, path);
+                break;
+            case 'R':
+                this.rotateRight1R(node, rightChild, path);
+                break;
+        }
+    }
+
     // Every ancestor of node is stored in the stack, which is not empty.
 // height( node.getLeft() ) - height( node.getRight() ) = 2.
     protected void rebalanceInsLeft( AVLNode<K,V> node,
@@ -201,9 +267,5 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
             this.reorganizeRem(path);
             return oldValue;
         }
-    }
-
-    public void reorganizeRem(Stack<PathStep<K,V>> path) {
-        //todo
     }
 }
