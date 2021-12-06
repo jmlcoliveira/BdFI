@@ -45,7 +45,7 @@ public class DatabaseClass implements Database {
     public DatabaseClass() {
         personByID = new SepChainHashTable<>();
         showsByID = new SepChainHashTable<>();
-        listOfShowsByRating = new BinarySearchTree<>();
+        listOfShowsByRating = new AVLTree<>();
         listOfShowsByTag = new SepChainHashTable<>();
         showsInProductionCounter = 0;
     }
