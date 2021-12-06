@@ -1,7 +1,8 @@
 package BdFI;
 
+import dataStructures.Comparator;
+
 import java.io.Serializable;
-import java.util.Comparator;
 
 public class ComparatorByShowName implements Comparator<Show>, Serializable {
 

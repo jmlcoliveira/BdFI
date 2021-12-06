@@ -1,7 +1,5 @@
 package dataStructures;
 
-import java.util.Comparator;
-
 public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E> {
 
     protected DoubleListNode<E> head;
