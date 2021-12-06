@@ -165,12 +165,12 @@ public class DatabaseClass implements Database {
     @Override
     public Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException {
-        OrderedList<Show> shows = listOfShowsByRating.find(rating);
-
-        if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
+              if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
         if (showsByID.isEmpty()) throw new NoShowsException();
         if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
         if (listOfShowsByRating.isEmpty()) throw new NoRatedShowsException();
+
+        OrderedList<Show> shows = listOfShowsByRating.find(rating);
         if (shows == null || shows.isEmpty()) throw new NoProductionsWithRatingException();
         return shows.iterator();
     }
