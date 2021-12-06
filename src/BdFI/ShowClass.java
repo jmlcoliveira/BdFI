@@ -53,6 +53,8 @@ public class ShowClass implements ShowPrivate {
      */
     private int currentRating;
 
+    private boolean isRated;
+
     /**
      * Number of reviews
      */
@@ -76,6 +78,7 @@ public class ShowClass implements ShowPrivate {
         this.title = title;
         currentRating = 0;
         reviewCount = 0;
+        isRated = false;
         participation = new DoubleList<>();
         tags = new DoubleList<>();
         inProduction = LocalDate.now().getYear() == year;
@@ -122,6 +125,7 @@ public class ShowClass implements ShowPrivate {
         if (inProduction)
             throw new ShowInProductionException();
         currentRating = updateReview(stars, reviewCount, currentRating);
+        isRated = true;
         reviewCount++;
     }
 
@@ -132,7 +136,7 @@ public class ShowClass implements ShowPrivate {
 
     @Override
     public boolean hasNoRatings() {
-        return currentRating == 0;
+        return !isRated;
     }
 
     @Override

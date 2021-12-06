@@ -12,6 +12,6 @@ public class ComparatorByShowName implements Comparator<Show>, Serializable {
 
     @Override
     public int compare(Show s1, Show s2) {
-        return s1.getTitle().compareTo(s2.getTitle());
+        return s1.getTitle().compareToIgnoreCase(s2.getTitle());
     }
 }

@@ -59,7 +59,7 @@ public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E
         while (node != null) {
             E currentElement = node.getElement();
 
-            if (currentElement.equals(element)) {
+            if (compare(currentElement, element) == 0) {
                 node.setElement(element);
                 return currentElement;
             }

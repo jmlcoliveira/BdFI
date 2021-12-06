@@ -91,13 +91,20 @@ public class DatabaseClass implements Database {
         if (!s.isInProduction())
             throw new ShowNotInProductionException();
         showsInProductionCounter--;
-        Iterator<Person> it = s.iteratorPersonsInShow();
-        while (it.hasNext()) {
-            PersonPrivate p = (PersonPrivate) it.next();
+        Iterator<Person> itP = s.iteratorPersonsInShow();
+        while (itP.hasNext()) {
+            PersonPrivate p = (PersonPrivate) itP.next();
             p.removeShow((ShowPrivate) s);
         }
         showsByID.remove(s.getShowID().toUpperCase());
-
+        if (listOfShowsByRating.find(s.getRating()) != null)
+            listOfShowsByRating.find(s.getRating()).remove(s);
+        Iterator<String> itTags = s.iteratorTags();
+        while (itTags.hasNext()) {
+            String tag = itTags.next().toUpperCase();
+            OrderedList<Show> l = listOfShowsByTag.find(tag);
+            l.remove(s);
+        }
     }
 
     @Override
@@ -105,12 +112,12 @@ public class DatabaseClass implements Database {
         ShowPrivate s = (ShowPrivate) getShow(showID);
         s.addTag(tag);
 
-        if (listOfShowsByTag.find(tag) == null) {
-            OrderedList<Show> shows = new OrderedDoubleList<>();
+        if (listOfShowsByTag.find(tag.toUpperCase()) == null) {
+            OrderedList<Show> shows = new OrderedDoubleList<>(new ComparatorByShowName());
             shows.insert(s);
-            listOfShowsByTag.insert(tag, shows);
+            listOfShowsByTag.insert(tag.toUpperCase(), shows);
         } else {
-            listOfShowsByTag.find(tag).insert(s);
+            listOfShowsByTag.find(tag.toUpperCase()).insert(s);
         }
     }
 
@@ -118,13 +125,19 @@ public class DatabaseClass implements Database {
     public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, ShowIdNotFoundException {
         if (review < 0 || review > 10) throw new InvalidShowRatingException();
         ShowPrivate s = showsByID.find(showID.toUpperCase());
-        if(s != null && s.isInProduction()) throw new ShowInProductionException();
-        if(s == null) throw new ShowIdNotFoundException();
+        if (s != null && s.isInProduction()) throw new ShowInProductionException();
+        if (s == null) throw new ShowIdNotFoundException();
 
 
         int oldRating = s.getRating();
         s.rate(review);
         int newRating = s.getRating();
+        if (newRating == 0) {
+            if (listOfShowsByRating.find(newRating) == null)
+                listOfShowsByRating.insert(newRating, new OrderedDoubleList<>(new ComparatorByShowName()));
+            listOfShowsByRating.find(newRating).insert(s);
+        }
+
         if (oldRating != newRating) {
             if (listOfShowsByRating.find(oldRating) != null)
                 listOfShowsByRating.find(oldRating).remove(s);
@@ -158,16 +171,16 @@ public class DatabaseClass implements Database {
         if (showsByID.isEmpty()) throw new NoShowsException();
         if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
         if (listOfShowsByRating.isEmpty()) throw new NoRatedShowsException();
-        if (shows == null) throw new NoProductionsWithRatingException();
+        if (shows == null || shows.isEmpty()) throw new NoProductionsWithRatingException();
         return shows.iterator();
     }
 
     public Iterator<Show> listTaggedShows(String tag) throws NoShowsException, NoTaggedProductionsException,
             NoShowsWithTagException {
         if (showsByID.isEmpty()) throw new NoShowsException();
-        if(listOfShowsByTag.isEmpty()) throw new NoTaggedProductionsException();
-        OrderedList<Show> shows = listOfShowsByTag.find(tag);
-        if(shows == null) throw new NoShowsWithTagException();
+        if (listOfShowsByTag.isEmpty()) throw new NoTaggedProductionsException();
+        OrderedList<Show> shows = listOfShowsByTag.find(tag.toUpperCase());
+        if (shows == null || shows.isEmpty()) throw new NoShowsWithTagException();
 
         return shows.iterator();
     }
