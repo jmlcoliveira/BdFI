@@ -105,12 +105,12 @@ public class DatabaseClass implements Database {
         ShowPrivate s = (ShowPrivate) getShow(showID);
         s.addTag(tag);
 
-        if (listOfShowsByTag.find(tag) == null) {
+        if (listOfShowsByTag.find(tag.toUpperCase()) == null) {
             OrderedList<Show> shows = new OrderedDoubleList<>();
             shows.insert(s);
-            listOfShowsByTag.insert(tag, shows);
+            listOfShowsByTag.insert(tag.toUpperCase(), shows);
         } else {
-            listOfShowsByTag.find(tag).insert(s);
+            listOfShowsByTag.find(tag.toUpperCase()).insert(s);
         }
     }
 
@@ -152,12 +152,13 @@ public class DatabaseClass implements Database {
     @Override
     public Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException {
-        OrderedList<Show> shows = listOfShowsByRating.find(rating);
 
         if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
         if (showsByID.isEmpty()) throw new NoShowsException();
         if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
         if (listOfShowsByRating.isEmpty()) throw new NoRatedShowsException();
+
+        OrderedList<Show> shows = listOfShowsByRating.find(rating);
         if (shows == null) throw new NoProductionsWithRatingException();
         return shows.iterator();
     }
@@ -166,7 +167,8 @@ public class DatabaseClass implements Database {
             NoShowsWithTagException {
         if (showsByID.isEmpty()) throw new NoShowsException();
         if(listOfShowsByTag.isEmpty()) throw new NoTaggedProductionsException();
-        OrderedList<Show> shows = listOfShowsByTag.find(tag);
+
+        OrderedList<Show> shows = listOfShowsByTag.find(tag.toUpperCase());
         if(shows == null) throw new NoShowsWithTagException();
 
         return shows.iterator();
