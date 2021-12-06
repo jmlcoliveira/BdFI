@@ -129,7 +129,7 @@ public class DatabaseClass implements Database {
             if (listOfShowsByRating.find(oldRating) != null)
                 listOfShowsByRating.find(oldRating).remove(s);
             if (listOfShowsByRating.find(newRating) == null)
-                listOfShowsByRating.insert(newRating, new OrderedDoubleList<>());
+                listOfShowsByRating.insert(newRating, new OrderedDoubleList<>(new ComparatorByShowName()));
             listOfShowsByRating.find(newRating).insert(s);
         }
     }

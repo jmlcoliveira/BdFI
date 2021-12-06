@@ -56,23 +56,32 @@ public class Tests {
 	 * Testa o comando property e properties, sem erros.
 	 */
 	@org.junit.Test
-    public void test04() { test("input4.txt","output4.txt"); }
+	public void test04() {
+		test("input4.txt", "output4.txt");
+	}
 
 	/**
 	 * Testa o comando property e properties, com erros.
 	 */
 	@org.junit.Test
-    public void test05() { test("input5.txt","output5.txt");  }
+	public void test05() {
+		test("input5.txt", "output5.txt");
+	}
+
+	@org.junit.Test
+	public void test06() {
+		test("input6.txt", "output6.txt");
+	}
 
 	private static final File BASE = new File("tests");
 
-    private PrintStream consoleStream;
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+	private PrintStream consoleStream;
+	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 
-    @Before
-    public void setup() {
-        consoleStream = System.out;
-        System.setOut(new PrintStream(outContent));
+	@Before
+	public void setup() {
+		consoleStream = System.out;
+		System.setOut(new PrintStream(outContent));
     }
 
     public void test(String input, String output) {

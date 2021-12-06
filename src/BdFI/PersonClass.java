@@ -109,7 +109,7 @@ public class PersonClass implements PersonPrivate {
 
     @Override
     public boolean hasParticipation() {
-        return showsOfPerson != null;
+        return showsOfPerson.size() != 0;
     }
 
     @Override

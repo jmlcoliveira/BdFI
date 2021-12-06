@@ -3,6 +3,8 @@ package dataStructures;
 import dataStructures.exceptions.EmptyDictionaryException;
 import dataStructures.exceptions.NoSuchElementException;
 
+import java.util.Comparator;
+
 public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements OrderedDictionary<K, V> {
 
     protected DoubleListNode<Entry<K, V>> head;
@@ -11,10 +13,20 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
 
     private int currentSize;
 
+    private final Comparator<K> comparator;
+
     public OrderedDoubleDictionary() {
         head = null;
         tail = null;
         currentSize = 0;
+        comparator = null;
+    }
+
+    public OrderedDoubleDictionary(Comparator<K> comparator) {
+        head = null;
+        tail = null;
+        currentSize = 0;
+        this.comparator = comparator;
     }
 
     @Override
@@ -35,7 +47,7 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
 
     private DoubleListNode<Entry<K, V>> findNode(K key) {
         DoubleListNode<Entry<K, V>> node = head;
-        while (node != null && node.getElement().getKey().compareTo(key) <= 0) {
+        while (node != null && compare(node.getElement().getKey(), key) <= 0) {
             K currentKey = node.getElement().getKey();
 
             if (currentKey.equals(key))
@@ -58,7 +70,7 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
                 ((EntryClass<K, V>) node.getElement()).setValue(value);
                 return oldValue;
             }
-            if (node.getElement().getKey().compareTo(key) > 0) {
+            if (compare(node.getElement().getKey(), key) > 0) {
                 next = node;
                 previous = node.getPrevious();
                 break;
@@ -132,6 +144,10 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
     @Override
     public Entry<K, V> maxEntry() throws EmptyDictionaryException {
         return tail.getElement();
+    }
+
+    private int compare(K k1, K k2) {
+        return comparator != null ? comparator.compare(k1, k2) : k1.compareTo(k2);
     }
 
     @Override

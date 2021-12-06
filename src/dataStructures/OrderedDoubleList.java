@@ -1,5 +1,7 @@
 package dataStructures;
 
+import java.util.Comparator;
+
 public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E> {
 
     protected DoubleListNode<E> head;
@@ -8,10 +10,20 @@ public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E
 
     private int currentSize;
 
+    private final Comparator<E> comparator;
+
     public OrderedDoubleList() {
         head = null;
         tail = null;
         currentSize = 0;
+        comparator = null;
+    }
+
+    public OrderedDoubleList(Comparator<E> comparator) {
+        head = null;
+        tail = null;
+        currentSize = 0;
+        this.comparator = comparator;
     }
 
     public boolean isEmpty() {
@@ -30,7 +42,7 @@ public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E
 
     private DoubleListNode<E> findNode(E element) {
         DoubleListNode<E> node = head;
-        while (node != null && node.getElement().compareTo(element) <= 0) {
+        while (node != null && compare(node.getElement(), element) <= 0) {
 
             if (node.getElement().equals(element))
                 return node;
@@ -51,7 +63,7 @@ public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E
                 node.setElement(element);
                 return currentElement;
             }
-            if (node.getElement().compareTo(element) > 0) {
+            if (compare(node.getElement(), element) > 0) {
                 next = node;
                 previous = node.getPrevious();
                 break;
@@ -121,6 +133,10 @@ public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E
         }
         currentSize--;
 
+    }
+
+    private int compare(E e1, E e2) {
+        return comparator != null ? comparator.compare(e1, e2) : e1.compareTo(e2);
     }
 
     public Iterator<E> iterator() {

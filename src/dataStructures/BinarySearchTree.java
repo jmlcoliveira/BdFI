@@ -3,6 +3,8 @@ package dataStructures;
 import dataStructures.exceptions.EmptyDictionaryException;
 import dataStructures.exceptions.NoSuchElementException;
 
+import java.util.Comparator;
+
 /**
  * BinarySearchTree implementation
  *
@@ -30,6 +32,8 @@ public class BinarySearchTree<K extends Comparable<K>, V>
      */
     protected int currentSize;
 
+    private final Comparator<K> comparator;
+
 
     /**
      * Tree Constructor - creates an empty tree.
@@ -37,6 +41,13 @@ public class BinarySearchTree<K extends Comparable<K>, V>
     public BinarySearchTree() {
         root = null;
         currentSize = 0;
+        comparator = null;
+    }
+
+    public BinarySearchTree(Comparator<K> comparator) {
+        root = null;
+        currentSize = 0;
+        this.comparator = comparator;
     }
 
     @Override
@@ -70,7 +81,7 @@ public class BinarySearchTree<K extends Comparable<K>, V>
         if (node == null)
             return null;
         else {
-            int compResult = key.compareTo(node.getKey());
+            int compResult = compare(key, node.getKey());
             if (compResult == 0)
                 return node;
             else if (compResult < 0)
@@ -138,7 +149,7 @@ public class BinarySearchTree<K extends Comparable<K>, V>
     protected BSTNode<K, V> findNode(K key, PathStep<K, V> lastStep) {
         BSTNode<K, V> node = root;
         while (node != null) {
-            int compResult = key.compareTo(node.getKey());
+            int compResult = compare(key, node.getKey());
             if (compResult == 0)
                 return node;
             else if (compResult < 0) {
@@ -233,6 +244,10 @@ public class BinarySearchTree<K extends Comparable<K>, V>
             currentSize--;
             return oldValue;
         }
+    }
+
+    private int compare(K k1, K k2) {
+        return comparator != null ? comparator.compare(k1, k2) : k1.compareTo(k2);
     }
 
     /**
