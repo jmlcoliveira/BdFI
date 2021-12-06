@@ -91,6 +91,7 @@ public class DatabaseClass implements Database {
         if (!s.isInProduction())
             throw new ShowNotInProductionException();
         showsInProductionCounter--;
+
         Iterator<Person> itP = s.iteratorPersonsInShow();
         while (itP.hasNext()) {
             PersonPrivate p = (PersonPrivate) itP.next();
@@ -99,11 +100,15 @@ public class DatabaseClass implements Database {
         showsByID.remove(s.getShowID().toUpperCase());
         if (listOfShowsByRating.find(s.getRating()) != null)
             listOfShowsByRating.find(s.getRating()).remove(s);
+
+
         Iterator<String> itTags = s.iteratorTags();
         while (itTags.hasNext()) {
             String tag = itTags.next().toUpperCase();
             OrderedList<Show> l = listOfShowsByTag.find(tag);
             l.remove(s);
+            if(l.isEmpty())
+                listOfShowsByTag.remove(tag);
         }
     }
 
