@@ -1,5 +1,7 @@
 package dataStructures;
 
+import dataStructures.exceptions.EmptyQueueException;
+
 import java.io.Serializable;
 
 /**

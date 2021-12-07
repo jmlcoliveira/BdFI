@@ -1,6 +1,6 @@
 package BdFI;
 
-import dataStructures.BinarySearchTree;
+import dataStructures.AVLTree;
 import dataStructures.Iterator;
 import dataStructures.OrderedDictionary;
 
@@ -64,7 +64,7 @@ public class PersonClass implements PersonPrivate {
         this.telephone = telephone;
         this.gender = gender;
         this.name = name;
-        showsOfPerson = new BinarySearchTree<>();
+        showsOfPerson = new AVLTree<>();
     }
 
     @Override
@@ -98,11 +98,13 @@ public class PersonClass implements PersonPrivate {
     }
 
     @Override
+    //O(log(n))
     public void addShow(ShowPrivate show) {
         showsOfPerson.insert(show.getShowID(), show);
     }
 
     @Override
+    //O(log(n))
     public void removeShow(ShowPrivate show) {
         showsOfPerson.remove(show.getShowID());
     }
@@ -113,6 +115,7 @@ public class PersonClass implements PersonPrivate {
     }
 
     @Override
+    //O(1)
     public Iterator<Show> showIterator() {
         return showsOfPerson.iteratorValues();
     }

@@ -83,7 +83,7 @@ public class ShowClass implements ShowPrivate {
         tags = new DoubleList<>();
         inProduction = LocalDate.now().getYear() == year;
 
-        personsInShow = new BinarySearchTree<>();
+        personsInShow = new AVLTree<>();
     }
 
     @Override
@@ -107,11 +107,13 @@ public class ShowClass implements ShowPrivate {
     }
 
     //requires stars, count, currentReview >= 0
+    //O(1)
     private static int updateReview(int stars, int count, int currentReview) {
         return Math.round((stars + count * currentReview) / ((float) (count + 1)));
     }
 
     @Override
+    //O(log(n))
     public void addParticipation(Participation part) {
         participation.addLast(part);
         Person p = part.getPerson();
@@ -119,6 +121,7 @@ public class ShowClass implements ShowPrivate {
     }
 
     @Override
+    //O(1)
     public void rate(int stars) throws InvalidShowRatingException, ShowInProductionException {
         if (stars < 0 || stars > 10)
             throw new InvalidShowRatingException();
@@ -140,6 +143,7 @@ public class ShowClass implements ShowPrivate {
     }
 
     @Override
+    //O(1)
     public void premiere() throws ShowNotInProductionException {
         if (!isInProduction())
             throw new ShowNotInProductionException();
@@ -147,27 +151,32 @@ public class ShowClass implements ShowPrivate {
     }
 
     @Override
+    //O(1)
     public void addTag(String tag) {
         tags.addLast(tag);
     }
 
     @Override
+    //O(1)
     public Iterator<String> iteratorTags() {
         return tags.iterator();
     }
 
     @Override
+    //O(1)
     public Iterator<Participation> iteratorParticipation() throws ShowHasNoParticipationsException {
         if (participation.isEmpty()) throw new ShowHasNoParticipationsException();
         return participation.iterator();
     }
 
     @Override
+    //O(1)
     public Iterator<Person> iteratorPersonsInShow() {
         return personsInShow.iteratorValues();
     }
 
     @Override
+    //O(1)
     public int compareTo(Show o) {
         return showID.compareTo(o.getShowID());
     }

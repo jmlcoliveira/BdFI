@@ -1,14 +1,15 @@
 package dataStructures;
 
+import dataStructures.exceptions.EmptyQueueException;
+
 /**
- * Queue List Implementation 
+ * Queue List Implementation
+ *
+ * @param <E> Generic Element
  * @author AED  Team
  * @version 1.0
- * @param <E> Generic Element
- * 
  */
-public class QueueInList<E> implements Queue<E>
-{ 
+public class QueueInList<E> implements Queue<E> {
 
 	/**
 	 * Serial Version UID of the Class
@@ -52,13 +53,10 @@ public class QueueInList<E> implements Queue<E>
 
 
     @Override
-    public E dequeue( ) throws EmptyQueueException   
-    {
-        if ( list.isEmpty() )
+    public E dequeue() throws EmptyQueueException {
+        if (list.isEmpty())
             throw new EmptyQueueException();
 
         return list.removeFirst();
     }
-
-
 }

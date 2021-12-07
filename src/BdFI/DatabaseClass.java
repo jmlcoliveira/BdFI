@@ -8,8 +8,6 @@ import BdFI.person.exceptions.PersonIdNotFoundException;
 import BdFI.show.exceptions.*;
 import dataStructures.*;
 
-import java.time.Year;
-
 /**
  * Database class which communicates with the Main class and stores information of all shows and
  * persons.
@@ -42,6 +40,7 @@ public class DatabaseClass implements Database {
     /**
      * DatabaseClass constructor
      */
+    //O(1)
     public DatabaseClass() {
         personByID = new SepChainHashTable<>();
         showsByID = new SepChainHashTable<>();
@@ -51,6 +50,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //0(1)
     public void addPerson(String personID, int year, String email, String telephone, String gender, String name) throws InvalidYearException, PersonIdAlreadyExistsException {
         if (year <= 0) throw new InvalidYearException();
         if (personByID.find(personID.toUpperCase()) != null) throw new PersonIdAlreadyExistsException();
@@ -59,6 +59,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(1)
     public void addShow(String showID, int year, String title) throws InvalidShowYearException, ShowIDExistsException {
         if (year <= 0) throw new InvalidShowYearException();
         if (showsByID.find(showID.toUpperCase()) != null) throw new ShowIDExistsException();
@@ -66,10 +67,11 @@ public class DatabaseClass implements Database {
         ShowPrivate show = new ShowClass(showID, year, title);
         showsByID.insert(showID.toUpperCase(), show);
 
-        if(year == Year.now().getValue()) showsInProductionCounter++;
+        if (show.isInProduction()) showsInProductionCounter++;
     }
 
     @Override
+    //O(log(n))
     public void addParticipation(String personID, String showID, String description) throws PersonIdNotFoundException, ShowIdNotFoundException {
         PersonPrivate p = (PersonPrivate) getPerson(personID);
         ShowPrivate s = (ShowPrivate) getShow(showID);
@@ -79,6 +81,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(1)
     public void premiereShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
         ShowPrivate s = (ShowPrivate) getShow(showID);
         s.premiere();
@@ -86,11 +89,16 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(n)
     public void removeShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
         Show s = getShow(showID);
         if (!s.isInProduction())
             throw new ShowNotInProductionException();
         showsInProductionCounter--;
+
+        //5 shows
+        //3 pessoas tem o show a ser removido
+        //o show tem 7 tags
 
         Iterator<Person> itP = s.iteratorPersonsInShow();
         while (itP.hasNext()) {
@@ -113,6 +121,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(n)
     public void tagShow(String showID, String tag) throws ShowIdNotFoundException {
         ShowPrivate s = (ShowPrivate) getShow(showID);
         s.addTag(tag);
@@ -127,6 +136,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(n)
     public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, ShowIdNotFoundException {
         if (review < 0 || review > 10) throw new InvalidShowRatingException();
         ShowPrivate s = showsByID.find(showID.toUpperCase());
@@ -153,6 +163,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(1)
     public Iterator<Participation> iteratorParticipationByShow(String showID) throws ShowIdNotFoundException, ShowHasNoParticipationsException {
         Show s = getShow(showID);
         if (s == null) throw new ShowIdNotFoundException();
@@ -160,6 +171,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(1)
     public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
         if(showsByID.isEmpty()) throw new NoShowsException();
         if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
@@ -168,9 +180,10 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(1) because is an AVL with a max of 11 elements
     public Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException {
-              if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
+        if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
         if (showsByID.isEmpty()) throw new NoShowsException();
         if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
         if (listOfShowsByRating.isEmpty()) throw new NoRatedShowsException();
@@ -180,6 +193,8 @@ public class DatabaseClass implements Database {
         return shows.iterator();
     }
 
+    @Override
+    //O(1)
     public Iterator<Show> listTaggedShows(String tag) throws NoShowsException, NoTaggedProductionsException,
             NoShowsWithTagException {
         if (showsByID.isEmpty()) throw new NoShowsException();
@@ -191,6 +206,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(1)
     public Iterator<Show> showsByPersonID(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
         Person p = getPerson(personID);
         if (!p.hasParticipation()) throw new PersonHasNoShowsException();
@@ -198,6 +214,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(1)
     public Show getShow(String showID) throws ShowIdNotFoundException {
         Show s = showsByID.find(showID.toUpperCase());
         if (s == null) throw new ShowIdNotFoundException();
@@ -205,6 +222,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
+    //O(1)
     public Person getPerson(String personID) throws PersonIdNotFoundException {
         Person p = personByID.find(personID.toUpperCase());
         if (p == null) throw new PersonIdNotFoundException();
