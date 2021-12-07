@@ -117,10 +117,10 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
         }
     }
 
-    protected  void rebalanceRemLeft(AVLNode<K,V> node,
-                                     Stack<PathStep<K,V>> path ) {
-        AVLNode<K,V> rightChild = (AVLNode<K,V>) node.getRight();
-        switch(rightChild.getBalance()) {
+    protected void rebalanceRemLeft(AVLNode<K, V> node,
+                                    Stack<PathStep<K, V>> path) {
+        AVLNode<K, V> rightChild = (AVLNode<K, V>) node.getRight();
+        switch (rightChild.getBalance()) {
             case 'L':
                 this.rotateRight2(node, rightChild, path);
                 break;
@@ -154,8 +154,8 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
 // when the balance factor of its leftChild is 'L'.
 // Every ancestor of theRoot is stored in the stack, which is not empty.
 // height( node.getLeft() ) - height( node.getRight() ) = 2.
-    protected void rotateLeft1L( AVLNode<K,V> theRoot, AVLNode<K,V> leftChild,
-                                 Stack<PathStep<K,V>> path ) {
+    protected void rotateLeft1L(AVLNode<K, V> theRoot, AVLNode<K, V> leftChild,
+                                Stack<PathStep<K, V>> path) {
         theRoot.setBalance('E');
         leftChild.setBalance('E');
         this.rotateLeft(theRoot, leftChild, path);
@@ -164,11 +164,12 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
     // Performs a double left rotation rooted at theRoot.
 // Every ancestor of theRoot is stored in the stack, which is not empty.
 // height( node.getLeft() ) - height( node.getRight() ) = 2.
-    protected void rotateLeft2( AVLNode<K,V> theRoot, AVLNode<K,V> leftChild,
-                                Stack<PathStep<K,V>> path ) {
-        AVLNode<K,V> rightGrandchild = (AVLNode<K,V>) leftChild.getRight();
-        switch ( rightGrandchild.getBalance() ) {
-            case 'L': leftChild.setBalance('E');
+    protected void rotateLeft2(AVLNode<K, V> theRoot, AVLNode<K, V> leftChild,
+                               Stack<PathStep<K, V>> path) {
+        AVLNode<K, V> rightGrandchild = (AVLNode<K, V>) leftChild.getRight();
+        switch (rightGrandchild.getBalance()) {
+            case 'L':
+                leftChild.setBalance('E');
                 theRoot.setBalance('R'); break;
             case 'E': leftChild.setBalance('E');
                 theRoot.setBalance('E'); break;
@@ -200,8 +201,8 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
 // when the balance factor of its rightChild is 'R'.
 // Every ancestor of theRoot is stored in the stack, which is not empty.
 // height( node.getRight() ) - height( node.getLeft() ) = 2.
-    protected void rotateRight1R( AVLNode<K,V> theRoot,
-                                  AVLNode<K,V> rightChild, Stack<PathStep<K,V>> path ) {
+    protected void rotateRight1R(AVLNode<K, V> theRoot,
+                                 AVLNode<K, V> rightChild, Stack<PathStep<K, V>> path) {
         theRoot.setBalance('E');
         rightChild.setBalance('E');
         this.rotateRight(theRoot, rightChild, path);
@@ -211,11 +212,12 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
     // Performs a double right rotation rooted at theRoot.
 // Every ancestor of theRoot is stored in the stack, which is not empty.
 // height( node.getRight() ) - height( node.getLeft() ) = 2.
-    protected void rotateRight2( AVLNode<K,V> theRoot,
-                                 AVLNode<K,V> rightChild, Stack<PathStep<K,V>> path ) {
-        AVLNode<K,V> leftGrandchild = (AVLNode<K,V>) rightChild.getLeft();
-        switch ( leftGrandchild.getBalance() ) {
-            case 'L': theRoot.setBalance('E');
+    protected void rotateRight2(AVLNode<K, V> theRoot,
+                                AVLNode<K, V> rightChild, Stack<PathStep<K, V>> path) {
+        AVLNode<K, V> leftGrandchild = (AVLNode<K, V>) rightChild.getLeft();
+        switch (leftGrandchild.getBalance()) {
+            case 'L':
+                theRoot.setBalance('E');
                 rightChild.setBalance('R'); break;
             case 'E': theRoot.setBalance('E');
                 rightChild.setBalance('E'); break;

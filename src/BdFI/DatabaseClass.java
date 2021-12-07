@@ -96,10 +96,6 @@ public class DatabaseClass implements Database {
             throw new ShowNotInProductionException();
         showsInProductionCounter--;
 
-        //5 shows
-        //3 pessoas tem o show a ser removido
-        //o show tem 7 tags
-
         Iterator<Person> itP = s.iteratorPersonsInShow();
         while (itP.hasNext()) {
             PersonPrivate p = (PersonPrivate) itP.next();

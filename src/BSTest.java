@@ -1,4 +1,7 @@
-import dataStructures.*;
+import dataStructures.AVLTree;
+import dataStructures.Entry;
+import dataStructures.Iterator;
+import dataStructures.OrderedDictionary;
 import org.junit.Test;
 
     public class BSTest {
@@ -21,69 +24,41 @@ import org.junit.Test;
 
         }
 
-        public void remove1NodeTest() {
-            OrderedDictionary<Integer, Integer> dic = new AVLTree<>();
+        @Test
+        public void balancedRemoveLeft() {
+            AVLTree<Integer, Integer> dic = new AVLTree<>();
+            dic.insert(20, 20);
             dic.insert(15, 15);
-            dic.insert(8, 8);
-            dic.insert(28, 28);
-            dic.insert(16, 16);
-            dic.insert(32, 32);
-            dic.insert(45, 45);
-
-            Iterator<Entry<Integer, String>> it = ((AVLTree) dic).breadthIterator();
-
-            assert (it.next().getValue().equals(15));
-            assert (it.next().getValue().equals(8));
-            assert (it.next().getValue().equals(28));
-            assert (it.next().getValue().equals(4));
-            assert (it.next().getValue().equals(16));
-            assert (it.next().getValue().equals(32));
-            assert (it.next().getValue().equals(45));
-
-            dic.remove(8);
-
-            it = ((AVLTree) dic).breadthIterator();
-
-            assert (it.next().getValue().equals(15));
-            assert (it.next().getValue().equals(4));
-            assert (it.next().getValue().equals(28));
-            assert (it.next().getValue().equals(16));
-            assert (it.next().getValue().equals(32));
-            assert (it.next().getValue().equals(45));
-
-        }
-
-        public void remove2NodeTest() {
-            OrderedDictionary<Integer, Integer> dic = new AVLTree<>();
-            dic.insert(15, 15);
-            dic.insert(8, 8);
-            dic.insert(28, 28);
-            dic.insert(16, 16);
-            dic.insert(32, 32);
+            dic.insert(25, 25);
+            dic.insert(10, 10);
+            dic.insert(17, 17);
+            dic.insert(23, 23);
             dic.insert(30, 30);
-            dic.insert(45, 45);
+            dic.insert(9, 9);
+            dic.insert(11, 11);
+            dic.insert(16, 16);
+            dic.insert(18, 18);
+            dic.insert(21, 21);
+            dic.insert(24, 24);
+            dic.insert(26, 26);
+            dic.insert(31, 31);
 
-            Iterator<Entry<Integer, String>> it = ((AVLTree) dic).breadthIterator();
+            dic.remove(15);
 
-            assert (it.next().getValue().equals(15));
-            assert (it.next().getValue().equals(8));
-            assert (it.next().getValue().equals(28));
-            assert (it.next().getValue().equals(4));
+            Iterator<Entry<Integer, Integer>> it = dic.breadthIterator();
+            assert (it.next().getValue().equals(20));
             assert (it.next().getValue().equals(16));
-            assert (it.next().getValue().equals(32));
+            assert (it.next().getValue().equals(25));
+            assert (it.next().getValue().equals(10));
+            assert (it.next().getValue().equals(17));
+            assert (it.next().getValue().equals(23));
             assert (it.next().getValue().equals(30));
-            assert (it.next().getValue().equals(45));
-
-            dic.remove(28);
-
-            it = ((AVLTree) dic).breadthIterator();
-
-            assert (it.next().getValue().equals(15));
-            assert (it.next().getValue().equals(8));
-            assert (it.next().getValue().equals(30));
-            assert (it.next().getValue().equals(4));
-            assert (it.next().getValue().equals(16));
-            assert (it.next().getValue().equals(32));
-            assert (it.next().getValue().equals(45));
+            assert (it.next().getValue().equals(9));
+            assert (it.next().getValue().equals(11));
+            assert (it.next().getValue().equals(18));
+            assert (it.next().getValue().equals(21));
+            assert (it.next().getValue().equals(24));
+            assert (it.next().getValue().equals(26));
+            assert (it.next().getValue().equals(31));
         }
     }
