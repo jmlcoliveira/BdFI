@@ -67,11 +67,11 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
         }
     }
 
-    public void reorganizeRem(Stack<PathStep<K,V>> path) {
+    private void reorganizeRem(Stack<PathStep<K, V>> path) {
         boolean shrunk = true;
         PathStep<K, V> lastStep = path.pop();
         AVLNode<K, V> parent = (AVLNode<K, V>) lastStep.parent;
-        while(shrunk && parent != null) {
+        while (shrunk && parent != null) {
             if (lastStep.isLeftChild) {             // parent's left subtree has shrunk.
                 switch (parent.getBalance()) {
                     case 'L':

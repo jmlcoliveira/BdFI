@@ -83,7 +83,7 @@ public class ShowClass implements ShowPrivate {
         tags = new DoubleList<>();
         inProduction = LocalDate.now().getYear() == year;
 
-        personsInShow = new AVLTree<>();
+        personsInShow = new BinarySearchTree<>();
     }
 
     @Override
