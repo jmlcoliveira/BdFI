@@ -98,6 +98,8 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
                         parent.setBalance('E');
                         break;
                 }
+            lastStep = path.pop();
+            parent = (AVLNode<K, V>) lastStep.parent;
         }
     }
 
@@ -109,7 +111,7 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
                 this.rotateLeft1L(node, leftChild, path);
                 break;
             case 'E':
-                this.rotateLeft1L(node, leftChild, path);
+                this.rotateLeft1E(node, leftChild, path);
                 break;
             case 'R':
                 this.rotateLeft2(node, leftChild, path);
@@ -125,7 +127,7 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
                 this.rotateRight2(node, rightChild, path);
                 break;
             case 'E':
-                this.rotateRight1R(node, rightChild, path);
+                this.rotateRight1E(node, rightChild, path);
                 break;
             case 'R':
                 this.rotateRight1R(node, rightChild, path);
@@ -160,6 +162,24 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
         leftChild.setBalance('E');
         this.rotateLeft(theRoot, leftChild, path);
     }
+
+    /**
+     * Performs a single left rotation rooted at theRoot,
+     * when the balance factor of its leftChild is 'E'.
+     * Every ancestor of theRoot is stored in the stack, which is not empty.
+     * height( node.getLeft() ) - height( node.getRight() ) = 2.
+     *
+     * @param theRoot   - root of the rotation
+     * @param leftChild - Left child of theRoot
+     * @param path      - Stack of PathStep objects containing all ancestors of theRoot
+     */
+    protected void rotateLeft1E(AVLNode<K, V> theRoot, AVLNode<K, V> leftChild,
+                                Stack<PathStep<K, V>> path) {
+        theRoot.setBalance('L');
+        leftChild.setBalance('R');
+        this.rotateLeft(theRoot, leftChild, path);
+    }
+
 
     // Performs a double left rotation rooted at theRoot.
 // Every ancestor of theRoot is stored in the stack, which is not empty.
@@ -205,6 +225,23 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
                                  AVLNode<K, V> rightChild, Stack<PathStep<K, V>> path) {
         theRoot.setBalance('E');
         rightChild.setBalance('E');
+        this.rotateRight(theRoot, rightChild, path);
+    }
+
+    /**
+     * Performs a single right rotation rooted at theRoot,
+     * when the balance factor of its rightChild is 'E'.
+     * Every ancestor of theRoot is stored in the stack, which is not empty.
+     * height( node.getRight() ) - height( node.getLeft() ) = 2.
+     *
+     * @param theRoot    - root of the rotation
+     * @param rightChild - Right child of theRoot
+     * @param path       - Stack of PathStep objects containing all ancestors of theRoot
+     */
+    protected void rotateRight1E(AVLNode<K, V> theRoot,
+                                 AVLNode<K, V> rightChild, Stack<PathStep<K, V>> path) {
+        theRoot.setBalance('R');
+        rightChild.setBalance('L');
         this.rotateRight(theRoot, rightChild, path);
     }
 
