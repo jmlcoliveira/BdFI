@@ -79,6 +79,7 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
                         break;
                     case 'E':
                         parent.setBalance('R');
+                        shrunk = false;
                         break;
                     case 'R':
                         this.rebalanceRemLeft(parent, path);
@@ -90,9 +91,11 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
                 switch (parent.getBalance()) {
                     case 'L':
                         this.rebalanceRemRight(parent, path);
+                        shrunk = false;
                         break;
                     case 'E':
-                        parent.setBalance('R');
+                        parent.setBalance('L');
+                        shrunk = false;
                         break;
                     case 'R':
                         parent.setBalance('E');

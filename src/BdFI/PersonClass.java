@@ -1,5 +1,6 @@
 package BdFI;
 
+import dataStructures.AVLTree;
 import dataStructures.BinarySearchTree;
 import dataStructures.Iterator;
 import dataStructures.OrderedDictionary;
@@ -64,7 +65,7 @@ public class PersonClass implements PersonPrivate {
         this.telephone = telephone;
         this.gender = gender;
         this.name = name;
-        showsOfPerson = new BinarySearchTree<>();
+        showsOfPerson = new AVLTree<>();
     }
 
     @Override
