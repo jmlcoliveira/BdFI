@@ -246,7 +246,7 @@ public class BinarySearchTree<K extends Comparable<K>, V>
         }
     }
 
-    private int compare(K k1, K k2) {
+    protected int compare(K k1, K k2) {
         return comparator != null ? comparator.compare(k1, k2) : k1.compareTo(k2);
     }
 

@@ -20,7 +20,7 @@ public class AdvancedBSTTree<K extends Comparable<K>, V>
         BSTNode<K,V> node = root;
         while ( node != null )
         {
-            int compResult = key.compareTo( node.getKey() );
+            int compResult = compare(key, node.getKey());
             if ( compResult == 0 )
                 return node;
             else if ( compResult < 0 )

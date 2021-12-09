@@ -1,21 +1,20 @@
 import dataStructures.AVLTree;
 import dataStructures.Entry;
 import dataStructures.Iterator;
-import dataStructures.OrderedDictionary;
 import org.junit.Test;
 
     public class BSTest {
 
         @Test
         public void insertTest() {
-            OrderedDictionary<Integer, String> dic = new AVLTree<>();
+            AVLTree<Integer, String> dic = new AVLTree<>();
             dic.insert(5, "a");
             dic.insert(3, "b");
             dic.insert(7, "c");
             dic.insert(10, "d");
             dic.insert(4, "e");
 
-            Iterator<Entry<Integer, String>> it = ((AVLTree) dic).breadthIterator();
+            Iterator<Entry<Integer, String>> it = dic.breadthIterator();
             assert (it.next().getValue().equals("a"));
             assert (it.next().getValue().equals("b"));
             assert (it.next().getValue().equals("c"));

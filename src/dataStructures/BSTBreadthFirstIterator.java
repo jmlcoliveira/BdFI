@@ -30,7 +30,6 @@ public class BSTBreadthFirstIterator<K extends Comparable<K>, V> implements Iter
 
     @Override
     public void rewind() {
-        BSTNode<K,V> node = root;
         queue.enqueue(root);
     }
 }
