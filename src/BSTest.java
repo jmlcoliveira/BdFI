@@ -143,4 +143,138 @@ import org.junit.Test;
 
         }
 
+        @Test
+        public void balanceRemoveTest01() {
+            AVLTree<Integer, Integer> dic = new AVLTree<>();
+            dic.insert(14, 14);
+            dic.insert(8, 8);
+            dic.insert(21, 21);
+            dic.insert(1, 1);
+            dic.insert(16, 16);
+            dic.insert(30, 30);
+            dic.insert(19, 19);
+            dic.insert(23, 23);
+
+            dic.remove(8);
+
+            Iterator<Entry<Integer, Integer>> it = dic.breadthIterator();
+
+            assert (it.next().getValue().equals(21));
+            assert (it.next().getValue().equals(14));
+            assert (it.next().getValue().equals(30));
+            assert (it.next().getValue().equals(1));
+            assert (it.next().getValue().equals(16));
+            assert (it.next().getValue().equals(23));
+            assert (it.next().getValue().equals(19));
+        }
+
+        @Test
+        public void balanceRemoveTest02() {
+            AVLTree<Integer, Integer> dic = new AVLTree<>();
+            dic.insert(20, 20);
+            dic.insert(15, 15);
+            dic.insert(25, 25);
+            dic.insert(10, 10);
+            dic.insert(17, 17);
+            dic.insert(22, 22);
+            dic.insert(30, 30);
+            dic.insert(16, 16);
+            dic.insert(23, 23);
+            dic.insert(27, 27);
+
+            dic.remove(25);
+            Iterator<Entry<Integer, Integer>> it = dic.breadthIterator();
+
+            assert (it.next().getValue().equals(20));
+            assert (it.next().getValue().equals(15));
+            assert (it.next().getValue().equals(27));
+            assert (it.next().getValue().equals(10));
+            assert (it.next().getValue().equals(17));
+            assert (it.next().getValue().equals(22));
+            assert (it.next().getValue().equals(30));
+            assert (it.next().getValue().equals(16));
+        }
+
+        @Test
+        public void balanceRemoveTest04() {
+            AVLTree<Integer, Integer> dic = new AVLTree<>();
+            dic.insert(20, 20);
+            dic.insert(15, 15);
+            dic.insert(25, 25);
+            dic.insert(10, 10);
+            dic.insert(17, 17);
+            dic.insert(22, 22);
+            dic.insert(30, 30);
+            dic.insert(12, 12);
+
+            dic.remove(17);
+
+            Iterator<Entry<Integer, Integer>> it = dic.breadthIterator();
+
+            assert (it.next().getValue().equals(20));
+            assert (it.next().getValue().equals(12));
+            assert (it.next().getValue().equals(25));
+            assert (it.next().getValue().equals(10));
+            assert (it.next().getValue().equals(15));
+            assert (it.next().getValue().equals(22));
+            assert (it.next().getValue().equals(30));
+        }
+
+        @Test
+        public void balanceRemoveTest05() {
+            AVLTree<Integer, Integer> dic = new AVLTree<>();
+            dic.insert(20, 20);
+            dic.insert(15, 15);
+            dic.insert(25, 25);
+            dic.insert(10, 10);
+            dic.insert(17, 17);
+            dic.insert(22, 22);
+            dic.insert(30, 30);
+            dic.insert(27, 27);
+
+            dic.remove(22);
+
+            Iterator<Entry<Integer, Integer>> it = dic.breadthIterator();
+
+            assert (it.next().getValue().equals(20));
+            assert (it.next().getValue().equals(15));
+            assert (it.next().getValue().equals(27));
+            assert (it.next().getValue().equals(10));
+            assert (it.next().getValue().equals(17));
+            assert (it.next().getValue().equals(25));
+            assert (it.next().getValue().equals(30));
+        }
+
+        @Test
+        public void balanceMultipleRemovesTest() {
+            AVLTree<Integer, Integer> dic = new AVLTree<>();
+            dic.insert(50, 50);
+            dic.insert(40, 40);
+            dic.insert(60, 60);
+            dic.insert(30, 30);
+            dic.insert(45, 45);
+            dic.insert(55, 55);
+            dic.insert(70, 70);
+            dic.insert(35, 35);
+            dic.insert(54, 54);
+            dic.insert(56, 56);
+            dic.insert(80, 80);
+
+            dic.remove(45);
+            dic.remove(56);
+            dic.remove(80);
+
+            Iterator<Entry<Integer, Integer>> it = dic.breadthIterator();
+
+            assert (it.next().getValue().equals(50));
+            assert (it.next().getValue().equals(35));
+            assert (it.next().getValue().equals(60));
+            assert (it.next().getValue().equals(30));
+            assert (it.next().getValue().equals(40));
+            assert (it.next().getValue().equals(55));
+            assert (it.next().getValue().equals(70));
+            assert (it.next().getValue().equals(54));
+
+        }
+
     }

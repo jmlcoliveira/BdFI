@@ -108,7 +108,7 @@ public class AVLTree<K extends Comparable<K>,V> extends AdvancedBSTTree<K,V> {
 
     protected void rebalanceRemRight(AVLNode<K,V> node,
                                      Stack<PathStep<K,V>> path ) {
-        AVLNode<K,V> leftChild = (AVLNode<K,V>) node.getRight();
+        AVLNode<K,V> leftChild = (AVLNode<K,V>) node.getLeft();
         switch(leftChild.getBalance()) {
             case 'L':
                 this.rotateLeft1L(node, leftChild, path);
