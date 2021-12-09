@@ -23,17 +23,36 @@ public class DatabaseClass implements Database {
     static final long serialVersionUID = 0L;
 
     /**
-     * the Person in the Database
+     * Dictionary containing every Person
+     * the Key is the PersonID
+     * the Value is the Person
      */
     private final Dictionary<String, PersonPrivate> personByID;
 
     /**
-     * the Show in the Show
+     * Dictionary containing every Show
+     * the Key is the ShowID
+     * the Value is the Show
      */
     private final Dictionary<String, ShowPrivate> showsByID;
+
+    /**
+     * Ordered Dictionary containing Shows with a certain Rating
+     * the Key is the rating
+     * the Value is an orderedList of Shows, ordered by name
+     */
     private final OrderedDictionary<Integer, OrderedList<Show>> listOfShowsByRating;
+
+    /**
+     * Ordered Dictionary containing Shows with a certain Tag
+     * the Key is the Tag
+     * the Value is an orderedList of Shows, ordered by name
+     */
     private final Dictionary<String, OrderedList<Show>> listOfShowsByTag;
 
+    /**
+     * number of Shows in production
+     */
     private int showsInProductionCounter;
 
 

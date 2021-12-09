@@ -52,5 +52,10 @@ public interface Person {
      */
     boolean hasParticipation();
 
+    /**
+     * Returns an Iterator of every Show the Person participated in
+     *
+     * @return Iterator of Shows
+     */
     Iterator<Show> showIterator();
 }
