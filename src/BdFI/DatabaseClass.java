@@ -41,7 +41,8 @@ public class DatabaseClass implements Database {
      * the Key is the rating
      * the Value is an orderedList of Shows, ordered by name
      */
-    private final OrderedDictionary<Integer, OrderedList<Show>> listOfShowsByRating;
+    private final OrderedList<Show>[] listOfShowsByRating;
+    private int ratedShowsCounter;
 
     /**
      * Ordered Dictionary containing Shows with a certain Tag
@@ -60,10 +61,17 @@ public class DatabaseClass implements Database {
      * DatabaseClass constructor
      */
     //O(1)
+    @SuppressWarnings("unchecked")
     public DatabaseClass() {
         personByID = new SepChainHashTable<>();
         showsByID = new SepChainHashTable<>();
-        listOfShowsByRating = new AVLTree<>();
+
+        listOfShowsByRating = new OrderedList[11];
+        Comparator<Show> c = new ComparatorByShowName();
+        for (int i = 0; i < 11; i++)
+            listOfShowsByRating[i] = new OrderedDoubleList<>(c);
+
+        ratedShowsCounter = 0;
         listOfShowsByTag = new SepChainHashTable<>();
         showsInProductionCounter = 0;
     }
@@ -72,7 +80,8 @@ public class DatabaseClass implements Database {
     //0(1)
     public void addPerson(String personID, int year, String email, String telephone, String gender, String name) throws InvalidYearException, PersonIdAlreadyExistsException {
         if (year <= 0) throw new InvalidYearException();
-        if (personByID.find(personID.toUpperCase()) != null) throw new PersonIdAlreadyExistsException();
+        if (personByID.find(personID.toUpperCase()) != null)
+            throw new PersonIdAlreadyExistsException();
 
         personByID.insert(personID.toUpperCase(), new PersonClass(personID, year, email, telephone, gender, name));
     }
@@ -121,16 +130,15 @@ public class DatabaseClass implements Database {
             p.removeShow((ShowPrivate) s);
         }
         showsByID.remove(s.getShowID().toUpperCase());
-        if (listOfShowsByRating.find(s.getRating()) != null)
-            listOfShowsByRating.find(s.getRating()).remove(s);
-
+        if (listOfShowsByRating[s.getRating()].remove(s) != null)
+            ratedShowsCounter--;
 
         Iterator<String> itTags = s.iteratorTags();
         while (itTags.hasNext()) {
             String tag = itTags.next().toUpperCase();
             OrderedList<Show> l = listOfShowsByTag.find(tag);
             l.remove(s);
-            if(l.isEmpty())
+            if (l.isEmpty())
                 listOfShowsByTag.remove(tag);
         }
     }
@@ -160,20 +168,16 @@ public class DatabaseClass implements Database {
 
 
         int oldRating = s.getRating();
+        boolean wasNotRated = s.hasNoRatings();
         s.rate(review);
+        if (wasNotRated)
+            ratedShowsCounter++;
         int newRating = s.getRating();
-        if (newRating == 0) {
-            if (listOfShowsByRating.find(newRating) == null)
-                listOfShowsByRating.insert(newRating, new OrderedDoubleList<>(new ComparatorByShowName()));
-            listOfShowsByRating.find(newRating).insert(s);
-        }
 
-        if (oldRating != newRating) {
-            if (listOfShowsByRating.find(oldRating) != null)
-                listOfShowsByRating.find(oldRating).remove(s);
-            if (listOfShowsByRating.find(newRating) == null)
-                listOfShowsByRating.insert(newRating, new OrderedDoubleList<>(new ComparatorByShowName()));
-            listOfShowsByRating.find(newRating).insert(s);
+        if (oldRating != newRating || wasNotRated) {
+            if (!wasNotRated)
+                listOfShowsByRating[oldRating].remove(s);
+            listOfShowsByRating[newRating].insert(s);
         }
     }
 
@@ -188,10 +192,23 @@ public class DatabaseClass implements Database {
     @Override
     //O(1)
     public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
-        if(showsByID.isEmpty()) throw new NoShowsException();
+        if (showsByID.isEmpty()) throw new NoShowsException();
         if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
-        if (listOfShowsByRating.isEmpty()) throw new NoRatedShowsException();
-        return listShows(listOfShowsByRating.maxEntry().getKey());
+        if (ratedShowsCounter == 0) throw new NoRatedShowsException();
+        return listShows(indexOfMaxRating());
+    }
+
+    /**
+     * Returns the index of max rating
+     *
+     * @return index of max rating
+     * Pre-condition: there is at least one rated show
+     */
+    private int indexOfMaxRating() {
+        for (int i = 10; i >= 0; i--)
+            if (listOfShowsByRating[i].size() > 0)
+                return i;
+        return 0; //will never be returned if pre-condition is met
     }
 
     @Override
@@ -201,9 +218,9 @@ public class DatabaseClass implements Database {
         if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
         if (showsByID.isEmpty()) throw new NoShowsException();
         if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
-        if (listOfShowsByRating.isEmpty()) throw new NoRatedShowsException();
+        if (ratedShowsCounter == 0) throw new NoRatedShowsException();
 
-        OrderedList<Show> shows = listOfShowsByRating.find(rating);
+        OrderedList<Show> shows = listOfShowsByRating[rating];
         if (shows == null || shows.isEmpty()) throw new NoProductionsWithRatingException();
         return shows.iterator();
     }
