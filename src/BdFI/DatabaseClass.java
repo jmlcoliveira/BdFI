@@ -74,7 +74,7 @@ public class DatabaseClass implements Database {
         listOfShowsByRating = new OrderedList[11];
         Comparator<Show> c = new ComparatorByShowName();
         for (int i = 0; i < 11; i++)
-            listOfShowsByRating[i] = new OrderedDoubleList<>(c);
+            listOfShowsByRating[i] = new AVLTreeE<>(c);
 
         ratedShowsCounter = 0;
         listOfShowsByTag = new SepChainHashTable<>();
@@ -155,7 +155,7 @@ public class DatabaseClass implements Database {
         s.addTag(tag);
 
         if (listOfShowsByTag.find(tag.toUpperCase()) == null) {
-            OrderedList<Show> shows = new OrderedDoubleList<>(new ComparatorByShowName());
+            OrderedList<Show> shows = new AVLTreeE<>(new ComparatorByShowName());
             shows.insert(s);
             listOfShowsByTag.insert(tag.toUpperCase(), shows);
         } else {

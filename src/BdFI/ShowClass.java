@@ -45,7 +45,7 @@ public class ShowClass implements ShowPrivate {
      */
     private final List<Participation> participation;
 
-    private final OrderedDictionary<String, Person> personsInShow;
+    private final Dictionary<String, Person> personsInShow;
 
     /**
      * List containing all tags of this show
@@ -87,7 +87,7 @@ public class ShowClass implements ShowPrivate {
         tags = new DoubleList<>();
         inProduction = LocalDate.now().getYear() == year;
 
-        personsInShow = new AVLTree<>();
+        personsInShow = new SepChainHashTable<>();
     }
 
     @Override
