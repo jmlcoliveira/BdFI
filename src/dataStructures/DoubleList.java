@@ -3,8 +3,6 @@ package dataStructures;
 import dataStructures.exceptions.EmptyListException;
 import dataStructures.exceptions.InvalidPositionException;
 
-import java.io.Serializable;
-
 /**
  * Adaptation of the DoubleList class given by the AED Team
  *

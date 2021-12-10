@@ -9,7 +9,7 @@ import dataStructures.exceptions.NoSuchElementException;
  * @author AED  Team
  * @version 1.0
  */
-class DoubleListIterator<E> implements TwoWayIterator<E> {
+public class DoubleListIterator<E> implements TwoWayIterator<E> {
 
     /**
      * Serial Version UID of the Class

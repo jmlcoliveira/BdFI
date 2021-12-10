@@ -1,5 +1,7 @@
-package dataStructures;
+package dataStructures.orderedDictionaries;
 
+import dataStructures.Dictionary;
+import dataStructures.Entry;
 import dataStructures.exceptions.EmptyDictionaryException;
 
 /**
@@ -37,11 +39,6 @@ public interface OrderedDictionary<K extends Comparable<K>, V>
      *
      * @see dataStructures.Dictionary#iterator()
      */
-    Iterator<Entry<K, V>> iterator();
-
-    Iterator<V> iteratorValues();
-
-    Iterator<K> iteratorKeys();
-
+    //Iterator<Entry<K, V>> iteratorEntries();
 } 
 

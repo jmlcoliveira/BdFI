@@ -1,6 +1,6 @@
-import dataStructures.AVLTree;
 import dataStructures.Entry;
 import dataStructures.Iterator;
+import dataStructures.orderedDictionaries.AVLTree;
 import org.junit.Test;
 
     public class BSTest {

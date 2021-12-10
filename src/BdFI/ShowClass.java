@@ -4,7 +4,11 @@ import BdFI.show.exceptions.InvalidShowRatingException;
 import BdFI.show.exceptions.ShowHasNoParticipationsException;
 import BdFI.show.exceptions.ShowInProductionException;
 import BdFI.show.exceptions.ShowNotInProductionException;
-import dataStructures.*;
+import dataStructures.Dictionary;
+import dataStructures.DoubleList;
+import dataStructures.Iterator;
+import dataStructures.List;
+import dataStructures.hashTable.SepChainHashTable;
 
 import java.time.LocalDate;
 

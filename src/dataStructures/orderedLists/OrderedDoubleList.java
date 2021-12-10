@@ -1,4 +1,9 @@
-package dataStructures;
+package dataStructures.orderedLists;
+
+import dataStructures.Comparator;
+import dataStructures.DoubleListIterator;
+import dataStructures.DoubleListNode;
+import dataStructures.Iterator;
 
 public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E> {
 
@@ -109,6 +114,16 @@ public class OrderedDoubleList<E extends Comparable<E>> implements OrderedList<E
             }
             node = node.getNext();
         }
+        return null;
+    }
+
+    @Override
+    public E minElement() {
+        return null;
+    }
+
+    @Override
+    public E maxElement() {
         return null;
     }
 

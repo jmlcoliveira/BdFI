@@ -1,5 +1,6 @@
-package dataStructures;
+package dataStructures.orderedDictionaries;
 
+import dataStructures.*;
 import dataStructures.exceptions.EmptyDictionaryException;
 import dataStructures.exceptions.NoSuchElementException;
 
@@ -151,7 +152,7 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
     }
 
     @Override
-    public Iterator<Entry<K, V>> iterator() {
+    public Iterator<Entry<K, V>> iteratorEntries() {
         return new IteratorEntry();
     }
 

@@ -2,8 +2,7 @@ package dataStructures;
 
 import java.io.Serializable;
 
-class DoubleListNode<E> implements Serializable
-{
+public class DoubleListNode<E> implements Serializable {
 
     /**
      * Serial Version UID of the Class

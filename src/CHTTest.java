@@ -1,4 +1,9 @@
-import dataStructures.*;
+import dataStructures.Dictionary;
+import dataStructures.Entry;
+import dataStructures.Iterator;
+import dataStructures.hashTable.SepChainHashTable;
+import dataStructures.orderedDictionaries.BinarySearchTree;
+import dataStructures.orderedDictionaries.OrderedDictionary;
 import org.junit.Test;
 
 import java.util.Random;
@@ -31,7 +36,7 @@ public class CHTTest {
 
         assertEquals(cht.size(), 6);
 
-        Iterator<Entry<Integer, Integer>> it = cht.iterator();
+        Iterator<Entry<Integer, Integer>> it = cht.iteratorEntries();
 
         OrderedDictionary<Integer, Integer> entries = new BinarySearchTree<>();
         while (it.hasNext()) {
@@ -41,7 +46,7 @@ public class CHTTest {
 
         assertEquals(cht.size(), entries.size());
 
-        Iterator<Entry<Integer, Integer>> itEntries = entries.iterator();
+        Iterator<Entry<Integer, Integer>> itEntries = entries.iteratorEntries();
 
         assertTrue(itEntries.hasNext());
         assertTrue(itEntries.next().getKey() == -3);
@@ -77,7 +82,7 @@ public class CHTTest {
                 assert (arr[i] == cht.find(arr[i]));
             }
 
-            Iterator<Entry<Integer, Integer>> it = cht.iterator();
+            Iterator<Entry<Integer, Integer>> it = cht.iteratorEntries();
 
             int counter = 0;
             while (it.hasNext()) {
@@ -118,7 +123,7 @@ public class CHTTest {
         assertTrue(cht.size() == 6);
         assertEquals(cht.size(), 6);
 
-        Iterator<Entry<Integer, Integer>> it = cht.iterator();
+        Iterator<Entry<Integer, Integer>> it = cht.iteratorEntries();
 
         OrderedDictionary<Integer, Integer> entries = new BinarySearchTree<Integer, Integer>();
         while (it.hasNext()) {
@@ -128,7 +133,7 @@ public class CHTTest {
 
         assertEquals(cht.size(), entries.size());
 
-        Iterator<Entry<Integer, Integer>> itEntries = entries.iterator();
+        Iterator<Entry<Integer, Integer>> itEntries = entries.iteratorEntries();
 
         assertTrue(itEntries.hasNext());
         assertTrue(itEntries.next().getKey() == -3);
@@ -163,7 +168,7 @@ public class CHTTest {
         assertTrue(cht.remove(7) == 7);
 
         assertEquals(cht.size(), 0);
-        Iterator<Entry<Integer, Integer>> it = cht.iterator();
+        Iterator<Entry<Integer, Integer>> it = cht.iteratorEntries();
         assertTrue(!it.hasNext());
 
         assertTrue(cht.insert(5, 5) == null);
@@ -176,7 +181,7 @@ public class CHTTest {
 
         assertEquals(cht.size(), 6);
 
-        it = cht.iterator();
+        it = cht.iteratorEntries();
 
         OrderedDictionary<Integer, Integer> entries = new BinarySearchTree<Integer, Integer>();
         while (it.hasNext()) {
@@ -186,7 +191,7 @@ public class CHTTest {
 
         assertEquals(cht.size(), entries.size());
 
-        Iterator<Entry<Integer, Integer>> itEntries = entries.iterator();
+        Iterator<Entry<Integer, Integer>> itEntries = entries.iteratorEntries();
 
         assertTrue(itEntries.hasNext());
         assertTrue(itEntries.next().getKey() == -3);

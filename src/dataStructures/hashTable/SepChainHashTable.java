@@ -1,6 +1,9 @@
-package dataStructures;
+package dataStructures.hashTable;
 
-import java.io.Serializable;
+import dataStructures.Dictionary;
+import dataStructures.Entry;
+import dataStructures.Iterator;
+import dataStructures.orderedDictionaries.OrderedDoubleDictionary;
 
 /**
  * Separate Chaining Hash table implementation
@@ -82,14 +85,24 @@ public class SepChainHashTable<K extends Comparable<K>, V>
     }
 
     @Override
-    public Iterator<Entry<K, V>> iterator() {
-        return new EntryIterator();
+    public Iterator<Entry<K, V>> iteratorEntries() {
+        return new IteratorEntries();
+    }
+
+    @Override
+    public Iterator<V> iteratorValues() {
+        return new IteratorValues();
+    }
+
+    @Override
+    public Iterator<K> iteratorKeys() {
+        return new IteratorKeys();
     }
 
     protected void rehash() {
         SepChainHashTable<K, V> temp = new SepChainHashTable<>(table.length * 2);
 
-        Iterator<Entry<K, V>> it = this.iterator();
+        Iterator<Entry<K, V>> it = this.iteratorEntries();
         //iterate over all Entries and save them in the new position
         while (it.hasNext()) {
             Entry<K, V> e = it.next();
@@ -99,9 +112,7 @@ public class SepChainHashTable<K extends Comparable<K>, V>
         this.maxSize = temp.maxSize;
     }
 
-    class EntryIterator implements Iterator<Entry<K, V>>, Serializable {
-
-        static final long serialVersionUID = 0L;
+    abstract class EntryIterator {
 
         /**
          * Current index in the dispersion table
@@ -126,7 +137,7 @@ public class SepChainHashTable<K extends Comparable<K>, V>
             return it.hasNext();
         }
 
-        public final Entry<K, V> next() {
+        private Entry<K, V> next() {
             return nextNode();
         }
 
@@ -149,8 +160,29 @@ public class SepChainHashTable<K extends Comparable<K>, V>
         protected void findNext() {
             if (it == null || !it.hasNext() || numberOfReturnedEntry < currentSize) {
                 while (it == null || (counter < table.length && !it.hasNext()))
-                    it = table[counter++].iterator();
+                    it = table[counter++].iteratorEntries();
             }
+        }
+    }
+
+    private class IteratorValues extends EntryIterator implements Iterator<V> {
+        @Override
+        public V next() {
+            return super.next().getValue();
+        }
+    }
+
+    private class IteratorEntries extends EntryIterator implements Iterator<Entry<K, V>> {
+        @Override
+        public Entry<K, V> next() {
+            return super.next();
+        }
+    }
+
+    private class IteratorKeys extends EntryIterator implements Iterator<K> {
+        @Override
+        public K next() {
+            return super.next().getKey();
         }
     }
 }

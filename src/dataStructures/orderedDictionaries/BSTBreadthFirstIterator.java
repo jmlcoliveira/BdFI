@@ -1,5 +1,9 @@
-package dataStructures;
+package dataStructures.orderedDictionaries;
 
+import dataStructures.Entry;
+import dataStructures.Iterator;
+import dataStructures.Queue;
+import dataStructures.QueueInList;
 import dataStructures.exceptions.NoSuchElementException;
 
 public class BSTBreadthFirstIterator<K extends Comparable<K>, V> implements Iterator<Entry<K,V>> {

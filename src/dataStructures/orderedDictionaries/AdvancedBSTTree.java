@@ -1,21 +1,22 @@
-package dataStructures;
+package dataStructures.orderedDictionaries;
+
+import dataStructures.Stack;
 
 public class AdvancedBSTTree<K extends Comparable<K>, V>
-        extends BinarySearchTree<K,V> {
+        extends BinarySearchTree<K, V> {
 
 
-    protected BSTNode<K,V> minNode( BSTNode<K,V> theRoot,
-                                    Stack<PathStep<K,V>> path ){
-        BSTNode<K,V> node = theRoot;
-        while ( node.getLeft() != null ){
-            path.push( new PathStep<K,V>(node, true) );
+    protected BSTNode<K, V> minNode(BSTNode<K, V> theRoot,
+                                    Stack<PathStep<K, V>> path) {
+        BSTNode<K, V> node = theRoot;
+        while (node.getLeft() != null) {
+            path.push(new PathStep<K, V>(node, true));
             node = node.getLeft();
         }
         return node;
     }
 
-    protected BSTNode<K,V> findNode( K key, Stack<PathStep<K,V>> path )
-    {
+    protected BSTNode<K, V> findNode(K key, Stack<PathStep<K, V>> path) {
         path.push( new PathStep<K,V>(null, false) );
         BSTNode<K,V> node = root;
         while ( node != null )

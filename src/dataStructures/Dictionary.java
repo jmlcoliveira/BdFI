@@ -54,13 +54,18 @@ public interface Dictionary<K,V> extends Serializable
      * @return previous value associated with key, 
      * or null if the dictionary does not an entry with that key
      */
-    V remove( K key );                                
+    V remove(K key);
 
     /**
      * Returns an iterator of the entries in the dictionary.
-     * @return  iterator of the entries in the dictionary
+     *
+     * @return iterator of the entries in the dictionary
      */
-    Iterator<Entry<K,V>> iterator( );  
+    Iterator<Entry<K, V>> iteratorEntries();
+
+    Iterator<V> iteratorValues();
+
+    Iterator<K> iteratorKeys();
 
 } 
 

@@ -1,10 +1,12 @@
-package dataStructures;                                         
+package dataStructures.orderedDictionaries;
+
+import dataStructures.EntryClass;
 
 import java.io.Serializable;
 
 /**
  * BST node implementation
- * 
+ *
  * @author AED team
  * @version 1.0
  *
@@ -196,8 +198,6 @@ class BSTNode<K extends Comparable<K>,V> implements Serializable
      */
     public boolean isLeaf( )                                
     {    
-        return leftChild == null && rightChild == null;          
-    }                                                                  
-
-
+        return leftChild == null && rightChild == null;
+    }
 }

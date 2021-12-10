@@ -1,9 +1,8 @@
 package BdFI;
 
-import dataStructures.AVLTree;
-import dataStructures.BinarySearchTree;
 import dataStructures.Iterator;
-import dataStructures.OrderedDictionary;
+import dataStructures.orderedDictionaries.AVLTree;
+import dataStructures.orderedDictionaries.OrderedDictionary;
 
 /**
  * Person's class containing all information regarding a person
@@ -116,7 +115,7 @@ public class PersonClass implements PersonPrivate {
     }
 
     @Override
-    //O(1)
+    //O(log(n))
     public Iterator<Show> showIterator() {
         return showsOfPerson.iteratorValues();
     }

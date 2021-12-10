@@ -1,14 +1,19 @@
-package dataStructures;  
+package dataStructures.hashTable;
+
+import dataStructures.Dictionary;
+import dataStructures.Entry;
+import dataStructures.Iterator;
 
 /**
  * Hash table implementation
+ *
+ * @param <K> Generic Key
+ * @param <V> Generic Value
  * @author AED  Team
  * @version 1.0
- * @param <K> Generic Key
- * @param <V> Generic Value 
  */
 
-public abstract class HashTable<K,V> implements Dictionary<K,V>
+public abstract class HashTable<K, V> implements Dictionary<K, V>
 { 
 	/**
 	 * Serial Version UID of the Class.
@@ -119,7 +124,7 @@ public abstract class HashTable<K,V> implements Dictionary<K,V>
     public abstract V remove( K key );
 
     @Override
-    public abstract Iterator<Entry<K,V>> iterator( );
+    public abstract Iterator<Entry<K, V>> iteratorEntries();
 
 
     //

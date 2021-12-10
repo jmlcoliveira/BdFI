@@ -6,7 +6,12 @@ import BdFI.person.exceptions.PersonHasNoShowsException;
 import BdFI.person.exceptions.PersonIdAlreadyExistsException;
 import BdFI.person.exceptions.PersonIdNotFoundException;
 import BdFI.show.exceptions.*;
-import dataStructures.*;
+import dataStructures.Comparator;
+import dataStructures.Dictionary;
+import dataStructures.Iterator;
+import dataStructures.hashTable.SepChainHashTable;
+import dataStructures.orderedLists.AVLTreeE;
+import dataStructures.orderedLists.OrderedList;
 
 /**
  * Database class which communicates with the Main class and stores information of all shows and
