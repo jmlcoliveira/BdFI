@@ -45,6 +45,11 @@ public class ShowClass implements ShowPrivate {
      */
     private final List<Participation> participation;
 
+    /**
+     * Dictionary containing every Person that participated on the Show
+     * the Key is the PersonID
+     * the Value is the Person
+     */
     private final Dictionary<String, Person> personsInShow;
 
     /**
@@ -57,6 +62,9 @@ public class ShowClass implements ShowPrivate {
      */
     private int currentRating;
 
+    /**
+     * If the Show is rated
+     */
     private boolean isRated;
 
     /**

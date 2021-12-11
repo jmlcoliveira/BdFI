@@ -42,9 +42,8 @@ public class DatabaseClass implements Database {
     private final Dictionary<String, ShowPrivate> showsByID;
 
     /**
-     * Ordered Dictionary containing Shows with a certain Rating
-     * the Key is the rating
-     * the Value is an orderedList of Shows, ordered by name
+     * Array of Ordered Lists, where the index is the rating, and that
+     * Ordered List contains the Shows with that rating
      */
     private final OrderedList<Show>[] listOfShowsByRating;
     private int ratedShowsCounter;

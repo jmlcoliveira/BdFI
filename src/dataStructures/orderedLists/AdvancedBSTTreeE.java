@@ -4,6 +4,12 @@ package dataStructures.orderedLists;
 import dataStructures.Comparator;
 import dataStructures.Stack;
 
+/**
+ * Advanced BSTree Data Type implementation
+ * @author AED team
+ * @version 1.0
+ * @param <E> Generic type Element, must extend comparable
+ */
 public class AdvancedBSTTreeE<E extends Comparable<E>>
         extends BinarySearchTreeE<E> {
 
