@@ -235,7 +235,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
-    //O(1)
+    //O(log(n))
     public Iterator<Show> listTaggedShows(String tag) throws NoShowsException, NoTaggedProductionsException,
             NoShowsWithTagException {
         if (showsByID.isEmpty()) throw new NoShowsException();
