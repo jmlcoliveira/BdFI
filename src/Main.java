@@ -122,6 +122,7 @@ public class Main {
         } catch (InvalidYearException e) {
             System.out.println(Error.INVALID_PERSON_YEAR);
         } catch (InvalidGenderException e) {
+            //todo ver com o prof
             if (year <= 0) System.out.println(Error.INVALID_PERSON_YEAR);
             else System.out.println(Error.INVALID_GENDER);
         } catch (PersonIdAlreadyExistsException e) {
@@ -422,7 +423,7 @@ public class Main {
      * Command 15
      * Outputs in the console a goodbye message
      *
-     * @param db database which is been saved
+     * @param db database which is being saved
      */
     private static void commandQuit(Database db) {
         System.out.println(Success.CLOSE_PROGRAM);

@@ -121,34 +121,39 @@ public class DatabaseClass implements Database {
     }
 
     @Override
-    //O(n)
+    //[O(x) = O(nPersonsInShow*log(nShowsInPerson)))] + [O(y) = O(log(nShowsWithRating))] + [O(z) = O(nTagsOfShow*log(nShowsWithTag))]
+    // O(max(x, y, z))
     public void removeShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
         Show s = getShow(showID);
         if (!s.isInProduction())
             throw new ShowNotInProductionException();
         showsInProductionCounter--;
 
-        Iterator<Person> itP = s.iteratorPersonsInShow();
-        while (itP.hasNext()) {
+        Iterator<Person> itP = s.iteratorPersonsInShow(); //O(1)
+        while (itP.hasNext()) { //k = O(nPersonsInShow)
             PersonPrivate p = (PersonPrivate) itP.next();
-            p.removeShow((ShowPrivate) s);
+            p.removeShow((ShowPrivate) s); //O(log(nShowsInPerson))
         }
-        showsByID.remove(s.getShowID().toUpperCase());
-        if (listOfShowsByRating[s.getRating()].remove(s) != null)
-            ratedShowsCounter--;
 
-        Iterator<String> itTags = s.iteratorTags();
-        while (itTags.hasNext()) {
-            String tag = itTags.next().toUpperCase();
-            OrderedList<Show> l = listOfShowsByTag.find(tag);
-            l.remove(s);
-            if (l.isEmpty())
-                listOfShowsByTag.remove(tag);
+        if (!s.hasNoRatings()) {
+            listOfShowsByRating[s.getRating()].remove(s); //O(log(nShowsWithRating))
+            ratedShowsCounter--;
         }
+
+        Iterator<String> itTags = s.iteratorTags(); //O(1)
+        while (itTags.hasNext()) { //k = O(nTagsOfShow)
+            String tag = itTags.next().toUpperCase();
+            OrderedList<Show> l = listOfShowsByTag.find(tag); //O(1)
+            l.remove(s); //O(log(nShowsWithTag))
+            if (l.isEmpty())
+                listOfShowsByTag.remove(tag); //O(1)
+        }
+
+        showsByID.remove(s.getShowID().toUpperCase()); //O(1)
     }
 
     @Override
-    //O(n)
+    //O(log(n))
     public void tagShow(String showID, String tag) throws ShowIdNotFoundException {
         ShowPrivate s = (ShowPrivate) getShow(showID);
         s.addTag(tag);
@@ -163,7 +168,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
-    //O(n)
+    //O(log(n))
     public void reviewShow(String showID, int review) throws InvalidShowRatingException, ShowInProductionException, ShowIdNotFoundException {
         if (review < 0 || review > 10) throw new InvalidShowRatingException();
         ShowPrivate s = showsByID.find(showID.toUpperCase());
@@ -172,14 +177,14 @@ public class DatabaseClass implements Database {
 
 
         int oldRating = s.getRating();
-        boolean wasNotRated = s.hasNoRatings();
+        boolean wasRated = !s.hasNoRatings();
         s.rate(review);
-        if (wasNotRated)
+        if (!wasRated)
             ratedShowsCounter++;
         int newRating = s.getRating();
 
-        if (oldRating != newRating || wasNotRated) {
-            if (!wasNotRated)
+        if (oldRating != newRating || !wasRated) {
+            if (wasRated)
                 listOfShowsByRating[oldRating].remove(s);
             listOfShowsByRating[newRating].insert(s);
         }
@@ -216,7 +221,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
-    //O(1) because is an AVL with a max of 11 elements
+    //O(log(n))
     public Iterator<Show> listShows(int rating) throws InvalidShowRatingException, NoShowsException,
             NoFinishedShowsException, NoRatedShowsException, NoProductionsWithRatingException {
         if (rating < 0 || rating > 10) throw new InvalidShowRatingException();

@@ -63,7 +63,7 @@ public class CHTTest {
 
         //insertRandomElems(cht, 200);
         for (int k = 0; k < 10000; k++) {
-            Dictionary<Integer, Integer> cht = new SepChainHashTable<Integer, Integer>(10000);
+            Dictionary<Integer, Integer> cht = new SepChainHashTable<>(10000);
             int[] arr = new int[10000];
             Random rand = new Random();
             int i = 0;
