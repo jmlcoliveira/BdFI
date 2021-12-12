@@ -201,9 +201,6 @@ public class DatabaseClass implements Database {
     @Override
     //O(1)
     public Iterator<Show> listBestShows() throws NoShowsException, NoFinishedShowsException, NoRatedShowsException {
-        if (showsByID.isEmpty()) throw new NoShowsException();
-        if (showsInProductionCounter == showsByID.size()) throw new NoFinishedShowsException();
-        if (ratedShowsCounter == 0) throw new NoRatedShowsException();
         return listShows(indexOfMaxRating());
     }
 
@@ -247,7 +244,7 @@ public class DatabaseClass implements Database {
     }
 
     @Override
-    //O(1)
+    //O(log(n))
     public Iterator<Show> showsByPersonID(String personID) throws PersonHasNoShowsException, PersonIdNotFoundException {
         Person p = getPerson(personID);
         if (!p.hasParticipation()) throw new PersonHasNoShowsException();
