@@ -10,7 +10,7 @@ import dataStructures.orderedDictionaries.OrderedDictionary;
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
  * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
  */
-public class PersonClass implements PersonPrivate {
+class PersonClass implements PersonPrivate {
 
     /**
      * Serial Version UID of the Class
@@ -43,7 +43,9 @@ public class PersonClass implements PersonPrivate {
     private final String name;
 
     /**
-     * List containing all shows where this person participated
+     * OrderedDictionary containing all shows where this person participated, ordered by showID
+     * Key - showID
+     * Value - show
      */
     private final OrderedDictionary<String, Show> showsOfPerson;
 

@@ -135,7 +135,7 @@ public class DatabaseClass implements Database {
             p.removeShow((ShowPrivate) s); //O(log(nShowsInPerson))
         }
 
-        if (!s.hasNoRatings()) {
+        if (s.hasRatings()) {
             listOfShowsByRating[s.getRating()].remove(s); //O(log(nShowsWithRating))
             ratedShowsCounter--;
         }
@@ -177,7 +177,7 @@ public class DatabaseClass implements Database {
 
 
         int oldRating = s.getRating();
-        boolean wasRated = !s.hasNoRatings();
+        boolean wasRated = s.hasRatings();
         s.rate(review);
         if (!wasRated)
             ratedShowsCounter++;

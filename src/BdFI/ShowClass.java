@@ -18,7 +18,7 @@ import java.time.LocalDate;
  * @author Guilherme Pocas (60236) g.pocas@campus.fct.unl.pt
  * @author Joao Oliveira (61052) jml.oliveira@campus.fct.unl.pt
  */
-public class ShowClass implements ShowPrivate {
+class ShowClass implements ShowPrivate {
 
     /**
      * Serial Version UID of the Class
@@ -150,8 +150,8 @@ public class ShowClass implements ShowPrivate {
     }
 
     @Override
-    public boolean hasNoRatings() {
-        return !isRated;
+    public boolean hasRatings() {
+        return isRated;
     }
 
     @Override

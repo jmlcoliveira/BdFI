@@ -59,7 +59,7 @@ public interface Show extends Comparable<Show> {
      *
      * @return <code>true</code> if it has any rating, <code>false</code> otherwise
      */
-    boolean hasNoRatings();
+    boolean hasRatings();
 
     /**
      * Checks if the show is still in production

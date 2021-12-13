@@ -26,7 +26,7 @@ public class Main {
     private static final String[] genders = {"FEMALE", "MALE", "OTHER", "NOT-PROVIDED"};
 
     /**
-     * Main method where Scanner and Database are initied
+     * Main method where Scanner and Database are inited
      *
      * @param args contains the supplied command-line arguments as an array of String
      */
@@ -116,15 +116,17 @@ public class Main {
             String telephone = in.next();
             String gender = in.next();
             String name = in.nextLine().trim();
-            validateGender(gender);
-            db.addPerson(id, year, email, telephone, gender, name);
-            System.out.println(Success.PERSON_ADDED);
+            if (year <= 0)
+                System.out.println(Error.INVALID_PERSON_YEAR);
+            else {
+                validateGender(gender);
+                db.addPerson(id, year, email, telephone, gender, name);
+                System.out.println(Success.PERSON_ADDED);
+            }
         } catch (InvalidYearException e) {
             System.out.println(Error.INVALID_PERSON_YEAR);
         } catch (InvalidGenderException e) {
-            //todo ver com o prof
-            if (year <= 0) System.out.println(Error.INVALID_PERSON_YEAR);
-            else System.out.println(Error.INVALID_GENDER);
+            System.out.println(Error.INVALID_GENDER);
         } catch (PersonIdAlreadyExistsException e) {
             System.out.println(Error.PERSON_EXISTS);
         }
@@ -143,8 +145,12 @@ public class Main {
             String idShow = in.next();
             int year = in.nextInt();
             String title = in.nextLine().trim();
-            db.addShow(idShow, year, title);
-            System.out.println(Success.SHOW_ADDED);
+            if (year <= 0)
+                System.out.println(Error.INVALID_SHOW_YEAR);
+            else {
+                db.addShow(idShow, year, title);
+                System.out.println(Success.SHOW_ADDED);
+            }
         } catch (InvalidShowYearException e) {
             System.out.println(Error.INVALID_SHOW_YEAR);
         } catch (ShowIDExistsException e) {
@@ -261,8 +267,12 @@ public class Main {
             String showID = in.next();
             int stars = in.nextInt();
             in.nextLine();
-            db.reviewShow(showID, stars);
-            System.out.println(Success.SHOW_RATED);
+            if (stars < 0 || stars > 10)
+                System.out.println(Error.INVALID_RATING);
+            else {
+                db.reviewShow(showID, stars);
+                System.out.println(Success.SHOW_RATED);
+            }
         } catch (InvalidShowRatingException e) {
             System.out.println(Error.INVALID_RATING);
         } catch (ShowInProductionException e) {
@@ -327,7 +337,15 @@ public class Main {
             while (it.hasNext()) {
                 Participation part = it.next();
                 Person p = part.getPerson();
-                System.out.printf(Success.SHOW_PARTICIPATION, p.getPersonID(), p.getName(), p.getYear(), p.getEmail(), p.getTelephone(), p.getGender(), part.getDescription());
+                System.out.printf(Success.SHOW_PARTICIPATION,
+                        p.getPersonID(),
+                        p.getName(),
+                        p.getYear(),
+                        p.getEmail(),
+                        p.getTelephone(),
+                        p.getGender(),
+                        part.getDescription()
+                );
             }
         } catch (ShowIdNotFoundException e) {
             System.out.println(Error.SHOW_DOESNT_EXIST);
@@ -406,7 +424,7 @@ public class Main {
             Iterator<Show> itShows = db.listTaggedShows(tag);
             while (itShows.hasNext()) {
                 Show next = itShows.next();
-                System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(),
+                System.out.printf(Success.TAG_SHOW, next.getShowID(), next.getTitle(),
                         next.getYear(), next.getRating());
             }
 

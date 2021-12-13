@@ -4,7 +4,7 @@ import dataStructures.Comparator;
 
 import java.io.Serializable;
 
-public class ComparatorByShowName implements Comparator<Show>, Serializable {
+class ComparatorByShowName implements Comparator<Show>, Serializable {
 
     /**
      * Serial Version UID of the Class

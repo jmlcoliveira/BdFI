@@ -1,7 +1,10 @@
 package BdFI;
 
 import BdFI.database.exceptions.*;
-import BdFI.person.exceptions.*;
+import BdFI.person.exceptions.InvalidYearException;
+import BdFI.person.exceptions.PersonHasNoShowsException;
+import BdFI.person.exceptions.PersonIdAlreadyExistsException;
+import BdFI.person.exceptions.PersonIdNotFoundException;
 import BdFI.show.exceptions.*;
 import dataStructures.Iterator;
 
@@ -25,7 +28,6 @@ public interface Database extends Serializable {
      * @param gender    person's gender
      * @param name      person's name
      * @throws InvalidYearException           if year <= 0
-     * @throws InvalidGenderException         if gender is invalid
      * @throws PersonIdAlreadyExistsException if personID already exists
      */
     void addPerson(String personID, int year, String email, String telephone, String gender, String name)
