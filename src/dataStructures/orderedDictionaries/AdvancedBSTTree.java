@@ -1,21 +1,31 @@
 package dataStructures.orderedDictionaries;
 
+import dataStructures.Comparator;
 import dataStructures.Stack;
 
 /**
  * Advanced BSTree Data Type implementation
- * @author AED team
- * @version 1.0
+ *
  * @param <K> Generic type Key, must extend comparable
  * @param <V> Generic type Value
+ * @author AED team
+ * @version 1.0
  */
-public class AdvancedBSTTree<K extends Comparable<K>, V>
+class AdvancedBSTTree<K extends Comparable<K>, V>
         extends BinarySearchTree<K, V> {
 
     /**
      * Serial Version UID of the Class.
      */
     static final long serialVersionUID = 0L;
+
+    AdvancedBSTTree() {
+        super();
+    }
+
+    AdvancedBSTTree(Comparator<K> comparator) {
+        super(comparator);
+    }
 
     /**
      * Returns the node whose key is the specified key;

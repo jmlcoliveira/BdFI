@@ -4,8 +4,6 @@ import dataStructures.*;
 import dataStructures.exceptions.EmptyDictionaryException;
 import dataStructures.exceptions.NoSuchElementException;
 
-import java.util.Comparator;
-
 public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements OrderedDictionary<K, V> {
 
     protected DoubleListNode<Entry<K, V>> head;

@@ -130,7 +130,7 @@ public class DatabaseClass implements Database {
         showsInProductionCounter--;
 
         Iterator<Person> itP = s.iteratorPersonsInShow(); //O(1)
-        while (itP.hasNext()) { //k = O(nPersonsInShow)
+        while (itP.hasNext()) { //k = nPersonsInShow
             PersonPrivate p = (PersonPrivate) itP.next();
             p.removeShow(s); //O(log(nShowsInPerson))
         }
@@ -141,7 +141,7 @@ public class DatabaseClass implements Database {
         }
 
         Iterator<String> itTags = s.iteratorTags(); //O(1)
-        while (itTags.hasNext()) { //k = O(nTagsOfShow)
+        while (itTags.hasNext()) { //k = nTagsOfShow
             String tag = itTags.next().toUpperCase();
             OrderedList<Show> l = listOfShowsByTag.find(tag); //O(1)
             l.remove(s); //O(log(nShowsWithTag))

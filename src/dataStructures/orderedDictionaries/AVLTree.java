@@ -1,5 +1,6 @@
 package dataStructures.orderedDictionaries;
 
+import dataStructures.Comparator;
 import dataStructures.Stack;
 import dataStructures.StackInList;
 
@@ -23,12 +24,16 @@ public class AVLTree<K extends Comparable<K>, V> extends AdvancedBSTTree<K, V> {
         super();
     }
 
+    public AVLTree(Comparator<K> comparator) {
+        super(comparator);
+    }
+
     @Override
-    public V insert( K key, V value ){
-        Stack<PathStep<K,V>> path = new StackInList<PathStep<K,V>>();
-        BSTNode<K,V> node = this.findNode(key, path);
-        if ( node == null ){
-            AVLNode<K,V> newLeaf = new AVLNode<K,V>(key, value);
+    public V insert(K key, V value) {
+        Stack<PathStep<K, V>> path = new StackInList<PathStep<K, V>>();
+        BSTNode<K, V> node = this.findNode(key, path);
+        if (node == null) {
+            AVLNode<K, V> newLeaf = new AVLNode<K, V>(key, value);
             this.linkSubtree(newLeaf, path.top());
             currentSize++;
             this.reorganizeIns(path);
