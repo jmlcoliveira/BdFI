@@ -15,12 +15,12 @@ interface PersonPrivate extends Person, Serializable {
      *
      * @param show participation
      */
-    void addShow(ShowPrivate show);
+    void addShow(Show show);
 
     /**
      * Removes a show
      *
      * @param show show
      */
-    void removeShow(ShowPrivate show);
+    void removeShow(Show show);
 }

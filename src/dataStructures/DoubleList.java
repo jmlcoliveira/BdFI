@@ -270,17 +270,19 @@ public class DoubleList<E> implements List<E> {
      * @param list - list to be appended to the end of this
      */
     public void append(DoubleList<E> list) {
-        DoubleListNode<E> first = list.head;
-        DoubleListNode<E> last = list.tail;
-        if (isEmpty())
-            head = first;
-        else {
-            first.setPrevious(tail);
-            tail.setNext(first);
+        if (!list.isEmpty()) {
+            DoubleListNode<E> first = list.head;
+            DoubleListNode<E> last = list.tail;
+            if (isEmpty())
+                head = first;
+            else {
+                first.setPrevious(tail);
+                tail.setNext(first);
+            }
+            tail = last;
+            currentSize += list.size();
+            list.clear();
         }
-        tail = last;
-        currentSize += list.size();
-        list.clear();
     }
 
 }

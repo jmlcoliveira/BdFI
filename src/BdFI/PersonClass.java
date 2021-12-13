@@ -101,13 +101,13 @@ class PersonClass implements PersonPrivate {
 
     @Override
     //O(log(n))
-    public void addShow(ShowPrivate show) {
+    public void addShow(Show show) {
         showsOfPerson.insert(show.getShowID(), show);
     }
 
     @Override
     //O(log(n))
-    public void removeShow(ShowPrivate show) {
+    public void removeShow(Show show) {
         showsOfPerson.remove(show.getShowID());
     }
 

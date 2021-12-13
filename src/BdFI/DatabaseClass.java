@@ -105,11 +105,11 @@ public class DatabaseClass implements Database {
     @Override
     //O(log(n))
     public void addParticipation(String personID, String showID, String description) throws PersonIdNotFoundException, ShowIdNotFoundException {
-        PersonPrivate p = (PersonPrivate) getPerson(personID);
-        ShowPrivate s = (ShowPrivate) getShow(showID);
+        Person p = getPerson(personID);
+        Show s = getShow(showID);
         Participation part = new ParticipationClass(p, s, description);
-        p.addShow(s);
-        s.addParticipation(part);
+        ((PersonPrivate) p).addShow(s);
+        ((ShowPrivate) s).addParticipation(part);
     }
 
     @Override
@@ -132,7 +132,7 @@ public class DatabaseClass implements Database {
         Iterator<Person> itP = s.iteratorPersonsInShow(); //O(1)
         while (itP.hasNext()) { //k = O(nPersonsInShow)
             PersonPrivate p = (PersonPrivate) itP.next();
-            p.removeShow((ShowPrivate) s); //O(log(nShowsInPerson))
+            p.removeShow(s); //O(log(nShowsInPerson))
         }
 
         if (s.hasRatings()) {
