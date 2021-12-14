@@ -130,30 +130,9 @@ public class DatabaseClass implements Database {
             showsByID.insert(showID.toUpperCase(), s);
             throw new ShowNotInProductionException();
         }
-        showsInProductionCounter--;
-
-        Iterator<Person> itP = s.iteratorPersonsInShow(); //O(1)
-        while (itP.hasNext()) { //k = nPersonsInShow
-            PersonPrivate p = (PersonPrivate) itP.next();
-            p.removeShow(s); //O(log(nShowsInPerson))
-        }
-
-        if (s.hasRatings()) {
-            listOfShowsByRating[s.getRating()].remove(s); //O(log(nShowsWithRating))
-            ratedShowsCounter--;
-        }
-
-        Iterator<String> itTags = s.iteratorTags(); //O(1)
-        while (itTags.hasNext()) { //k = nTagsOfShow
-            String tag = itTags.next().toUpperCase();
-            OrderedList<Show> l = listOfShowsByTag.find(tag); //O(1)
-            l.remove(s); //O(log(nShowsWithTag))
-            if (l.isEmpty())
-                listOfShowsByTag.remove(tag); //O(1)
-        }
         /*Show s = getShow(showID);
         if (!s.isInProduction())
-            throw new ShowNotInProductionException();
+            throw new ShowNotInProductionException();*/
         showsInProductionCounter--;
 
         Iterator<Person> itP = s.iteratorPersonsInShow(); //O(1)
@@ -176,7 +155,7 @@ public class DatabaseClass implements Database {
                 listOfShowsByTag.remove(tag); //O(1)
         }
 
-        showsByID.remove(s.getShowID().toUpperCase()); //O(1)*/
+        //showsByID.remove(s.getShowID().toUpperCase()); //O(1)
     }
 
     @Override
