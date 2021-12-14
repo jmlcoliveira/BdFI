@@ -46,10 +46,11 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
 
     private DoubleListNode<Entry<K, V>> findNode(K key) {
         DoubleListNode<Entry<K, V>> node = head;
-        while (node != null && compare(node.getElement().getKey(), key) <= 0) {
+        int compareResult = 0;
+        while (node != null && (compareResult = compare(node.getElement().getKey(), key)) <= 0) {
             K currentKey = node.getElement().getKey();
 
-            if (currentKey.equals(key))
+            if (compareResult == 0)
                 return node;
             node = node.getNext();
         }
@@ -64,12 +65,14 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
         while (node != null) {
             K currentKey = node.getElement().getKey();
 
-            if (currentKey.equals(key)) {
+            int compareResult = compare(currentKey, key);
+
+            if (compareResult == 0) {
                 V oldValue = node.getElement().getValue();
                 ((EntryClass<K, V>) node.getElement()).setValue(value);
                 return oldValue;
             }
-            if (compare(node.getElement().getKey(), key) > 0) {
+            if (compareResult > 0) {
                 next = node;
                 previous = node.getPrevious();
                 break;
@@ -77,7 +80,7 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
             node = node.getNext();
         }
 
-        DoubleListNode<Entry<K, V>> newNode = new DoubleListNode<Entry<K, V>>(new EntryClass<>(key, value));
+        DoubleListNode<Entry<K, V>> newNode = new DoubleListNode<>(new EntryClass<>(key, value));
         addNode(newNode, next, previous);
 
         return null;
@@ -151,7 +154,7 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
 
     @Override
     public Iterator<Entry<K, V>> iteratorEntries() {
-        return new IteratorEntry();
+        return new IteratorEntries();
     }
 
     @Override
@@ -223,7 +226,7 @@ public class OrderedDoubleDictionary<K extends Comparable<K>, V> implements Orde
         }
     }
 
-    class IteratorEntry extends ODLIterator implements TwoWayIterator<Entry<K, V>> {
+    class IteratorEntries extends ODLIterator implements TwoWayIterator<Entry<K, V>> {
         @Override
         public Entry<K, V> next() throws NoSuchElementException {
             return super.next();

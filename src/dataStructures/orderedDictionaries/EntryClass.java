@@ -1,8 +1,10 @@
-package dataStructures;
+package dataStructures.orderedDictionaries;
+
+import dataStructures.Entry;
 
 import java.io.Serializable;
 
-public class EntryClass<K extends Comparable<K>, V> implements Serializable, Entry<K, V>, Comparable<EntryClass<K, V>> {
+class EntryClass<K extends Comparable<K>, V> implements Serializable, Entry<K, V>, Comparable<EntryClass<K, V>> {
     static final long serialVersionUID = 0L;
 
     private K key;

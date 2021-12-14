@@ -1,7 +1,5 @@
 package dataStructures.orderedDictionaries;
 
-import dataStructures.EntryClass;
-
 import java.io.Serializable;
 
 /**
