@@ -60,6 +60,16 @@ public class DatabaseClass implements Database {
      */
     private int showsInProductionCounter;
 
+    /**
+     * Value to initialize the HashTable of persons
+     */
+    private final int PERSONS_INITIAL_VALUE = 400; //4 rehashes at most
+
+    /**
+     * Value to initialize the HashTable of shows
+     */
+    private final int SHOWS_INITIAL_VALUE = 200; //4 rehashes at most
+
 
     /**
      * DatabaseClass constructor
@@ -67,8 +77,8 @@ public class DatabaseClass implements Database {
     //O(1)
     @SuppressWarnings("unchecked")
     public DatabaseClass() {
-        personByID = new SepChainHashTable<>();
-        showsByID = new SepChainHashTable<>();
+        personByID = new SepChainHashTable<>(PERSONS_INITIAL_VALUE);
+        showsByID = new SepChainHashTable<>(SHOWS_INITIAL_VALUE);
 
         listOfShowsByRating = new OrderedList[11];
         Comparator<Show> c = new ComparatorByShowName();
@@ -124,15 +134,10 @@ public class DatabaseClass implements Database {
     //[O(x) = O(nPersonsInShow*log(nShowsInPerson)))] + [O(y) = O(log(nShowsWithRating))] + [O(z) = O(nTagsOfShow*log(nShowsWithTag))]
     // O(max(x, y, z))
     public void removeShow(String showID) throws ShowNotInProductionException, ShowIdNotFoundException {
-        ShowPrivate s = showsByID.remove(showID.toUpperCase()); //O(1)
-        if (s == null) throw new ShowIdNotFoundException();
-        if (!s.isInProduction()) {
-            showsByID.insert(showID.toUpperCase(), s);
-            throw new ShowNotInProductionException();
-        }
-        /*Show s = getShow(showID);
+        Show s = getShow(showID);
         if (!s.isInProduction())
-            throw new ShowNotInProductionException();*/
+            throw new ShowNotInProductionException();
+
         showsInProductionCounter--;
 
         Iterator<Person> itP = s.iteratorPersonsInShow(); //O(1)
@@ -155,7 +160,7 @@ public class DatabaseClass implements Database {
                 listOfShowsByTag.remove(tag); //O(1)
         }
 
-        //showsByID.remove(s.getShowID().toUpperCase()); //O(1)
+        showsByID.remove(s.getShowID().toUpperCase()); //O(1)
     }
 
     @Override

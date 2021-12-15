@@ -40,8 +40,6 @@ public class SepChainHashTable<K extends Comparable<K>, V>
         int arraySize = HashTable.nextPrime((int) (1.1 * capacity));
         // Compiler gives a warning.
         table = (Dictionary<K, V>[]) new Dictionary[arraySize];
-        for (int i = 0; i < arraySize; i++)
-            table[i] = new OrderedDoubleDictionary<>();
         maxSize = capacity;
         currentSize = 0;
     }
@@ -62,7 +60,8 @@ public class SepChainHashTable<K extends Comparable<K>, V>
 
     @Override
     public V find(K key) {
-        return table[this.hash(key)].find(key);
+        int hash = this.hash(key);
+        return table[hash] != null ? table[hash].find(key) : null;
     }
 
     @Override
@@ -70,18 +69,32 @@ public class SepChainHashTable<K extends Comparable<K>, V>
         if (this.isFull())
             this.rehash();
 
-        V v = table[this.hash(key)].insert(key, value);
-        if (v == null)
+        int hash = this.hash(key);
+        Dictionary<K, V> temp = table[hash];
+        if (temp != null) {
+            V v = temp.insert(key, value);
+            if (v == null)
+                currentSize++;
+            return v;
+        } else {
+            table[hash] = new OrderedDoubleDictionary<>();
+            table[hash].insert(key, value);
             currentSize++;
-        return v;
+            return null;
+        }
     }
 
     @Override
     public V remove(K key) {
-        V value = table[this.hash(key)].remove(key);
-        if (value != null)
-            currentSize--;
-        return value;
+        int hash = this.hash(key);
+        Dictionary<K, V> temp = table[hash];
+        if (temp != null) {
+            V value = temp.remove(key);
+            if (value != null)
+                currentSize--;
+            return value;
+        } else
+            return null;
     }
 
     @Override
@@ -134,7 +147,7 @@ public class SepChainHashTable<K extends Comparable<K>, V>
         }
 
         public boolean hasNext() {
-            return it.hasNext();
+            return it != null && it.hasNext();
         }
 
         private Entry<K, V> next() {
@@ -159,8 +172,11 @@ public class SepChainHashTable<K extends Comparable<K>, V>
          */
         protected void findNext() {
             if (it == null || !it.hasNext() || numberOfReturnedEntry < currentSize) {
-                while (it == null || (counter < table.length && !it.hasNext()))
-                    it = table[counter++].iteratorEntries();
+                while (counter < table.length && (it == null || !it.hasNext())) {
+                    if (table[counter] != null)
+                        it = table[counter].iteratorEntries();
+                    counter++;
+                }
             }
         }
     }
