@@ -125,7 +125,7 @@ class ShowClass implements ShowPrivate {
     }
 
     @Override
-    //O(log(n))
+    //O(1)
     public void addParticipation(Participation part) {
         participation.addLast(part);
         Person p = part.getPerson();
