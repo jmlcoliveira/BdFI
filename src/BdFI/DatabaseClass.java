@@ -219,13 +219,12 @@ public class DatabaseClass implements Database {
      * Returns the index of max rating
      *
      * @return index of max rating
-     * Pre-condition: there is at least one rated show
      */
     private int indexOfMaxRating() {
         for (int i = 10; i >= 0; i--)
             if (listOfShowsByRating[i].size() > 0)
                 return i;
-        return 0; //will never be returned if pre-condition is met
+        return 0;
     }
 
     @Override
