@@ -225,7 +225,7 @@ public class DatabaseClass implements Database {
         for (int i = 10; i >= 0; i--)
             if (listOfShowsByRating[i].size() > 0)
                 return i;
-        return 0; //will never be returned if pre-condition is met
+        return -1; //will never be returned if pre-condition is met
     }
 
     @Override
