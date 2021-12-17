@@ -267,12 +267,9 @@ public class Main {
             String showID = in.next();
             int stars = in.nextInt();
             in.nextLine();
-            if (stars < 0 || stars > 10)
-                System.out.println(Error.INVALID_RATING);
-            else {
-                db.reviewShow(showID, stars);
-                System.out.println(Success.SHOW_RATED);
-            }
+            validateRating(stars);
+            db.reviewShow(showID, stars);
+            System.out.println(Success.SHOW_RATED);
         } catch (InvalidShowRatingException e) {
             System.out.println(Error.INVALID_RATING);
         } catch (ShowInProductionException e) {
@@ -391,13 +388,13 @@ public class Main {
         try {
             int rating = in.nextInt();
             in.nextLine();
+            validateRating(rating);
             Iterator<Show> itShows = db.listShows(rating);
             while (itShows.hasNext()) {
                 Show next = itShows.next();
                 System.out.printf(Success.SHOW_LIST, next.getShowID(), next.getTitle(),
                         next.getYear(), next.getRating());
             }
-
         } catch (InvalidShowRatingException e) {
             System.out.println(Error.INVALID_RATING);
         } catch (NoShowsException e) {
@@ -471,7 +468,7 @@ public class Main {
     /**
      * Saves the database in a file
      *
-     * @param db database which is been saved
+     * @param db database which is being saved
      */
     private static void save(Database db) {
         try {
@@ -511,5 +508,15 @@ public class Main {
             if (s.compareToIgnoreCase(gender) == 0)
                 return;
         throw new InvalidGenderException();
+    }
+
+    /**
+     * Checks if a rating is valid
+     *
+     * @param rating rating to be checked
+     * @throws InvalidShowRatingException if rating is invalid
+     */
+    private static void validateRating(int rating) throws InvalidShowRatingException {
+        if (rating < 0 || rating > 10) throw new InvalidShowRatingException();
     }
 }

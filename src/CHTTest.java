@@ -64,17 +64,17 @@ public class CHTTest {
         //insertRandomElems(cht, 200);
         for (int k = 0; k < 10000; k++) {
             Dictionary<Integer, Integer> cht = new SepChainHashTable<>(10000);
-            int[] arr = new int[10000];
+            int[] arr = new int[10001];
             Random rand = new Random();
             int i = 0;
-            while (i < 10000) {
+            while (i < 10001) {
                 int e = rand.nextInt();
                 cht.insert(e, e);
                 arr[i] = e;
                 i = cht.size();
             }
 
-            for (i = 0; i < 10000; i++) {
+            for (i = 0; i < 10001; i++) {
                 if (cht.find(arr[i]) == null) {
                     System.out.println(i);
                     System.out.println(arr[i]);
