@@ -168,7 +168,7 @@ public class AVLTree<K extends Comparable<K>, V> extends AdvancedBSTTree<K, V> {
         PathStep<K, V> lastStep = path.pop();
         AVLNode<K, V> parent = (AVLNode<K, V>) lastStep.parent;
         while (shrunk && parent != null) {
-            if (lastStep.isLeftChild) {             // parent's left subtree has shrunk.
+            if (lastStep.isLeftChild) {// parent's left subtree has shrunk.
                 switch (parent.getBalance()) {
                     case 'L':
                         parent.setBalance('E');
@@ -179,7 +179,7 @@ public class AVLTree<K extends Comparable<K>, V> extends AdvancedBSTTree<K, V> {
                         break;
                     case 'R':
                         this.rebalanceRemLeft(parent, path);
-                        shrunk = false;
+                        shrunk = parent.getBalance() == 'E';
                         break;
                 }
             }
@@ -187,7 +187,7 @@ public class AVLTree<K extends Comparable<K>, V> extends AdvancedBSTTree<K, V> {
                 switch (parent.getBalance()) {
                     case 'L':
                         this.rebalanceRemRight(parent, path);
-                        shrunk = false;
+                        shrunk = parent.getBalance() == 'E';
                         break;
                     case 'E':
                         parent.setBalance('L');

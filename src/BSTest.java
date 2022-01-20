@@ -62,6 +62,30 @@ import org.junit.Test;
         }
 
         @Test
+        public void rrRemove() {
+            AVLTree<Integer, Integer> dic = new AVLTree<>();
+            dic.insert(100, 100);
+            dic.insert(95, 95);
+            dic.insert(200, 200);
+            dic.insert(90, 90);
+            dic.insert(150, 150);
+            dic.insert(205, 205);
+            dic.insert(202, 202);
+            dic.insert(210, 210);
+            dic.remove(90);
+
+            Iterator<Entry<Integer, Integer>> it = dic.breadthIterator();
+
+            assert (it.next().getValue().equals(200));
+            assert (it.next().getValue().equals(100));
+            assert (it.next().getValue().equals(205));
+            assert (it.next().getValue().equals(95));
+            assert (it.next().getValue().equals(150));
+            assert (it.next().getValue().equals(202));
+            assert (it.next().getValue().equals(210));
+        }
+
+        @Test
         public void balanceRemoveRightE() {
             AVLTree<Integer, Integer> dic = new AVLTree<>();
             dic.insert(10, 10);
